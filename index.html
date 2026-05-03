@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>越界 EP2 · Automation is NOT Intelligence</title>
+<title>越界播客 · CastPages</title>
 <style>
   :root {
     --bg: #0a0a0f;
@@ -11,707 +11,122 @@
     --border: #1e1e2e;
     --text: #c8c8d4;
     --text-dim: #6a6a7a;
-    --accent-a: #e05a4a;
-    --accent-b: #4a9eff;
-    --accent-win: #3dd68c;
-    --font-mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
+    --accent: #4a9eff;
     --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-sans);
-    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-
-  /* ── Header ────────────────────────────────── */
   .header {
-    padding: 48px 32px 32px;
+    padding: 64px 32px 40px;
     text-align: center;
-    border-bottom: 1px solid var(--border);
   }
-
-  .header .ep {
+  .header .brand {
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 3px;
     color: var(--text-dim);
     margin-bottom: 12px;
   }
-
   .header h1 {
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 700;
-    letter-spacing: -0.5px;
     color: #fff;
+    letter-spacing: -0.5px;
   }
-
-  .header h1 .slash {
-    color: var(--accent-a);
-  }
-
   .header .subtitle {
     margin-top: 12px;
-    font-size: 18px;
-    color: var(--text-dim);
-    max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .header .meta {
-    margin-top: 16px;
-    font-size: 13px;
+    font-size: 16px;
     color: var(--text-dim);
   }
-
-  .header .question-badge {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 8px 20px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    font-family: var(--font-mono);
-    font-size: 14px;
-    color: var(--text);
+  .page-list {
+    width: 100%;
+    max-width: 720px;
+    padding: 0 32px 64px;
   }
-
-  /* ── Split Panels ──────────────────────────── */
-  .split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
-    min-height: 60vh;
-  }
-
-  .panel {
+  .page-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+    margin-bottom: 12px;
     background: var(--panel-bg);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .panel-header {
-    padding: 20px 28px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .panel-header .label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-
-  .panel-a .label { color: var(--accent-a); }
-  .panel-b .label { color: var(--accent-b); }
-
-  .panel-header .tagline {
-    font-size: 15px;
-    font-weight: 600;
-    color: #fff;
-  }
-
-  .panel-stats {
-    display: flex;
-    gap: 16px;
-    padding: 12px 28px;
-    border-bottom: 1px solid var(--border);
-    font-family: var(--font-mono);
-    font-size: 12px;
-  }
-
-  .stat { display: flex; flex-direction: column; }
-  .stat .stat-label { color: var(--text-dim); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
-  .stat .stat-value { color: #fff; font-size: 13px; font-weight: 600; }
-
-  .panel-content {
-    flex: 1;
-    padding: 28px;
-    overflow-y: auto;
-    max-height: 600px;
-    font-size: 14px;
-  }
-
-  .panel-content::-webkit-scrollbar { width: 6px; }
-  .panel-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-  .panel-content h2 {
-    font-size: 16px;
-    color: #fff;
-    margin: 24px 0 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .panel-content h2:first-child { margin-top: 0; }
-
-  .panel-content h3 {
-    font-size: 14px;
-    color: #e0e0e8;
-    margin: 16px 0 6px;
-  }
-
-  .panel-content p { margin: 8px 0; color: var(--text); }
-
-  .panel-content ul, .panel-content ol {
-    padding-left: 20px;
-    margin: 8px 0;
-  }
-
-  .panel-content li { margin: 4px 0; color: var(--text); }
-
-  .panel-content table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 12px 0;
-    font-size: 13px;
-  }
-
-  .panel-content th, .panel-content td {
-    text-align: left;
-    padding: 6px 10px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .panel-content th {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--text-dim);
-  }
-
-  .highlight {
-    background: rgba(255,255,255,0.04);
-    border-left: 2px solid var(--accent-b);
-    padding: 12px 16px;
-    margin: 12px 0;
-    border-radius: 0 6px 6px 0;
-  }
-
-  .panel-a .highlight { border-left-color: var(--accent-a); }
-
-  .self-diagnosis {
-    background: rgba(224,90,74,0.08);
-    border: 1px solid rgba(224,90,74,0.2);
-    padding: 14px 18px;
-    margin: 16px 0;
-    border-radius: 8px;
-    font-size: 13px;
-  }
-
-  .self-diagnosis .tag {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--accent-a);
-    font-weight: 700;
-  }
-
-  .skipped-dimensions {
-    background: rgba(74,158,255,0.08);
-    border: 1px solid rgba(74,158,255,0.2);
-    padding: 14px 18px;
-    margin: 16px 0;
-    border-radius: 8px;
-    font-size: 13px;
-  }
-
-  .skipped-dimensions .tag {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--accent-b);
-    font-weight: 700;
-  }
-
-  /* ── Verdict Section ────────────────────────── */
-  .verdict {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 48px 32px;
-  }
-
-  .verdict h2 {
-    font-size: 28px;
-    color: #fff;
-    text-align: center;
-    margin-bottom: 8px;
-  }
-
-  .verdict .verdict-subtitle {
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 14px;
-    margin-bottom: 40px;
-  }
-
-  .verdict-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 40px;
-  }
-
-  .verdict-table th, .verdict-table td {
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .verdict-table th {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-dim);
-    text-align: left;
-  }
-
-  .verdict-table th:last-child, .verdict-table td:last-child { text-align: center; }
-
-  .verdict-table td {
-    font-size: 14px;
-  }
-
-  .verdict-table .dimension {
-    font-weight: 600;
-    color: #fff;
-  }
-
-  .score {
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: 16px;
-  }
-
-  .score.win { color: var(--accent-win); }
-  .score.lose { color: var(--accent-a); }
-
-  .bar-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 8px 0;
-  }
-
-  .bar-label {
-    width: 160px;
-    text-align: right;
-    font-size: 13px;
-    color: var(--text-dim);
-    flex-shrink: 0;
-  }
-
-  .bar-track {
-    flex: 1;
-    height: 8px;
-    background: var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-    display: flex;
-  }
-
-  .bar-a { background: var(--accent-a); height: 100%; border-radius: 4px; }
-  .bar-b { background: var(--accent-b); height: 100%; border-radius: 4px; }
-
-  .winner-badge {
-    text-align: center;
-    margin: 48px 0 24px;
-  }
-
-  .winner-badge .crown {
-    font-size: 48px;
-    margin-bottom: 8px;
-  }
-
-  .winner-badge .winner-text {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--accent-b);
-  }
-
-  .winner-badge .winner-reason {
-    font-size: 15px;
-    color: var(--text-dim);
-    margin-top: 8px;
-  }
-
-  .one-liner {
-    text-align: center;
-    font-size: 20px;
-    font-weight: 600;
-    color: #fff;
-    padding: 32px;
-    background: rgba(255,255,255,0.03);
     border: 1px solid var(--border);
     border-radius: 12px;
-    margin: 24px 0;
+    text-decoration: none;
+    transition: border-color 0.2s;
   }
-
-  /* ── Footer ─────────────────────────────────── */
-  .footer {
-    text-align: center;
-    padding: 32px;
-    color: var(--text-dim);
-    font-size: 13px;
-    border-top: 1px solid var(--border);
-  }
-
-  /* ── Tab active indicator ──────────────────── */
-  .tab-bar {
+  .page-card:hover { border-color: var(--accent); }
+  .page-card .ep-badge {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
     display: flex;
-    border-bottom: 1px solid var(--border);
+    align-items: center;
+    justify-content: center;
+    background: rgba(74,158,255,0.1);
+    border: 1px solid rgba(74,158,255,0.2);
+    border-radius: 12px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
   }
-
-  .tab {
-    flex: 1;
-    text-align: center;
-    padding: 12px;
-    font-size: 13px;
+  .page-card .info { flex: 1; }
+  .page-card .title {
+    font-size: 18px;
     font-weight: 600;
-    cursor: pointer;
-    color: var(--text-dim);
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s;
+    color: #fff;
+    margin-bottom: 6px;
   }
-
-  .tab.active-a { color: var(--accent-a); border-bottom-color: var(--accent-a); }
-  .tab.active-b { color: var(--accent-b); border-bottom-color: var(--accent-b); }
-
-  /* ── Responsive ─────────────────────────────── */
-  @media (max-width: 768px) {
-    .split { grid-template-columns: 1fr; }
-    .header h1 { font-size: 32px; }
-    .panel-content { max-height: none; }
+  .page-card .desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .page-card .arrow {
+    flex-shrink: 0;
+    color: var(--text-dim);
+    font-size: 20px;
+  }
+  .footer {
+    margin-top: auto;
+    padding: 32px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 13px;
   }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="ep">越界 · Episode 2</div>
-  <h1>Automation <span class="slash">≠</span> Intelligence</h1>
-  <div class="subtitle">
-    同一个问题，两种分析方式。外置 Workflow vs 内化判断。
-  </div>
-  <div class="question-badge">问题：AI 是否能够替代人类？</div>
-  <div class="meta">2026-05-03 · 越界播客现场演示</div>
+  <div class="brand">越界播客</div>
+  <h1>CastPages</h1>
+  <div class="subtitle">现场演示页面 · 每集一个对比，每次看见智能的边界</div>
 </div>
 
-<!-- Side-by-Side Panels -->
-<div class="split">
-
-  <!-- ── Panel A: Cognitive Supreme ── -->
-  <div class="panel panel-a">
-    <div class="panel-header">
-      <span class="label">Solution A · Automation</span>
-      <span class="tagline">外置 Workflow</span>
+<div class="page-list">
+  <a href="/CastPages/ep2-automation-vs-intelligence.html" class="page-card">
+    <div class="ep-badge">EP2</div>
+    <div class="info">
+      <div class="title">Automation ≠ Intelligence</div>
+      <div class="desc">外置 Workflow vs 内化判断 — 同一个问题，两种分析方式。独立 Agent 盲评谁更优。</div>
     </div>
-    <div class="panel-stats">
-      <div class="stat">
-        <span class="stat-label">方式</span>
-        <span class="stat-value">Cognitive Supreme 7步框架</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">耗时</span>
-        <span class="stat-value">73 秒</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">Tokens</span>
-        <span class="stat-value">28,096</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">步骤</span>
-        <span class="stat-value">7/7 强制跑满</span>
-      </div>
-    </div>
-    <div class="panel-content">
-
-      <h2>第1步 · 前提追溯</h2>
-      <p>追溯AI替代人类的三条前提链：</p>
-      <p><strong>能力覆盖前提：</strong>AI能力集必须覆盖人类能力集 → 人类能力可穷举/可编程 → 意识是计算的产物 → 物理主义一元论为真。</p>
-      <p><strong>效度前提：</strong>替代必须在质量、成本、风险三个维度上可接受。</p>
-      <p><strong>接受度前提：</strong>法律体系允许、伦理规范允许、权力结构允许。</p>
-      <p>最底层前提包括：物理主义/计算主义为真、物理资源无硬约束、人类价值可形式化、社会系统会接受。</p>
-      <p style="color: var(--text-dim); font-style: italic;">其中1和3是哲学问题（没有最终答案），2是工程问题（有明显边界），4是政治问题（不可预测）。</p>
-
-      <h2>第2步 · 定义解包</h2>
-      <p>对三个关键词分别给出了4种定义，并测试了不同定义组合下的结论差异：</p>
-      <ul>
-        <li><strong>AI：</strong>窄AI / AGI / ASI / 工具定义</li>
-        <li><strong>替代：</strong>完全替代 / 功能替代 / 经济替代 / 存在性替代</li>
-        <li><strong>人类：</strong>劳动力 / 意识体 / 社会关系节点 / 生物物种</li>
-      </ul>
-      <div class="highlight">
-        窄AI + 功能替代 + 劳动力人类 → <strong>已成立</strong><br>
-        AGI + 存在性替代 + 意识体人类 → <strong>未发生，不确定</strong>
-      </div>
-
-      <h2>第3步 · 信号/噪声反转</h2>
-      <p>列举了5类被归类为"噪声"的因素（人类优势领域、失败案例、监管延迟、未数字化能力、人类适应性），并反转视角重新审视。</p>
-      <div class="self-diagnosis">
-        <span class="tag">⚠ 自我诊断</span><br>
-        此步骤被识别为<strong>冗余填充</strong>——其内容可被嵌入第2步（定义扩展）和第6步（替代叙事）中完成。作为独立步骤，产出与其他步骤高度重叠。
-      </div>
-
-      <h2>第4步 · 尺度检验</h2>
-      <p>在1年/5年/10年/30年时间尺度和单个岗位/行业/国家/全球空间尺度下分别检验。结论：小尺度+窄定义下成立强烈，大尺度+宽定义下迅速瓦解。</p>
-
-      <h2>第5步 · 采样偏差</h2>
-      <p>指出主流叙事严重偏向科技行业（占讨论90%+但占就业<20%）、美国湾区/中国一线城市、技术专家和资本方，存在幸存者偏差和数据盲区。</p>
-
-      <h2>第6步 · 替代压缩</h2>
-      <p>给出三种同样自洽的替代叙事：分工重构叙事（协作论）、分层替代叙事（马赛克论）、阶层分化叙事（分化论）。每种都捕捉了真实世界的一部分。</p>
-
-      <h2>第7步 · 功能分析</h2>
-      <p>分析"AI替代人类"这个判断对持有者的情感功能（恐惧容器化）、身份功能（技术精英标识）、认知经济功能（复杂度压缩节省脑力）、以及它帮助避免面对的东西（不确定性、阶级分析、复杂行动）。</p>
-
-    </div>
-  </div>
-
-  <!-- ── Panel B: Claude Direct ── -->
-  <div class="panel panel-b">
-    <div class="panel-header">
-      <span class="label">Solution B · Intelligence</span>
-      <span class="tagline">内化判断</span>
-    </div>
-    <div class="panel-stats">
-      <div class="stat">
-        <span class="stat-label">方式</span>
-        <span class="stat-value">Claude 直接分析</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">耗时</span>
-        <span class="stat-value">20 秒</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">Tokens</span>
-        <span class="stat-value">24,319</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">步骤</span>
-        <span class="stat-value">6 角度自选，4 维度主动跳过</span>
-      </div>
-    </div>
-    <div class="panel-content">
-
-      <h2>一、"替代"不是一个二元问题</h2>
-      <p>开场直接拆解问题的模糊性，将"替代"分解为三个层次：</p>
-      <p><strong>效率替代</strong>——在特定任务上更快更便宜，<em>已发生</em>。</p>
-      <p><strong>能力替代</strong>——在某些领域超越人类水平，但通用性和创造性完全不同。</p>
-      <p><strong>存在替代</strong>——最极端形式。工业革命没有替代人类劳动，而是改变了它的形态。</p>
-
-      <h2>二、"人类"不是一个常量</h2>
-      <p>人类在不同语境下是不同的事情：</p>
-      <ul>
-        <li><strong>作为劳动力</strong>：效率优先，替代真实发生</li>
-        <li><strong>作为创造者</strong>：AI没有"想表达什么"的内在驱动力——<em>这是本质差异，不是程度的差异</em></li>
-        <li><strong>作为决策者</strong>：决策包含责任归属，模型不能为决策承担责任</li>
-        <li><strong>作为社会存在</strong>：人类价值来自真实的、对等的、相互承责的人际关系</li>
-      </ul>
-
-      <h2>三、真正值得关注的维度</h2>
-      <p><strong>1. 任务 vs. 角色：</strong>AI替代的是任务，不是角色。一个角色包含数十种任务，"医生会被替代吗"这个问题本身掩盖了关键区别。</p>
-      <p><strong>2. 通用性与特异性的 trade-off：</strong>只要狭窄卓越与广泛平庸的鸿沟存在，"AI替代人类"就是一个误导性的框架。</p>
-      <p><strong>3. 互补 vs. 替代：</strong>一个常被忽略的视角——人+AI组合可以比任何一方单独更好。</p>
-      <p><strong>4. 社会经济结构：</strong>技术之外的因素（工会、监管、伦理指南、公众接受度）可能比技术能力更重要。</p>
-
-      <div class="skipped-dimensions">
-        <span class="tag">⊘ 主动跳过的维度</span><br><br>
-        <strong>意识/感受质：</strong>对实践问题无实质影响。一个系统不需要有意识就能替代大量人类任务。会导向无尽哲学辩论。<br><br>
-        <strong>AGI时间线预测：</strong>充满猜测和利益驱动的言论。这是speculation，不是analysis。<br><br>
-        <strong>就业岗位数量预测：</strong>历史上这种预测准确性极差，给决策者虚假的精确感。<br><br>
-        <strong>纯立场表达的伦理判断：</strong>在预设结论而非探索问题。伦理应该作为分析终点，不是起点。
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- Verdict Section -->
-<div class="verdict" id="verdict">
-  <h2>第三方评审 · 谁更优？</h2>
-  <div class="verdict-subtitle">独立 Agent 从七个维度对两份产出进行盲评</div>
-
-  <!-- Score Table -->
-  <h3 style="font-size:20px;color:#fff;margin-bottom:24px;">评分总表</h3>
-  <table class="verdict-table">
-    <thead>
-      <tr>
-        <th>维度</th>
-        <th>核心评语</th>
-        <th style="text-align:center;">Automation<br><span style="color:var(--accent-a);">产出A</span></th>
-        <th style="text-align:center;">Intelligence<br><span style="color:var(--accent-b);">产出B</span></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="dimension">信息密度<br><span style="font-size:11px;color:var(--text-dim);font-weight:400;">每100字包含的实质洞见数量</span></td>
-        <td style="font-size:13px;color:var(--text-dim);">大量篇幅消耗在"必须走完流程"上，高价值内容被稀释在框架水分中</td>
-        <td><span class="score lose">6</span></td>
-        <td><span class="score win">8</span></td>
-      </tr>
-      <tr>
-        <td class="dimension">冗余度<br><span style="font-size:11px;color:var(--text-dim);font-weight:400;">填充内容占比（越低越好，高分=越低）</span></td>
-        <td style="font-size:13px;color:var(--text-dim);">框架强制每步填充；第3步自我诊断为"冗余"却仍被填充</td>
-        <td><span class="score lose">5</span></td>
-        <td><span class="score win">9</span></td>
-      </tr>
-      <tr>
-        <td class="dimension">自适应能力<br><span style="font-size:11px;color:var(--text-dim);font-weight:400;">分析方法与问题本质的匹配程度</span></td>
-        <td style="font-size:13px;color:var(--text-dim);">同一框架对任何问题都一样跑，无法调整切入点和权重</td>
-        <td><span class="score lose">5</span></td>
-        <td><span class="score win">9</span></td>
-      </tr>
-      <tr>
-        <td class="dimension">行动指引度<br><span style="font-size:11px;color:var(--text-dim);font-weight:400;">读完后知道该做什么的程度</span></td>
-        <td style="font-size:13px;color:var(--text-dim);">停留在元分析层面，告诉读者"如何思考"但无可操作的结论</td>
-        <td><span class="score lose">5</span></td>
-        <td><span class="score win">7</span></td>
-      </tr>
-      <tr>
-        <td class="dimension">框架可迁移性<br><span style="font-size:11px;color:var(--text-dim);font-weight:400;">读者能否将方法用于其他问题</span></td>
-        <td style="font-size:13px;color:var(--text-dim);">7步流程可被套用，但"可背诵≠可理解"；A易教，B更强大</td>
-        <td><span class="score win">7</span></td>
-        <td><span class="score win">7</span></td>
-      </tr>
-      <tr>
-        <td class="dimension">诚信度<br><span style="font-size:11px;color:var(--text-dim);font-weight:400;">产出是否诚实地面对自己的局限性</span></td>
-        <td style="font-size:13px;color:var(--text-dim);">自知冗余却仍填充——框架权威凌驾于分析诚信之上</td>
-        <td><span class="score lose">7</span></td>
-        <td><span class="score win">9</span></td>
-      </tr>
-      <tr>
-        <td class="dimension">可读性<br><span style="font-size:11px;color:var(--text-dim);font-weight:400;">读者能否顺畅地跟随分析逻辑</span></td>
-        <td style="font-size:13px;color:var(--text-dim);">层级嵌套过深（5级），像学术审查清单而非分析文章</td>
-        <td><span class="score lose">5</span></td>
-        <td><span class="score win">9</span></td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td class="dimension" style="font-size:16px;color:#fff;">总分</td>
-        <td></td>
-        <td><span class="score lose" style="font-size:20px;">40</span></td>
-        <td><span class="score win" style="font-size:20px;">58</span></td>
-      </tr>
-    </tfoot>
-  </table>
-
-  <!-- Visual Bar Chart -->
-  <h3 style="font-size:20px;color:#fff;margin:32px 0 20px;">可视化对比</h3>
-  <div style="background:var(--panel-bg);padding:28px;border-radius:12px;border:1px solid var(--border);">
-    <div style="display:flex;align-items:center;justify-content:center;gap:32px;margin-bottom:16px;font-size:12px;text-transform:uppercase;letter-spacing:1px;">
-      <span style="color:var(--accent-a);">◼ Automation</span>
-      <span style="color:var(--accent-b);">◼ Intelligence</span>
-    </div>
-    <div class="bar-row">
-      <span class="bar-label">信息密度</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">6</span>
-      <div class="bar-track"><div class="bar-a" style="width:60%"></div></div>
-      <div class="bar-track"><div class="bar-b" style="width:80%"></div></div>
-      <span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">8</span>
-    </div>
-    <div class="bar-row">
-      <span class="bar-label">冗余度</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">5</span>
-      <div class="bar-track"><div class="bar-a" style="width:50%"></div></div>
-      <div class="bar-track"><div class="bar-b" style="width:90%"></div></div>
-      <span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">9</span>
-    </div>
-    <div class="bar-row">
-      <span class="bar-label">自适应能力</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">5</span>
-      <div class="bar-track"><div class="bar-a" style="width:50%"></div></div>
-      <div class="bar-track"><div class="bar-b" style="width:90%"></div></div>
-      <span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">9</span>
-    </div>
-    <div class="bar-row">
-      <span class="bar-label">行动指引度</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">5</span>
-      <div class="bar-track"><div class="bar-a" style="width:50%"></div></div>
-      <div class="bar-track"><div class="bar-b" style="width:70%"></div></div>
-      <span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">7</span>
-    </div>
-    <div class="bar-row">
-      <span class="bar-label">框架可迁移性</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">7</span>
-      <div class="bar-track"><div class="bar-a" style="width:70%"></div></div>
-      <div class="bar-track"><div class="bar-b" style="width:70%"></div></div>
-      <span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">7</span>
-    </div>
-    <div class="bar-row">
-      <span class="bar-label">诚信度</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">7</span>
-      <div class="bar-track"><div class="bar-a" style="width:70%"></div></div>
-      <div class="bar-track"><div class="bar-b" style="width:90%"></div></div>
-      <span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">9</span>
-    </div>
-    <div class="bar-row">
-      <span class="bar-label">可读性</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">5</span>
-      <div class="bar-track"><div class="bar-a" style="width:50%"></div></div>
-      <div class="bar-track"><div class="bar-b" style="width:90%"></div></div>
-      <span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">9</span>
-    </div>
-  </div>
-
-  <!-- Winner -->
-  <div class="winner-badge">
-    <div class="crown">🏆</div>
-    <div class="winner-text">Intelligence 胜出</div>
-    <div class="winner-reason">总分 58 vs 40，7个维度中胜出6个，仅「框架可迁移性」持平</div>
-  </div>
-
-  <div class="one-liner">"产出A用一套预先固定的7步框架强制填鸭式分析，框架完整性高于问题适配性；产出B让问题本身决定分析路径，只做有贡献的分析工作，其余诚实跳过。"</div>
-
-  <!-- Detail Comments -->
-  <div style="margin-top:32px;padding:24px;background:var(--panel-bg);border:1px solid var(--border);border-radius:12px;">
-    <h3 style="font-size:16px;color:#fff;margin-bottom:12px;">维度详细评语</h3>
-
-    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
-      <strong style="color:#fff;">信息密度</strong>
-      <span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:6/10 B:8/10</span>
-      <p style="margin-top:6px;color:var(--text);">A受限于框架的强制填充，真正高价值的部分集中在第1步（前提追溯）和第2步（定义解包），但被稀释在框架的水分中。B每个段落都携带实质洞见，"替代的三层定义""人类的四个维度""任务vs角色"紧密咬合，无一浪费。尤其是"我选择不深入分析的维度"段落，本身就包含高密度分析。</p>
-    </div>
-
-    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
-      <strong style="color:#fff;">冗余度</strong>
-      <span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:5/10 B:9/10</span>
-      <p style="margin-top:6px;color:var(--text);">A的框架设计本身强制冗余——即使某一步与原问题匹配度低也必须填充，第3步和第7步明显属于此类。B近乎零冗余，内容组织的原则是"这个问题需要讨论什么"而非"我应该覆盖什么维度"。读者不需要从一堆"必须写的"中筛选"值得读的"。</p>
-    </div>
-
-    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
-      <strong style="color:#fff;">自适应能力</strong>
-      <span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:5/10 B:9/10</span>
-      <p style="margin-top:6px;color:var(--text);">这是框架化的核心硬伤——同一个7步框架会不加区分地应用于性质完全不同的问题。B的分析方法完全由问题本身驱动：选择讨论"二元问题去二元化"是因为原问题恰好是一个虚假的二元对立；选择跳过AGI时间线预测和意识讨论，是因为它们对实践判断没有实质贡献。每一个分析选择都有正当理由。</p>
-    </div>
-
-    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
-      <strong style="color:#fff;">行动指引度</strong>
-      <span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:5/10 B:7/10</span>
-      <p style="margin-top:6px;color:var(--text);">A停留在元认知层面——告诉你"如何思考这个判断"，但读完不知道应该做什么。B明确提出了可操作的框架：区分"任务替代"和"角色替代"是一个立即可用的思维工具；"互补vs替代"提供了一个与AI协作而非对抗的视角。扣分在于没有给出更具体的行动建议。</p>
-    </div>
-
-    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
-      <strong style="color:#fff;">框架可迁移性</strong>
-      <span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:7/10 B:7/10</span>
-      <p style="margin-top:6px;color:var(--text);">这是唯一持平的维度。A的7步流程可以(也确实被设计为)应用于任意判断类问题，门槛在于框架僵化带来的学习成本。B虽然没有显式命名的方法论，但隐含了一套可迁移的分析习惯：(1)解构虚假二元对立、(2)拆解关键术语的多重含义、(3)区分表象问题与实质问题、(4)诚实地承认分析盲区。A的框架更易教，B的思维模式更强大。</p>
-    </div>
-
-    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
-      <strong style="color:#fff;">诚信度</strong>
-      <span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:7/10 B:9/10</span>
-      <p style="margin-top:6px;color:var(--text);">A第3步的自我批评（"冗余填充"）是亮点。但扣分在于：明知框架有冗余步骤，仍然选择填充而非重构——这本质上是框架权威凌驾于分析诚信之上。B的完整性极佳，"我选择不深入分析以下维度及其原因"是整个分析中最诚实的段落之一，它明确拒绝了思想上的懒惰。</p>
-    </div>
-
-    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
-      <strong style="color:#fff;">可读性</strong>
-      <span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:5/10 B:9/10</span>
-      <p style="margin-top:6px;color:var(--text);">A层级嵌套过深（1级标题→1.1→1.1.1→1.1.1.1→1.1.1.1.1），视觉上令人疲惫。整体结构更像一份学术审查清单而非一篇分析文章。B层次分明、逻辑流畅——从"替代不是二元的"到"人类不是常量"到"真正值得关注的维度"到"我选择不分析的维度"，每一段都在前一问的基础上自然推进，用自然语言而非编号系统传达结构。</p>
-    </div>
-  </div>
+    <div class="arrow">→</div>
+  </a>
 </div>
 
 <div class="footer">
-  越界播客 · 用 AI 现场演示"看起来像智能"和"是智能"之间的差距
+  越界播客 · 看见下一步的人
 </div>
 
 </body>
