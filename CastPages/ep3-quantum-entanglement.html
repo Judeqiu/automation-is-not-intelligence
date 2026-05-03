@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>越界 EP3 · 量子纠缠 — Automation vs Intelligence</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --panel-bg: #111118;
+    --border: #1e1e2e;
+    --text: #c8c8d4;
+    --text-dim: #6a6a7a;
+    --accent-a: #e05a4a;
+    --accent-b: #4a9eff;
+    --accent-win: #3dd68c;
+    --font-mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-sans); line-height: 1.6; }
+
+  .header {
+    padding: 48px 32px 32px; text-align: center; border-bottom: 1px solid var(--border);
+  }
+  .header .ep { font-size: 12px; text-transform: uppercase; letter-spacing: 3px; color: var(--text-dim); margin-bottom: 12px; }
+  .header h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+  .header h1 .slash { color: var(--accent-a); }
+  .header .subtitle { margin-top: 12px; font-size: 18px; color: var(--text-dim); max-width: 680px; margin-left: auto; margin-right: auto; }
+  .header .question-badge { display: inline-block; margin-top: 20px; padding: 8px 20px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 20px; font-family: var(--font-mono); font-size: 14px; color: var(--text); }
+  .header .meta { margin-top: 16px; font-size: 13px; color: var(--text-dim); }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); min-height: 60vh; }
+  .panel { background: var(--panel-bg); display: flex; flex-direction: column; }
+
+  .panel-header { padding: 20px 28px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .panel-header .label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; }
+  .panel-a .label { color: var(--accent-a); }
+  .panel-b .label { color: var(--accent-b); }
+  .panel-header .tagline { font-size: 15px; font-weight: 600; color: #fff; }
+
+  .panel-stats { display: flex; gap: 16px; padding: 12px 28px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 12px; overflow-x: auto; }
+  .stat { display: flex; flex-direction: column; flex-shrink: 0; }
+  .stat .stat-label { color: var(--text-dim); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+  .stat .stat-value { color: #fff; font-size: 13px; font-weight: 600; }
+
+  .panel-content { flex: 1; padding: 28px; overflow-y: auto; max-height: 620px; font-size: 14px; }
+  .panel-content::-webkit-scrollbar { width: 6px; }
+  .panel-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .panel-content h2 { font-size: 16px; color: #fff; margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .panel-content h2:first-child { margin-top: 0; }
+  .panel-content h3 { font-size: 14px; color: #e0e0e8; margin: 16px 0 6px; }
+  .panel-content p { margin: 8px 0; }
+  .panel-content ul, .panel-content ol { padding-left: 20px; margin: 8px 0; }
+  .panel-content li { margin: 4px 0; }
+
+  .highlight { background: rgba(255,255,255,0.04); border-left: 2px solid var(--accent-b); padding: 12px 16px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+  .panel-a .highlight { border-left-color: var(--accent-a); }
+
+  .self-diagnosis {
+    background: rgba(224,90,74,0.08); border: 1px solid rgba(224,90,74,0.2);
+    padding: 14px 18px; margin: 16px 0; border-radius: 8px; font-size: 13px;
+  }
+  .self-diagnosis .tag { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-a); font-weight: 700; }
+
+  .skipped-dimensions {
+    background: rgba(74,158,255,0.08); border: 1px solid rgba(74,158,255,0.2);
+    padding: 14px 18px; margin: 16px 0; border-radius: 8px; font-size: 13px;
+  }
+  .skipped-dimensions .tag { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-b); font-weight: 700; }
+
+  .verdict { max-width: 1100px; margin: 0 auto; padding: 48px 32px; }
+  .verdict h2 { font-size: 28px; color: #fff; text-align: center; margin-bottom: 8px; }
+  .verdict .verdict-subtitle { text-align: center; color: var(--text-dim); font-size: 14px; margin-bottom: 40px; }
+
+  .verdict-table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+  .verdict-table th, .verdict-table td { padding: 14px 18px; border-bottom: 1px solid var(--border); text-align: left; }
+  .verdict-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); }
+  .verdict-table th:last-child, .verdict-table td:last-child { text-align: center; }
+  .verdict-table .dimension { font-weight: 600; color: #fff; }
+  .score { font-family: var(--font-mono); font-weight: 700; font-size: 16px; }
+  .score.win { color: var(--accent-win); }
+  .score.lose { color: var(--accent-a); }
+
+  .bar-row { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+  .bar-label { width: 160px; text-align: right; font-size: 13px; color: var(--text-dim); flex-shrink: 0; }
+  .bar-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .bar-a { background: var(--accent-a); height: 100%; border-radius: 4px; }
+  .bar-b { background: var(--accent-b); height: 100%; border-radius: 4px; }
+
+  .winner-badge { text-align: center; margin: 48px 0 24px; }
+  .winner-badge .winner-text { font-size: 28px; font-weight: 700; color: var(--accent-b); }
+  .winner-badge .winner-reason { font-size: 15px; color: var(--text-dim); margin-top: 8px; }
+
+  .one-liner { text-align: center; font-size: 20px; font-weight: 600; color: #fff; padding: 32px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; margin: 24px 0; }
+
+  .key-insight { margin: 32px 0; padding: 24px; background: rgba(74,158,255,0.04); border: 1px solid rgba(74,158,255,0.15); border-radius: 12px; }
+  .key-insight h3 { font-size: 16px; color: var(--accent-b); margin-bottom: 8px; }
+  .key-insight p { color: var(--text); font-size: 14px; line-height: 1.7; }
+
+  .footer { text-align: center; padding: 32px; color: var(--text-dim); font-size: 13px; border-top: 1px solid var(--border); }
+  .back-link { display: inline-block; margin-bottom: 24px; color: var(--accent-b); text-decoration: none; font-size: 14px; }
+  .back-link:hover { text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    .split { grid-template-columns: 1fr; }
+    .header h1 { font-size: 28px; }
+    .panel-content { max-height: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="ep">越界 · Episode 3</div>
+  <h1>Automation <span class="slash">≠</span> Intelligence</h1>
+  <div class="subtitle">当解释一个科学概念时，框架化分析会把"讲清楚"变成"拆解清楚"</div>
+  <div class="question-badge">问题：量子纠缠是怎么一回事？</div>
+  <div class="meta">2026-05-03 · 越界播客现场演示</div>
+</div>
+
+<div style="text-align:center;padding:20px 0 0;">
+  <a href="/" class="back-link">← 返回 CastPages</a>
+</div>
+
+<div class="split">
+
+  <!-- Panel A: Cognitive Supreme -->
+  <div class="panel panel-a">
+    <div class="panel-header">
+      <span class="label">Solution A · Automation</span>
+      <span class="tagline">外置 Workflow — 7步框架</span>
+    </div>
+    <div class="panel-stats">
+      <div class="stat"><span class="stat-label">方式</span><span class="stat-value">Cognitive Supreme 7步</span></div>
+      <div class="stat"><span class="stat-label">耗时</span><span class="stat-value">65 秒</span></div>
+      <div class="stat"><span class="stat-label">Tokens</span><span class="stat-value">15,966</span></div>
+    </div>
+    <div class="panel-content">
+
+      <h2>第1步 · 前提追溯</h2>
+      <p>追溯前提链直到"不可再追问的底层"：</p>
+      <p>量子纠缠 → 测量坍缩 → 量子态叠加 → 波函数 → 量子力学基本假设（希尔伯特空间、厄米算符、薛定谔方程）→ 经典物理失效 → 测量问题 → <strong>实在论 vs 反实在论的哲学分歧</strong></p>
+      <p style="color: var(--text-dim); font-style: italic;">"当我们追问'为什么世界是这样'时，科学止步于实验事实。这属于形而上学。"</p>
+
+      <h2>第2步 · 定义解包</h2>
+      <p>逐个拆解四个关键词：</p>
+      <ul>
+        <li><strong>"量子"</strong>：物理量的最小不可分割单元。若误解为"包与包之间的神秘连接"则完全误导。</li>
+        <li><strong>"纠缠"</strong>：标准定义（薛定谔，1935）— |ψ⟩ ≠ |a⟩⊗|b⟩，联合态不能写成子系统的直积态。</li>
+        <li><strong>"解释"</strong>：若指"给出直观的因果故事"→ 不可能。若指"给出正确的数学形式"→ 可行。</li>
+        <li><strong>"一回事"</strong>：如果提问者想找经典类比，不存在。如果是问数学描述和实验验证，可以精确回答。</li>
+      </ul>
+      <div class="highlight">
+        结论：定义"纠缠"为直积态的不可分性，是最清晰、最不误导的起点。
+      </div>
+
+      <h2>第3步 · 信号/噪声反转</h2>
+      <p>识别出5类被科普当作"噪声"的内容：数学形式、贝尔不等式、测量理论选择、实验历史、纠缠度量。</p>
+      <div class="highlight">
+        反转关键洞察：<strong>没有张量积概念，根本无法区分"经典关联"和"量子纠缠"。</strong>所有通俗类比（手套、骰子、颜色球）实际上都在解释经典关联。量子纠缠的"诡异感"完全来自哥本哈根解释中的测量坍缩——采用多世界解释则毫不可怕。
+      </div>
+
+      <h2>第4步 · 尺度检验</h2>
+      <p>不同知识水平的听众：</p>
+      <ul>
+        <li><strong>小学生</strong>→不可行（要么误导，要么不理解）</li>
+        <li><strong>高中生</strong>→部分可行（可讲EPR悖论和贝尔思想实验）</li>
+        <li><strong>大学生（非物理）</strong>→相对可行（需线性代数基础）</li>
+        <li><strong>物理专业</strong>→完全可行（纠缠熵、蒸馏、量子通信应用）</li>
+      </ul>
+
+      <h2>第5步 · 采样偏差</h2>
+      <p>主流科普存在系统性偏差：科普书籍强调"爱因斯坦 vs 玻尔"的戏剧冲突但忽略贝尔细节；YouTube视频"听起来神奇"优先于"听起来正确"；哥本哈根解释主导、多世界被边缘化；科普作者倾向于给"看似解释清楚"的类比而非承认"我们真的不知道"。</p>
+
+      <h2>第6步 · 替代压缩</h2>
+      <p>三种解释框架：</p>
+      <p><strong>A. 数学形式框架</strong> — 张量积与不可分性。最精确但需要线性代数。</p>
+      <p><strong>B. 操作-信息框架</strong> — 关联超过经典极限，贝尔不等式。不神秘化、不需要深奥数学。</p>
+      <p><strong>C. 多世界框架</strong> — 没有坍缩只有分支，纠缠是宇宙波函数的自然演化。消除超距作用的神秘感。</p>
+
+      <h2>第7步 · 功能分析</h2>
+      <p>提问者的真实动机：</p>
+      <ul>
+        <li>情感：对未知的好奇与敬畏；焦虑缓解；逃避现实</li>
+        <li>身份：智识标识；社交货币</li>
+        <li>认知：真正的求知欲 vs 寻找宇宙底层叙事 vs 验证自己的世界观</li>
+      </ul>
+      <div class="self-diagnosis">
+        <span class="tag">⚠ 诊断</span><br>
+        问"量子纠缠是什么"并在非专业场合提出的人，<strong>绝大多数(>80%)不是在寻求真正理解量子力学</strong>，而是在寻求"我已触及了某种深刻真理"的智识满足感。
+      </div>
+
+      <div class="self-diagnosis">
+        <span class="tag">⚠ 自我评估</span><br>
+        第1、2、6步有实质贡献；第3、4、5步辅助贡献；<strong>第7步对解释物理本身几乎没有贡献</strong>——但框架不允许跳过。
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Panel B: Claude Direct -->
+  <div class="panel panel-b">
+    <div class="panel-header">
+      <span class="label">Solution B · Intelligence</span>
+      <span class="tagline">内化判断 — 直接解释</span>
+    </div>
+    <div class="panel-stats">
+      <div class="stat"><span class="stat-label">方式</span><span class="stat-value">Claude 直接解释</span></div>
+      <div class="stat"><span class="stat-label">耗时</span><span class="stat-value">13 秒</span></div>
+      <div class="stat"><span class="stat-label">Tokens</span><span class="stat-value">15,669</span></div>
+    </div>
+    <div class="panel-content">
+
+      <h2>从"袜子"讲起</h2>
+      <p>两只袜子一左一右，装进两个不透明盒子，一个寄北京一个寄上海。打开一个知道另一个——<strong>这只是经典关联、信息不足而已，不是魔法。</strong></p>
+      <div class="highlight">
+        <strong>量子纠缠不同的地方：</strong><br>
+        在测量之前，两个粒子<strong>并不各自有一个确定状态</strong>——它们处于叠加态，就像两只袜子都既是左又是右。直到你测量其中一个，它才"决定"自己是左还是右。而且这个"决定"是<strong>瞬时的</strong>——不管你距离多远。
+      </div>
+      <p>这就是爱因斯坦说的"鬼魅般的超距作用"。</p>
+
+      <h2>但你不能用它来超光速通信</h2>
+      <p>这是最关键但最被忽略的细节：<strong>你无法控制测量结果。</strong>结果是完全随机的——你只能"发现"它，不能"选择"它。你发现了一个结果，然后推断出远方粒子的状态，但你不能用它来"发消息"。</p>
+
+      <h2>四条总结</h2>
+      <ol>
+        <li>两个粒子之间的一种<strong>特殊关联</strong>，共享同一个量子态</li>
+        <li>测量其中一个会<strong>瞬间影响另一个</strong>，无论距离多远</li>
+        <li><strong>不能用来超光速通信</strong>，因为无法控制测量结果</li>
+        <li>这不是"信息传递"，而是更深层的——两个粒子<strong>失去了独立个体性</strong></li>
+      </ol>
+
+      <div class="skipped-dimensions">
+        <span class="tag">⊘ 解释策略：故意不用的套路</span><br><br>
+        <strong>薛定谔的猫：</strong>讲的是单个系统的叠加，而非两个系统之间的关联。对"解释纠缠"这个目标，猫跑题了。<br><br>
+        <strong>骰子/硬币比喻：</strong>每次掷骰子结果独立——但纠缠恰恰是"结果不再独立"。需要的比喻必须表达"关联性"，所以选了袜子。<br><br>
+        <strong>波函数、希尔伯特空间、贝尔不等式等数学：</strong>对一个"好奇的普通人"，这些术语不会增加理解，只会制造障碍。关键不是让他们能用量子力学做计算，而是能<strong>感受到这个现象违反直觉在哪里</strong>。<br><br>
+        <strong>直接澄清"不能超光速通信"：</strong>许多科普停在"瞬间作用"的戏剧性画面上，观众带着错误理解离开。必须把这个误解掐掉。
+      </div>
+
+      <p style="margin-top:16px; font-style:italic; color:var(--text-dim);">策略：建脚手架（袜子类比）→ 拆脚手架（指出哪里失效）→ 清理误解（不能超光速通信）</p>
+
+    </div>
+  </div>
+</div>
+
+<!-- Verdict -->
+<div class="verdict">
+  <h2>第三方评审 · 谁更优？</h2>
+  <div class="verdict-subtitle">独立 Agent 从七个维度对两份产出进行盲评</div>
+
+  <div class="key-insight">
+    <h3>核心发现：框架选错了工具</h3>
+    <p>Cognitive Supreme 是一个设计精良的<strong>信念解构工具</strong>，但被放在了<strong>科学解释任务</strong>上。它把"请解释X"强行重新定义为"请解构'我想理解X'这个判断"，这种错位是结构性的、框架决定的。产出B则让任务本身决定方法，做到了"合适"而非"正确"。</p>
+  </div>
+
+  <h3 style="font-size:20px;color:#fff;margin-bottom:24px;">评分总表</h3>
+  <table class="verdict-table">
+    <thead>
+      <tr>
+        <th>维度</th>
+        <th>核心评语</th>
+        <th style="text-align:center;">Automation<br><span style="color:var(--accent-a);">产出A</span></th>
+        <th style="text-align:center;">Intelligence<br><span style="color:var(--accent-b);">产出B</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="dimension">解释清晰度<br><span style="font-size:11px;color:var(--text-dim);">普通人读完是否能理解</span></td><td style="font-size:13px;color:var(--text-dim);">A首句即见"希尔伯特空间、厄米算符"，读者已迷失；B用袜子比喻在30秒内建立理解框架</td><td><span class="score lose">3</span></td><td><span class="score win">9</span></td></tr>
+      <tr><td class="dimension">冗余度<br><span style="font-size:11px;color:var(--text-dim);">填充内容占比</span></td><td style="font-size:13px;color:var(--text-dim);">7步中仅2步对解释有实质贡献，A自己承认但框架不允许跳过</td><td><span class="score lose">3</span></td><td><span class="score win">9</span></td></tr>
+      <tr><td class="dimension">自适应能力<br><span style="font-size:11px;color:var(--text-dim);">方法与任务匹配度</span></td><td style="font-size:13px;color:var(--text-dim);">框架为解构判断设计，被错放在科学解释任务上——这是结构性错位</td><td><span class="score lose">2</span></td><td><span class="score win">9</span></td></tr>
+      <tr><td class="dimension">直觉建立<br><span style="font-size:11px;color:var(--text-dim);">读者能否形成直观感受</span></td><td style="font-size:13px;color:var(--text-dim);">以抽象定义代替直觉构建；读者知道正确定义但没有"感觉"</td><td><span class="score lose">2</span></td><td><span class="score win">8</span></td></tr>
+      <tr><td class="dimension">误导风险<br><span style="font-size:11px;color:var(--text-dim);">高分=低误导风险</span></td><td style="font-size:13px;color:var(--text-dim);">形式化表达可能导致术语记诵式的"伪理解"；功能分析冒犯真诚求知者</td><td><span class="score lose">6</span></td><td><span class="score win">8</span></td></tr>
+      <tr><td class="dimension">可读性<br><span style="font-size:11px;color:var(--text-dim);">读者能否顺畅跟随</span></td><td style="font-size:13px;color:var(--text-dim);">层级嵌套过深，像学术审查清单而非科普；接触实际解释前需穿透多层元框架</td><td><span class="score lose">3</span></td><td><span class="score win">9</span></td></tr>
+      <tr><td class="dimension">思考指引<br><span style="font-size:11px;color:var(--text-dim);">读后是否有新思考方式</span></td><td style="font-size:13px;color:var(--text-dim);">方法论文本有价值但需忍受大量无关内容才能提取；B的四条结论可记可复述</td><td><span class="score lose">5</span></td><td><span class="score win">7</span></td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td class="dimension" style="font-size:16px;color:#fff;">总分</td><td></td><td><span class="score lose" style="font-size:20px;">24</span></td><td><span class="score win" style="font-size:20px;">59</span></td></tr>
+    </tfoot>
+  </table>
+
+  <!-- Bar chart -->
+  <h3 style="font-size:20px;color:#fff;margin:32px 0 20px;">可视化对比</h3>
+  <div style="background:var(--panel-bg);padding:28px;border-radius:12px;border:1px solid var(--border);">
+    <div style="display:flex;align-items:center;justify-content:center;gap:32px;margin-bottom:16px;font-size:12px;text-transform:uppercase;letter-spacing:1px;">
+      <span style="color:var(--accent-a);">◼ Automation</span>
+      <span style="color:var(--accent-b);">◼ Intelligence</span>
+    </div>
+    <div class="bar-row"><span class="bar-label">解释清晰度</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">3</span><div class="bar-track"><div class="bar-a" style="width:30%"></div></div><div class="bar-track"><div class="bar-b" style="width:90%"></div></div><span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">9</span></div>
+    <div class="bar-row"><span class="bar-label">冗余度</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">3</span><div class="bar-track"><div class="bar-a" style="width:30%"></div></div><div class="bar-track"><div class="bar-b" style="width:90%"></div></div><span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">9</span></div>
+    <div class="bar-row"><span class="bar-label">自适应能力</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">2</span><div class="bar-track"><div class="bar-a" style="width:20%"></div></div><div class="bar-track"><div class="bar-b" style="width:90%"></div></div><span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">9</span></div>
+    <div class="bar-row"><span class="bar-label">直觉建立</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">2</span><div class="bar-track"><div class="bar-a" style="width:20%"></div></div><div class="bar-track"><div class="bar-b" style="width:80%"></div></div><span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">8</span></div>
+    <div class="bar-row"><span class="bar-label">误导风险</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">6</span><div class="bar-track"><div class="bar-a" style="width:60%"></div></div><div class="bar-track"><div class="bar-b" style="width:80%"></div></div><span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">8</span></div>
+    <div class="bar-row"><span class="bar-label">可读性</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">3</span><div class="bar-track"><div class="bar-a" style="width:30%"></div></div><div class="bar-track"><div class="bar-b" style="width:90%"></div></div><span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">9</span></div>
+    <div class="bar-row"><span class="bar-label">思考指引</span><span style="font-size:11px;color:var(--accent-a);width:24px;text-align:right;font-family:var(--font-mono);">5</span><div class="bar-track"><div class="bar-a" style="width:50%"></div></div><div class="bar-track"><div class="bar-b" style="width:70%"></div></div><span style="font-size:11px;color:var(--accent-b);width:24px;font-family:var(--font-mono);">7</span></div>
+  </div>
+
+  <!-- Winner -->
+  <div class="winner-badge">
+    <div class="winner-text" style="font-size:32px;">Intelligence 胜出</div>
+    <div class="winner-reason">总分 59 vs 24 — 7个维度全部胜出，其中「自适应能力」差距最大（2 vs 9），这是框架化分析的根本性硬伤</div>
+  </div>
+
+  <div class="one-liner">"产出A把'解释量子纠缠'当成了一个需要解构的判断来对待，产出B则把它当成了一个需要解释的概念来对待——前者回答的是'这个问题应该怎么被思考'，后者回答的是'量子纠缠是什么'。"</div>
+
+  <!-- Detail Comments -->
+  <div style="margin-top:32px;padding:24px;background:var(--panel-bg);border:1px solid var(--border);border-radius:12px;">
+    <h3 style="font-size:16px;color:#fff;margin-bottom:12px;">维度详细评语</h3>
+
+    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
+      <strong style="color:#fff;">解释清晰度</strong><span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:3/10 B:9/10</span>
+      <p style="margin-top:6px;color:var(--text);">A几乎未能履行"解释"功能。读者读完第1步看到"希尔伯特空间、厄米算符、实在论 vs 反实在论"时已经迷失。真正的解释内容被埋藏在7步结构深处。它实际上在"解释如何解释量子纠缠"而非"解释量子纠缠"。B以袜子比喻开场，在一个段落后立即指出"但这是经典关联，量子世界不一样"，瞬间建立了理解框架。四条总结清晰可记。</p>
+    </div>
+
+    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
+      <strong style="color:#fff;">冗余度</strong><span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:3/10 B:9/10</span>
+      <p style="margin-top:6px;color:var(--text);">7步中仅有第2步和第6步对解释量子纠缠有实质贡献。第3、4、5、7步填充了大量与"让读者理解量子纠缠"无关的内容。即使A自己也在自我诊断中承认了这一点，但框架不允许跳过。B的每一段都服务于同一个目标：让读者理解量子纠缠。类比、对比、清理误解三步紧密咬合。</p>
+    </div>
+
+    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
+      <strong style="color:#fff;">自适应能力 — 最关键的差异</strong><span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:2/10 B:9/10</span>
+      <p style="margin-top:6px;color:var(--text);">Cognitive Supreme的7步框架被设计用于<strong>解构一个判断或信念</strong>，而非<strong>解释一个科学概念</strong>。面对"量子纠缠是怎么一回事"这种求知型问题，框架完全无法自适应。它把"请解释X"强行重新定义为"请解构'我想理解X'这个判断"。这种错位是结构性的、框架决定的。B完美地识别出任务核心并选择了最佳策略：用日常经验作为跳板，精确找到读者的认知缺口，然后针对性地填补。</p>
+    </div>
+
+    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
+      <strong style="color:#fff;">直觉建立</strong><span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:2/10 B:8/10</span>
+      <p style="margin-top:6px;color:var(--text);">A以抽象定义和形式框架代替直觉构建。一个没有量子力学背景的读者读完仍然没有"感觉"量子纠缠到底是怎么回事。B的"建→拆"过程极具教学价值："袜子"类比建脚手架 → 立即拆掉（"但量子不是这样"）→ 精确刻画经典直觉和量子现实的差异。"两个粒子失去了独立个体性"这句话对直觉建立尤为有力。</p>
+    </div>
+
+    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
+      <strong style="color:#fff;">误导风险</strong><span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:6/10 B:8/10</span>
+      <p style="margin-top:6px;color:var(--text);">A的风险来自高度形式化表达可能让读者产生"我已经理解了"的术语记诵式错觉；第7步的">80%提问者不是真正寻求理解"可能让真诚求知者感到被否定。B花篇幅明确指出"不能超光速通信"——这是普通人听完量子纠缠后最可能形成的错误印象。明确指出袜子类比在量子世界不成立，避免类比固化为错误理解。</p>
+    </div>
+
+    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
+      <strong style="color:#fff;">可读性</strong><span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:3/10 B:9/10</span>
+      <p style="margin-top:6px;color:var(--text);">A首句即为"量子纠缠→测量坍缩→量子态叠加→波函数→量子力学基本假设（希尔伯特空间、厄米算符、薛定谔方程）"——典型的写给物理学入门者而非普通人的语言。层级嵌套的编号结构让阅读体验接近学术审查清单。B从具体比喻自然过渡到抽象概念，语言接近口语化但足够精确，没有强迫读者先理解一个复杂框架才能理解内容。</p>
+    </div>
+
+    <div style="margin:16px 0;padding:14px 18px;background:rgba(255,255,255,0.02);border-radius:8px;">
+      <strong style="color:#fff;">行动/思考指引</strong><span style="font-size:11px;color:var(--text-dim);margin-left:8px;">A:5/10 B:7/10</span>
+      <p style="margin-top:6px;color:var(--text);">A的"定义不同会导致结论不同"和"一个现象可以有多个正确描述框架"是深刻的认知工具——但读者要先忍受大量无关内容才能提取。B的四条总结直接可记可复述。"不能超光速通信"的澄清不仅是教一个事实，还教了一个筛选标准：任何声称"量子纠缠实现超光速通信"的解释都应该被怀疑。</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  越界播客 · Automation is NOT Intelligence · 每一集验证一次
+</div>
+
+</body>
+</html>
