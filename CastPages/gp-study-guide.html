@@ -367,6 +367,100 @@
     .hero h1, .hero .subtitle, .hero .badge, .hero .label { color: #000; }
     .cta { display: none; }
   }
+
+  /* ---- Tab Navigation ---- */
+  .tab-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 40px;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+    padding-top: 16px;
+  }
+  .tab-btn {
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    background: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.15s, border-color 0.15s;
+    font-family: var(--font-sans);
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .tab-panel { display: block; }
+  .tab-panel.hidden { display: none; }
+
+  /* Methodology specific */
+  .drill-box {
+    background: #fff;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .drill-box .drill-name {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 640px) {
+    .before-after { grid-template-columns: 1fr; }
+    .tab-btn { padding: 10px 14px; font-size: 13px; }
+  }
+  .before-box {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 14px;
+  }
+  .after-box {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 14px;
+  }
+  .before-box .box-label { color: #dc2626; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: block; }
+  .after-box .box-label { color: #059669; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: block; }
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li { padding: 4px 0 4px 24px; position: relative; font-size: 14px; }
+  .checklist li::before { content: "☐"; position: absolute; left: 0; color: var(--text-tertiary); }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .phase-num {
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent); color: #fff;
+    border-radius: 10px; font-weight: 800; font-size: 18px;
+    flex-shrink: 0;
+  }
 </style>
 </head>
 <body>
@@ -382,6 +476,15 @@
 
 <!-- ====== CONTENT ====== -->
 <div class="container">
+
+<!-- Tab Navigation -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('guide')">Study Guide</button>
+  <button class="tab-btn" onclick="switchTab('methodology')">Practical Methodology</button>
+</nav>
+
+<!-- TAB 1: Study Guide -->
+<div class="tab-panel" id="tab-guide">
 
 <!-- SECTION 1: EXAM OVERVIEW -->
 <div class="section">
@@ -1079,6 +1182,385 @@
   </blockquote>
 </div>
 
+</div><!-- end tab-guide -->
+
+<!-- ====== TAB 2: Practical Methodology ====== -->
+<div class="tab-panel hidden" id="tab-methodology">
+
+<div class="section">
+  <h2 class="section-title"><span class="num">M1</span>The 3-Phase System: From C to A</h2>
+  <p>Improving GP is not random. It follows a predictable progression. Most students stagnate because they keep doing Phase 2 work (practicing essays) without first building a Phase 1 foundation (content + frameworks). <strong>You must build in order. Skipping phases guarantees a plateau.</strong></p>
+
+  <div class="phase-header">
+    <div class="phase-num">1</div>
+    <div>
+      <h3 style="margin:0;font-size:18px;">Foundation: Content Bank + Frameworks</h3>
+      <p style="margin:4px 0 0;font-size:14px;color:var(--text-tertiary);">Duration: First 4–6 weeks (or JC1 Term 1–2)</p>
+    </div>
+  </div>
+  <div class="card card-highlight">
+    <strong>Goal:</strong> Build a knowledge bank of 80–100 processed entries across 4–5 topic areas. Memorise the core frameworks (PEEL, REACT, Question Analysis Protocol) until they are automatic.<br><br>
+    <strong>DO:</strong> Read daily → process using 3-Pass Method → file into knowledge bank. Practice essay outlines (NOT full essays yet). Memorise the 9 SAQ question types.<br>
+    <strong>DON'T:</strong> Write full timed essays before you have content. You will produce word salad and reinforce bad habits.
+  </div>
+
+  <div class="phase-header" style="margin-top:24px;">
+    <div class="phase-num">2</div>
+    <div>
+      <h3 style="margin:0;font-size:18px;">Structure: Timed Application</h3>
+      <p style="margin:4px 0 0;font-size:14px;color:var(--text-tertiary);">Duration: Until ~2 months before A-Levels</p>
+    </div>
+  </div>
+  <div class="card card-highlight">
+    <strong>Goal:</strong> Apply frameworks under timed conditions. Build stamina. Identify your specific weaknesses through systematic error tracking.<br><br>
+    <strong>DO:</strong> 2–3 essay outlines/week + 1 full essay/week + 1 full Paper 2/week. Time everything. Log every error. Focus practice on your weakest question type.<br>
+    <strong>DON'T:</strong> Write the same type of essay every time. Avoid feedback (marking your own work without a rubric or answer key).
+  </div>
+
+  <div class="phase-header" style="margin-top:24px;">
+    <div class="phase-num">3</div>
+    <div>
+      <h3 style="margin:0;font-size:18px;">Precision: Error Elimination & Speed</h3>
+      <p style="margin:4px 0 0;font-size:14px;color:var(--text-tertiary);">Duration: Final 6–8 weeks before A-Levels</p>
+    </div>
+  </div>
+  <div class="card card-highlight">
+    <strong>Goal:</strong> Eliminate recurring mistakes. Increase speed to leave 10-minute review buffer in both papers. Refine evaluation quality (AO3).<br><br>
+    <strong>DO:</strong> Targeted drills for your weakest component. Full timed papers under exam conditions. Review error log. Sleep well. No new content — consolidate.<br>
+    <strong>DON'T:</strong> Read new material. Start a new topic area. Pull all-nighters. Panic and abandon your frameworks.
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title"><span class="num">M2</span>Essay Writing: The Complete Method</h2>
+
+  <div class="subsection">
+    <h3 class="subsection-title">2.1 Question Analysis Protocol (First 5 Minutes)</h3>
+    <p>Before you even think about your thesis, you must <strong>decode the question</strong>. The single most common reason for a failing essay: answering a question that wasn't asked.</p>
+
+    <div class="drill-box">
+      <div class="drill-name">The 3-Pass Question Analysis Drill</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Circle keywords.</strong> What is the <em>topic domain</em>? (e.g., media, politics, environment) What is the <em>specific angle</em> within that domain? Example: "Is social media a threat to democracy?" → Domain: Media + Politics. Angle: Threat (not benefit, not effect — specifically threat).</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Identify the command word.</strong> This dictates your argument structure. "Discuss" → present multiple views then judge. "To what extent" → agree partially, show boundaries. "Evaluate" → set criteria, assess against them. "How far do you agree" → degrees of agreement, not binary. Misreading the command word means your entire essay structure is wrong from the start.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Identify the scope.</strong> Is the question asking about "your society" (Singapore-specific evidence required)? Or is it global/universal? Does it specify a time frame? A demographic? Missing the scope = evidence that doesn't match = lost AO1 marks.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">2.2 Thesis Construction Formula</h3>
+    <p>A weak thesis is the #1 reason essays cap at C. Here is the difference:</p>
+
+    <div class="before-after">
+      <div class="before-box">
+        <span class="box-label">Weak (C-grade)</span>
+        "Technology has both advantages and disadvantages in education. I will discuss both sides."
+        <p style="margin-top:8px;font-size:12px;color:#dc2626;">Fence-sitting. No position. No preview of arguments. The examiner knows nothing about where this essay is going.</p>
+      </div>
+      <div class="after-box">
+        <span class="box-label">Strong (A-grade)</span>
+        "While technology has expanded access to information, I argue that its net effect on education is negative because it erodes deep learning — by fragmenting attention, reducing knowledge retention, and replacing understanding with search-engine dependence."
+        <p style="margin-top:8px;font-size:12px;color:#059669;">Clear position. Specific reasons previewed. Acknowledges complexity ("While..."). The examiner knows exactly what the essay will argue.</p>
+      </div>
+    </div>
+
+    <div class="framework">
+      <div class="name">Thesis Formula: While [counterpoint], I argue [position] because [reason 1], [reason 2], and [reason 3].</div>
+      <p style="font-size:14px;color:var(--text-secondary);">This formula works for <strong>any</strong> GP essay question. It demonstrates AO3 immediately (you acknowledge the opposing view) and gives your essay a clear direction. Memorise the structure and practice filling it in for 10 different past-year questions.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">2.3 PEEL+ Framework (PEEL with Counterargument)</h3>
+    <p>Standard PEEL gets you to a B. <strong>PEEL+</strong> — adding a dedicated counterargument-rebuttal paragraph — is what gets you to an A. The A-grade structure:</p>
+
+    <div class="framework">
+      <div class="name">A-Grade Essay Structure (500–800 words, 5–6 paragraphs)</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">¶1</div><div class="step-text"><strong>Introduction:</strong> Hook (1 sentence) → Context/definitions (1–2 sentences) → Thesis statement (using the formula) → Signpost (brief preview of your argument chain). <em>Write this AFTER the body paragraphs.</em></div></div>
+        <div class="step"><div class="step-num">¶2</div><div class="step-text"><strong>Body 1 (Pro-argument):</strong> Strongest supporting argument. PEEL. Topic sentence → Specific evidence → Explanation (why it supports thesis) → Link back.</div></div>
+        <div class="step"><div class="step-num">¶3</div><div class="step-text"><strong>Body 2 (Pro-argument):</strong> Second supporting argument. PEEL. Use a different angle or different type of evidence than ¶2.</div></div>
+        <div class="step"><div class="step-num">¶4</div><div class="step-text"><strong>Body 3 (Nuance/Extension):</strong> A deeper, more sophisticated argument that complicates or extends your thesis. This shows the examiner you can think beyond surface level. <em>This paragraph is what separates A from B.</em></div></div>
+        <div class="step"><div class="step-num">¶5</div><div class="step-text"><strong>Counterargument + Rebuttal:</strong> "Admittedly, some argue that [strongest opposing view] because [their reasoning]." → Then rebut: "However, this argument fails to account for [your rebuttal], and because [your reasoning], my position holds." <em>Never present a counterargument you cannot rebut convincingly.</em></div></div>
+        <div class="step"><div class="step-num">¶6</div><div class="step-text"><strong>Conclusion:</strong> Restate thesis (in different words) → Synthesise (don't just list your points — show how they connect to form a larger insight) → Forward-looking statement or broader implication. <em>No new evidence.</em></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">2.4 The 30-Minute Outline Drill (Detailed Protocol)</h3>
+    <p>This is the <strong>single highest-leverage practice activity</strong> in GP. It trains the exact neural pathway needed in the exam: see question → form thesis → map arguments → deploy evidence.</p>
+
+    <div class="drill-box">
+      <div class="drill-name">Outline Drill Protocol</div>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:12px;"><strong>Frequency:</strong> 2–3 per week. <strong>Duration:</strong> 30 minutes strict. <strong>No notes, no phone, no internet.</strong></p>
+      <ol style="font-size:14px;">
+        <li><strong>Pick a question</strong> from a past-year paper. Don't choose the easiest one — choose one from a topic area you're weak in.</li>
+        <li><strong>Set a 30-minute timer.</strong> No pausing. No checking your knowledge bank.</li>
+        <li><strong>Write on one page:</strong>
+          <ul style="margin-top:4px;">
+            <li>Thesis statement (1 sentence, using the formula)</li>
+            <li>Topic sentences for 3 body paragraphs (1 sentence each)</li>
+            <li>Counterargument + rebuttal (1+1 sentences)</li>
+            <li>Under each topic sentence: the <strong>specific evidence</strong> you would use (named entity + number/date if applicable)</li>
+          </ul>
+        </li>
+        <li><strong>After the timer:</strong> Open your knowledge bank. Check: did you have the evidence? What did you miss? Add missing evidence to your bank.</li>
+        <li><strong>Self-evaluate:</strong> Is your thesis debatable and specific? Do your topic sentences form a logical chain? Is your evidence specific (not generic)? Did you include a counterargument?</li>
+      </ol>
+    </div>
+
+    <div class="card card-success">
+      <strong>Progression target:</strong> After 10 outlines, you should finish in 25 minutes. After 20, you should finish in 20 minutes with higher quality. After 30, you should be able to produce a complete outline in 15 minutes — the speed you need in the actual exam. <strong>Keep your outlines in a folder.</strong> Review them before the exam. An outline you wrote 3 months ago that uses evidence you've since forgotten can be reactivated in 5 minutes of review.
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">2.5 Essay Self-Grading Checklist</h3>
+    <p>After every full essay or outline, run through this checklist. Be honest. If you check fewer than 7 boxes, that essay would not score an A.</p>
+
+    <ul class="checklist">
+      <li><strong>Thesis:</strong> Is my thesis debatable, specific, and does it preview my arguments?</li>
+      <li><strong>Question:</strong> Does every paragraph directly address the question asked (not the question I wish was asked)?</li>
+      <li><strong>Topic sentences:</strong> Does each topic sentence make a debatable claim (not a statement of fact)?</li>
+      <li><strong>Evidence:</strong> Is every piece of evidence specific (contains a name/date/number/policy/country)?</li>
+      <li><strong>Explanation:</strong> Does every body paragraph include explanation of WHY the evidence supports the point (not just description of the evidence)?</li>
+      <li><strong>Counterargument:</strong> Did I include a genuine counterargument (not a straw man) and rebut it convincingly?</li>
+      <li><strong>Evaluation (AO3):</strong> Did I demonstrate independent judgment, or did I just report what others say?</li>
+      <li><strong>Links:</strong> Does every paragraph end by linking back to the thesis?</li>
+      <li><strong>Conclusion:</strong> Does my conclusion synthesise (not summarise) and offer a forward-looking insight?</li>
+      <li><strong>Language:</strong> Are my sentences clear and grammatically correct? Did I use precise vocabulary?</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title"><span class="num">M3</span>Comprehension: Precision Answering Techniques</h2>
+
+  <div class="subsection">
+    <h3 class="subsection-title">3.1 The 9 SAQ Question Types &amp; Exact Answer Formulas</h3>
+    <p>Once you recognise the question type, the answering formula is fixed. <strong>Stop guessing and start pattern-matching.</strong></p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Type</th><th>What It Tests</th><th>Answer Formula</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Literal</strong></td><td>Direct understanding</td><td>Locate relevant text → Paraphrase in own words → Do NOT lift</td></tr>
+          <tr><td>2</td><td><strong>Inferential</strong></td><td>Reading between lines</td><td>Identify textual clues → State implied meaning → Support with evidence from passage</td></tr>
+          <tr><td>3</td><td><strong>Explanation</strong></td><td>Contextual meaning</td><td>Paraphrase the idea → Explain what it means IN CONTEXT → Show how it connects to surrounding text</td></tr>
+          <tr><td>4</td><td><strong>Metaphor / Simile</strong></td><td>Figurative language</td><td>Identify the comparison → Explain literal meaning → Explain effect in context ("The author uses this metaphor to emphasise...")</td></tr>
+          <tr><td>5</td><td><strong>Language Use</strong></td><td>Authorial technique effect</td><td>Name technique (diction/irony/juxtaposition/rhetorical question) → Quote specific word/phrase → Explain effect on reader. <em>All 3 parts required for full marks.</em></td></tr>
+          <tr><td>6</td><td><strong>Purpose</strong></td><td>Why the author wrote it</td><td>Paraphrase content → State purpose ("The author uses this to emphasise/highlight/illustrate/reinforce...") → Explain intended effect</td></tr>
+          <tr><td>7</td><td><strong>Attitude</strong></td><td>Author's feelings</td><td>Identify attitude (supportive/critical/skeptical/dismissive/ambivalent) → Quote evidence → Explain how the evidence reveals the attitude</td></tr>
+          <tr><td>8</td><td><strong>Tone</strong></td><td>How attitude is conveyed</td><td>Identify tone (sarcastic/optimistic/somber/urgent/academic) → Quote specific word choices → Explain how word choice creates the tone</td></tr>
+          <tr><td>9</td><td><strong>Punctuation</strong></td><td>Effect of punctuation</td><td>Identify punctuation mark → Explain purpose (quotation marks = distancing/irony; dashes = emphasis/interruption; ellipsis = omission/trailing thought) → Explain effect in context</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">3.2 Summary Writing: 5-Point Quality Check</h3>
+
+    <div class="framework">
+      <div class="name">Summary Protocol (15–18 minutes, 80–120 words)</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Question requirements:</strong> Read twice. What EXACTLY are you summarising? Underline the keyword in the question. Summarising only the "against" arguments when the question also asks for "for" is the most common and costly error.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Location:</strong> In Syllabus 8881, the summary is based on <strong>ALL of Passage 2</strong>. Scan every paragraph. Mark every relevant point. If you only scan the paragraphs you think contain the answer, you WILL miss points.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Degree:</strong> Do your words convey the same intensity as the passage? "Concerned" ≠ "alarmed." "Suggests" ≠ "insists." Mismatching the degree = meaning distortion = lost marks.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Connotation:</strong> Do your words carry the same positive/negative charge? "Frugal" ≠ "cheap." "Assertive" ≠ "aggressive." Wrong connotation changes the author's intended meaning.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Examples &amp; Statistics:</strong> When the passage uses examples or statistics, don't include the raw data. Extract the <strong>overarching point</strong> the examples are making. Summarise the argument, not the illustration.</div></div>
+      </div>
+    </div>
+
+    <div class="card card-danger">
+      <strong>8881 Change Reminder:</strong> No opening phrase is provided. You must write the first sentence yourself. Also: summary is now based on ALL paragraphs of Passage 2, not selected ones. Scan the entire passage.
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">3.3 AQ: The Complete Response Protocol (12 Marks)</h3>
+
+    <div class="framework">
+      <div class="name">AQ Protocol (20–25 minutes)</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Identify the author's argument(s).</strong> Which specific claim(s) from which passage(s) will you evaluate? State them clearly in your first sentence. "The author of Passage A argues that..."</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text"><strong>State your position.</strong> Do you agree or disagree? To what extent? "I largely agree with this argument as it applies to Singapore, though with two important qualifications."</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Apply to Singapore with specific evidence.</strong> Each paragraph: State the author's claim → Apply to SG context using a <strong>named policy, statistic, or social trend</strong> → Explain whether SG supports or challenges the claim → Explain WHY. <em>Do not just describe SG — evaluate the author's argument using SG as evidence.</em></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Be balanced.</strong> The author is rarely 100% right or 100% wrong about Singapore. Show where their argument applies AND where it doesn't. This balance demonstrates AO3.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Conclude.</strong> Your overall judgment: to what extent do the author's arguments apply to Singapore? 1–2 sentences synthesising your evaluation.</div></div>
+      </div>
+    </div>
+
+    <div class="card card-warning">
+      <strong>Time discipline:</strong> The AQ is worth 12 marks but must not consume more than 25 minutes. Budget: 3 minutes to plan, 18–20 minutes to write, 2 minutes to review. If you spend 35+ minutes on AQ, you will rush the SAQs and summary — and those are easier marks.
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">3.4 Comparison Questions: Step-by-Step Protocol <span class="new-badge">NEW</span></h3>
+
+    <div class="drill-box">
+      <div class="drill-name">Comparison Question Protocol (4–6 marks, ~8 minutes per question)</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Read the quoted sentence from Passage A/B.</strong> Underline its key terms. What is the <em>specific claim</em> being made? You must understand this precisely before looking at Passage C.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Scan Passage C</strong> for content that relates to the same concept. Is there an idea that <strong>supports</strong> (reinforces, provides evidence for, agrees with) or <strong>contradicts</strong> (challenges, undermines, provides counter-evidence to) the quoted claim?</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text"><strong>State the relationship clearly:</strong> "Passage C supports/contradicts Passage A's claim that [paraphrase claim] by [explain how C supports/contradicts]." <em>Use the word "supports" or "contradicts" explicitly.</em></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Quote from C</strong> and <strong>reference the line from A/B</strong>. Show the examiner you are working with textual evidence from both passages. 1 mark for identifying the relationship, remaining marks for the quality of your justification.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Justify WHY.</strong> Don't just say "C supports A because they both talk about technology." Explain <em>how</em> C's evidence strengthens/weakens A's argument. The justification is where the marks are. "C's example of [X] supports A's claim that [Y] because it demonstrates [Z], which confirms A's premise that..."</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title"><span class="num">M4</span>The Example Bank System</h2>
+
+  <p>The difference between "I read widely" and "I have usable evidence" is the <strong>Example Bank</strong> — a structured system for converting what you read into what you can deploy. Without this system, most of what you read is forgotten within 48 hours.</p>
+
+  <div class="subsection">
+    <h3 class="subsection-title">4.1 The Why–How–So What Template</h3>
+    <p>For every example in your bank, fill in ALL three fields. A fact without evaluation is useless for AO3.</p>
+
+    <div class="before-after">
+      <div class="before-box">
+        <span class="box-label">Weak Entry (C-grade)</span>
+        "Singapore uses ERP (Electronic Road Pricing) to manage traffic congestion."
+        <p style="margin-top:8px;font-size:12px;color:#dc2626;">Fact only. No argument. Cannot be used to support any thesis because there's no evaluation attached.</p>
+      </div>
+      <div class="after-box">
+        <span class="box-label">Strong Entry (A-grade)</span>
+        <strong>What:</strong> Singapore's ERP system uses dynamic pricing — rates vary by time, location, and traffic conditions.<br>
+        <strong>Why:</strong> This reflects a pragmatic governance philosophy: use market mechanisms (price signals) to solve collective action problems (congestion).<br>
+        <strong>So What:</strong> Demonstrates that technology, when paired with thoughtful policy design, can align individual incentives with public goods — challenging the narrative that tech inevitably erodes social welfare.
+        <p style="margin-top:8px;font-size:12px;color:#059669;">Deployable for: technology & society, governance, environment, economics. The evaluation (So What) is already written — just adapt it to your thesis.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">4.2 Local–Global Example Pairing</h3>
+    <p>Every topic area should have at least <strong>2 Singapore examples and 2 global examples</strong>. This gives you flexibility: SG examples for AQ and Singapore-focused essay questions; global examples for comparative arguments and demonstrating breadth.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Topic Area</th><th>Singapore Examples</th><th>Global Examples</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Environment</strong></td><td>Green Plan 2030, carbon tax (S$25/tCO₂e), Tuas Nexus waste-to-energy plant</td><td>Germany's Energiewende, COP28 loss and damage fund, Costa Rica's reforestation (25%→57% forest cover)</td></tr>
+          <tr><td><strong>Technology</strong></td><td>Smart Nation initiative, TraceTogether, AI Singapore programme</td><td>EU AI Act (2024), China's social credit system, Elon Musk's Neuralink</td></tr>
+          <tr><td><strong>Society</strong></td><td>HDB Ethnic Integration Policy, Section 377A repeal (2022), Beyond the Label mental health campaign</td><td>US affirmative action Supreme Court ruling (2023), France's burqa ban, New Zealand's wellbeing budget</td></tr>
+          <tr><td><strong>Politics</strong></td><td>POFMA (fake news law), reserved presidency, GRC system</td><td>Taiwan election (2024), India's digital public infrastructure, Brexit consequences</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">4.3 Weekly Bank Maintenance</h3>
+    <div class="card card-highlight">
+      <strong>Sunday routine (20 minutes):</strong>
+      <ol style="margin-top:8px;">
+        <li>Add 2–3 new entries from the week's reading (processed via 3-Pass Method).</li>
+        <li>Review 10 random entries. Can you recall the Why and So What from just the What? If not, re-read and re-process.</li>
+        <li>Identify gaps: which topic area has the fewest entries? Which has only Singapore examples but no global ones (or vice versa)? Focus next week's reading on the gaps.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title"><span class="num">M5</span>Time Management Systems</h2>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Paper 1: The 15-60-10-5 Protocol</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Phase</th><th>Time</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Plan</strong></td><td>0–15 min</td><td>Read all 8 questions. Eliminate. Choose the best one. Thesis + 3–4 topic sentences + evidence + counterargument. Write on the question paper.</td></tr>
+          <tr><td><strong>Write</strong></td><td>15–75 min</td><td>Write body paragraphs first (~12 min each), then introduction (~8 min), then conclusion (~5 min). Writing the intro last means it will actually match your essay.</td></tr>
+          <tr><td><strong>Check</strong></td><td>75–85 min</td><td>Read every sentence. Fix grammar, spelling, weak word choices. Check every paragraph links to the thesis.</td></tr>
+          <tr><td><strong>Word count check</strong></td><td>85–90 min</td><td>Count words (roughly: count lines × words per line). If under 500, add to your weakest paragraph. If over 800, cut the weakest evidence, not the argument.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Paper 2: The 35-25-30 Protocol</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Section</th><th>Time</th><th>Content Marks</th><th>Strategy</th></tr></thead>
+        <tbody>
+          <tr><td><strong>SAQs + Comparison Qs</strong></td><td>35 min</td><td>~21–23 marks</td><td>Answer in order. If stuck on one question for >3 min, circle it, leave space, and return later. Don't sacrifice 5 easy marks for 1 hard mark.</td></tr>
+          <tr><td><strong>Summary</strong></td><td>25 min</td><td>8 marks</td><td>Scan all of Passage 2. List all points. Paraphrase. Write opening sentence. Count words (80–120). Check: did you use your own words throughout?</td></tr>
+          <tr><td><strong>AQ</strong></td><td>30 min</td><td>12 marks</td><td>3 min plan + 22 min write + 5 min review. Use REACT framework. At least 2 specific Singapore examples. Evaluate, don't describe.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Pre-Exam Week Schedule</h3>
+    <div class="card card-success">
+      <strong>The 7-Day GP Exam Countdown:</strong>
+      <ul style="margin-top:8px;">
+        <li><strong>D–7 to D–4:</strong> 1 full timed paper per day (alternate Paper 1 and 2). Review errors same day. No new content.</li>
+        <li><strong>D–3:</strong> Review all essay outlines you've written. Read your best 3 full essays to anchor the feeling of good writing.</li>
+        <li><strong>D–2:</strong> Light Paper 2 practice (SAQs only, 30 min). Review SAQ formulas and AQ framework. Early night.</li>
+        <li><strong>D–1:</strong> Flip through knowledge bank. Read your Singapore examples for AQ. Pack: entry proof, NRIC, 3 pens, water, analogue watch. Sleep by 10pm.</li>
+        <li><strong>Exam day:</strong> Protein-rich breakfast. Arrive 30 min early. No discussing the exam with anyone. In the hall: first 15 min = question analysis only.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title"><span class="num">M6</span>Self-Assessment &amp; Error Tracking</h2>
+
+  <p>Students who improve fastest are not the ones who practice most — they are the ones who <strong>identify and eliminate their specific, recurring errors</strong>. Most students make the same 3–5 mistakes in every essay for months because they never track them systematically.</p>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Error Log Template</h3>
+    <p>After every practice paper or outline, log your errors in a simple table. Review it before every practice session.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Date</th><th>Paper/Drill</th><th>Error Type</th><th>Specific Mistake</th><th>Fix for Next Time</th></tr></thead>
+        <tbody>
+          <tr><td>15 Jun</td><td>Essay outline (Environment)</td><td>Evidence too vague</td><td>Wrote "many countries use carbon pricing" without naming any</td><td>For every evidence, include country name + policy name or date</td></tr>
+          <tr><td>18 Jun</td><td>Paper 2 (SAQs)</td><td>Lifting from passage</td><td>Copied "rapidly escalating crisis" directly without paraphrasing</td><td>Read the phrase → close eyes → write from memory → check against original</td></tr>
+          <tr><td>22 Jun</td><td>Full essay (Politics)</td><td>No counterargument</td><td>Spent 70 minutes writing body and forgot the counterargument para</td><td>Write "CA+R" in my pre-writing notes. Make it a non-negotiable item in my outline</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Weekly Progress Review (5 minutes every Sunday)</h3>
+    <div class="card card-highlight">
+      <ol>
+        <li>Review this week's error log. Which error appeared most frequently? That is your #1 priority for next week's practice.</li>
+        <li>Count: how many essay outlines did you do? How many full papers? Are you on track (2–3 outlines + 1 full paper per week)?</li>
+        <li>Check your knowledge bank: how many new entries this week? Goal: 3–5 minimum.</li>
+        <li>Set next week's focus: "Next week I will focus on [specific skill, e.g., thesis construction / paraphrasing / counterargument writing]." Write it down. Review it before every practice session.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+</div><!-- end tab-methodology -->
+
 <div class="cta">
   <h2>Start Today</h2>
   <p>Pick one thing from this guide — one habit, one framework, one drill — and do it today. Not tomorrow. The students who improve are the ones who start before they feel ready.</p>
@@ -1097,5 +1579,17 @@
   <p><a href="index.html" style="color:var(--accent);text-decoration:none;">← Back to CastPages</a></p>
 </footer>
 
+<script>
+function switchTab(tabName) {
+  // Update buttons
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  // Update panels
+  document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.add('hidden'));
+  document.getElementById('tab-' + tabName).classList.remove('hidden');
+  // Scroll to top of content
+  document.querySelector('.container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
 </body>
 </html>
