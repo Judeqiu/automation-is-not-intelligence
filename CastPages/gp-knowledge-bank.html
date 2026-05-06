@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Knowledge Bank — How to Build Your GP Evidence System</title>
+<meta name="description" content="A complete slide guide to building a GP knowledge bank. Covers entry templates, the 3-pass processing pipeline, organisation by Theme→Subtopic→Scale, the Triple-Layer Technique, weekly maintenance, retrieval practice, and setup checklist.">
+<style>
+  :root {
+    --slide-bg: #0f172a;
+    --slide-text: #e2e8f0;
+    --slide-dim: #94a3b8;
+    --accent: #f59e0b;
+    --accent2: #fbbf24;
+    --blue: #4a9eff;
+    --green: #34d399;
+    --red: #f87171;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #000;
+    font-family: var(--font-sans);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slides-wrapper {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 48px;
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+    background: var(--slide-bg);
+    overflow-y: auto;
+  }
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    z-index: 1;
+  }
+  .slide.prev { opacity: 0; transform: translateX(-60px); }
+
+  .slide-content { max-width: 840px; width: 100%; text-align: center; }
+  .slide-content.left { text-align: left; }
+
+  .slide-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .slide-title {
+    font-size: clamp(26px, 5vw, 48px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+  }
+  .slide-subtitle {
+    font-size: clamp(15px, 2.5vw, 20px);
+    color: var(--slide-dim);
+    line-height: 1.5;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Grid */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 24px;
+  }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  .col-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 24px;
+    text-align: left;
+  }
+  .col-card h4 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+  .col-card p, .col-card li { font-size: 13px; color: var(--slide-dim); line-height: 1.6; }
+  .col-card ul { padding-left: 18px; }
+  .col-card li { margin-bottom: 5px; }
+
+  /* Template showcase */
+  .template-card {
+    background: rgba(255,255,255,0.03);
+    border: 2px solid rgba(245,158,11,0.25);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: left;
+    margin-top: 24px;
+  }
+  .template-card .field {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .template-card .field:last-child { border-bottom: none; }
+  .template-card .field-label {
+    flex-shrink: 0;
+    width: 90px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-top: 2px;
+  }
+  .template-card .field-value { font-size: 13px; color: var(--slide-dim); line-height: 1.5; }
+  .template-card .field-value strong { color: #fff; }
+
+  /* Before/After */
+  .before-box {
+    background: rgba(248,113,113,0.06);
+    border: 1px solid rgba(248,113,113,0.2);
+    border-radius: 10px;
+    padding: 18px;
+    text-align: left;
+    font-size: 13px;
+    color: var(--slide-dim);
+    line-height: 1.6;
+  }
+  .after-box {
+    background: rgba(52,211,153,0.06);
+    border: 1px solid rgba(52,211,153,0.2);
+    border-radius: 10px;
+    padding: 18px;
+    text-align: left;
+    font-size: 13px;
+    color: var(--slide-dim);
+    line-height: 1.6;
+  }
+  .box-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* Pipeline flow */
+  .pipeline {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .pipe-step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+    min-width: 120px;
+    flex: 1;
+    max-width: 200px;
+  }
+  .pipe-arrow {
+    color: var(--accent);
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .pipe-step .step-icon { font-size: 24px; margin-bottom: 6px; }
+  .pipe-step .step-title { font-size: 13px; color: #fff; font-weight: 700; margin-bottom: 4px; }
+  .pipe-step .step-desc { font-size: 11px; color: var(--slide-dim); line-height: 1.4; }
+
+  /* Organisation tree */
+  .org-tree {
+    text-align: left;
+    margin-top: 24px;
+  }
+  .org-level {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 0;
+    padding-left: 0;
+  }
+  .org-level.l2 { padding-left: 40px; }
+  .org-level.l3 { padding-left: 80px; }
+  .org-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+  }
+  .org-badge.theme { background: rgba(245,158,11,0.15); color: var(--accent); }
+  .org-badge.subtopic { background: rgba(74,158,255,0.15); color: var(--blue); }
+  .org-badge.scale { background: rgba(52,211,153,0.15); color: var(--green); font-size: 9px; }
+  .org-label { font-size: 13px; color: var(--slide-dim); }
+
+  /* Scale badges */
+  .scale-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .scale-badge {
+    flex: 1; min-width: 140px;
+    padding: 16px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .scale-badge.global { background: rgba(74,158,255,0.08); border: 1px solid rgba(74,158,255,0.2); }
+  .scale-badge.regional { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2); }
+  .scale-badge.local { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.2); }
+  .scale-badge .s-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
+  .scale-badge.global .s-label { color: var(--blue); }
+  .scale-badge.regional .s-label { color: var(--accent); }
+  .scale-badge.local .s-label { color: var(--green); }
+  .scale-badge .s-desc { font-size: 12px; color: var(--slide-dim); line-height: 1.4; }
+
+  /* Checklist */
+  .ck-list { text-align: left; list-style: none; padding: 0; margin-top: 20px; }
+  .ck-list li { padding: 8px 0 8px 28px; position: relative; font-size: 14px; color: var(--slide-dim); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .ck-list li:last-child { border-bottom: none; }
+  .ck-list li::before { content: "☐"; position: absolute; left: 0; color: rgba(255,255,255,0.25); font-size: 16px; }
+
+  /* Source table */
+  .src-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13px; }
+  .src-table th { text-align: left; padding: 10px 14px; color: var(--accent); font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .src-table td { padding: 10px 14px; color: var(--slide-dim); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .src-table .tier-badge { display: inline-block; padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 700; }
+  .src-table .tier-core { background: rgba(52,211,153,0.15); color: var(--green); }
+  .src-table .tier-supp { background: rgba(74,158,255,0.15); color: var(--blue); }
+  .src-table .tier-skip { background: rgba(248,113,113,0.15); color: var(--red); }
+
+  /* Nav */
+  .nav-arrows {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    z-index: 100;
+  }
+  .nav-arrow {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .nav-arrow:hover { background: rgba(255,255,255,0.16); }
+  .nav-arrow:active { background: rgba(255,255,255,0.24); }
+  .dots { display: flex; gap: 8px; align-items: center; }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .dot.active { background: var(--accent); transform: scale(1.4); }
+  .dot:hover { background: rgba(255,255,255,0.4); }
+  .slide-num {
+    position: fixed;
+    top: 24px;
+    right: 32px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--slide-dim);
+    z-index: 100;
+  }
+
+  /* Big number */
+  .big-emoji { font-size: clamp(48px, 8vw, 72px); margin-bottom: 16px; }
+
+  @media (max-width: 640px) {
+    .slide { padding: 36px 18px; justify-content: flex-start; padding-top: 60px; }
+    .slide-num { top: 14px; right: 14px; font-size: 11px; }
+    .nav-arrows { bottom: 16px; gap: 12px; }
+    .nav-arrow { width: 40px; height: 40px; font-size: 16px; }
+    .pipe-step { min-width: 80px; max-width: 140px; padding: 12px 10px; }
+    .org-level.l2 { padding-left: 20px; }
+    .org-level.l3 { padding-left: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="slides-wrapper" id="slides">
+
+<!-- SLIDE 0: Title -->
+<div class="slide active" data-index="0">
+  <div class="slide-content">
+    <div class="big-emoji">📚</div>
+    <div class="slide-eyebrow">GP · Knowledge System</div>
+    <div class="slide-title">The Knowledge<br>Bank</div>
+    <div class="slide-subtitle">How to build, organise, and use your GP evidence system — so that everything you read becomes something you can deploy.</div>
+    <div style="margin-top:28px;font-size:14px;color:var(--slide-dim);">Use ← → arrow keys or tap arrows to navigate</div>
+  </div>
+</div>
+
+<!-- SLIDE 1: The Problem -->
+<div class="slide" data-index="1">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">The Problem</div>
+    <div class="slide-title">You read every day.<br>You remember almost nothing.</div>
+    <div class="slide-subtitle" style="text-align:left;margin-top:20px;">
+      <p style="margin-bottom:16px;">Most JC students consume hours of news weekly. But when they sit down to write an essay, they produce vague generalisations: <em>"Many countries have tried to reduce pollution..."</em></p>
+      <p style="margin-bottom:16px;"><strong style="color:#fff;">The problem is not reading volume. It is processing depth.</strong> Without a system to capture, organise, and retrieve what you read, you are pouring water into a leaky bucket.</p>
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:20px;margin-top:20px;">
+        <p style="font-size:15px;color:#fff;margin-bottom:6px;"><strong style="color:var(--accent);">The 48-Hour Rule:</strong></p>
+        <p style="font-size:14px;color:var(--slide-dim);">Without active processing, you lose ~70% of what you read within 48 hours. Within a week, ~90% is gone. A knowledge bank stops this decay by <strong style="color:#fff;">externalising your memory</strong> — storing not just facts, but the arguments and evaluations you've already built from them.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: What Is a Knowledge Bank -->
+<div class="slide" data-index="2">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Definition</div>
+    <div class="slide-title">A knowledge bank<br>is not a scrapbook.</div>
+    <div class="slide-subtitle" style="text-align:left;margin-top:20px;">
+      <p style="margin-bottom:16px;">A scrapbook collects articles. A knowledge bank <strong style="color:#fff;">processes</strong> them into usable argument components.</p>
+      <div class="two-col">
+        <div class="before-box">
+          <span class="box-label" style="color:var(--red);">Scrapbook (Useless for GP)</span>
+          <p>Links to articles you "saved for later." Screenshots of headlines. Copied paragraphs with no annotation. No argument. No evaluation. No retrieval system.</p>
+        </div>
+        <div class="after-box">
+          <span class="box-label" style="color:var(--green);">Knowledge Bank (What You Need)</span>
+          <p>Each entry contains: <strong style="color:#fff;">Argument</strong> (the debatable claim), <strong style="color:#fff;">Specific Evidence</strong> (named, dated, quantified), <strong style="color:#fff;">Your Evaluation</strong> (why it matters, what it proves). Organised by theme → subtopic → scale. Searchable. Retrievable in seconds.</p>
+        </div>
+      </div>
+      <p style="margin-top:16px;font-size:14px;color:var(--accent);">A knowledge bank turns reading from passive consumption into active preparation. Every entry is a pre-built argument component ready to deploy in an essay or AQ.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: Anatomy of a Perfect Entry -->
+<div class="slide" data-index="3">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">The Entry Template</div>
+    <div class="slide-title">Anatomy of a<br>Perfect Entry</div>
+    <div class="template-card">
+      <div class="field">
+        <div class="field-label">Name</div>
+        <div class="field-value"><strong>Concise, searchable title.</strong> "Singapore Green Plan 2030" — not "that article about Singapore environment stuff."</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Theme / Subtopic</div>
+        <div class="field-value"><strong>Primary topic area + specific issue.</strong> Environment → Climate Policy. (Tag multiple themes if applicable — "Tech" and "Environment" for a green-tech example.)</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Scale</div>
+        <div class="field-value"><strong>Singapore / Regional (SEA) / Global.</strong> Essential for AQ and "in your society" questions.</div>
+      </div>
+      <div class="field">
+        <div class="field-label">What</div>
+        <div class="field-value"><strong>2–3 sentences.</strong> What happened? What is the policy/event/statistic? Be specific: names, dates, numbers. "Singapore launched the Green Plan 2030 in Feb 2021, targeting net-zero by 2050, with specific goals including a 36% reduction in peak emissions by 2030 and 1,000 ha of new green space."</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Why</div>
+        <div class="field-value"><strong>Why did this happen?</strong> Underlying causes, motivations, contexts. "Driven by Singapore's vulnerability to sea-level rise as a low-lying island state, and its desire to position itself as a green finance hub in Asia — combining survival instinct with economic opportunity."</div>
+      </div>
+      <div class="field">
+        <div class="field-label">So What</div>
+        <div class="field-value"><strong>What does this prove? Where can it be used?</strong> "Demonstrates that small states can exercise disproportionate leadership in global challenges when they align national interest with international cooperation. Challenges the narrative that economic development and environmental protection are in zero-sum conflict. <strong>Use for:</strong> environment vs economy, small states in global governance, government-led vs individual action."</div>
+      </div>
+      <div class="field">
+        <div class="field-label">Source</div>
+        <div class="field-value"><strong>Where + when.</strong> "Straits Times, 10 Feb 2021. Official Green Plan website: greenplan.gov.sg"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: Weak vs Strong -->
+<div class="slide" data-index="4">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Quality Comparison</div>
+    <div class="slide-title">The difference a<br>good entry makes.</div>
+    <div class="two-col" style="margin-top:20px;">
+      <div class="before-box">
+        <span class="box-label" style="color:var(--red);">Weak Entry (C-grade)</span>
+        <p style="margin-bottom:8px;"><strong>Topic:</strong> Environment</p>
+        <p style="margin-bottom:8px;"><strong>Example:</strong> Singapore uses ERP to manage traffic congestion.</p>
+        <p style="font-size:11px;color:rgba(248,113,113,0.7);">✗ No context or mechanism<br>✗ No argument attached<br>✗ Can't be deployed in an essay because there's no evaluation<br>✗ Wrong topic tag (ERP = governance/tech, not just environment)</p>
+      </div>
+      <div class="after-box">
+        <span class="box-label" style="color:var(--green);">Strong Entry (A-grade)</span>
+        <p style="margin-bottom:6px;"><strong>Singapore's ERP System · Governance / Tech / Environment</strong></p>
+        <p style="margin-bottom:6px;"><strong>What:</strong> ERP 2.0 (2025) uses GNSS-based dynamic pricing — rates vary by location, time, and real-time traffic conditions. Replaced 1998 gantry system. Covers all vehicles.</p>
+        <p style="margin-bottom:6px;"><strong>Why:</strong> Reflects pragmatic governance: use market mechanisms (price signals) to solve collective action problems (congestion). Extends the logic of Singapore's water pricing and COE systems.</p>
+        <p style="margin-bottom:6px;"><strong>So What:</strong> Shows technology + policy design can align individual incentives with public goods. Challenges narrative that environmental regulation requires sacrifice — ERP makes driving smoother for those who pay. <strong>Use for:</strong> technology & society, market-based environmental policy, Singapore governance model, individual vs collective responsibility.</p>
+        <p style="font-size:11px;color:rgba(52,211,153,0.7);">✓ Specific, dated, named · ✓ Argument attached · ✓ Cross-topic connections mapped · ✓ Deployable for multiple question types</p>
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:13px;color:var(--accent);">Rule: If you cannot immediately identify 3 different essay questions this entry could support, it is not processed enough. Add the "So What."</p>
+  </div>
+</div>
+
+<!-- SLIDE 5: The Processing Pipeline -->
+<div class="slide" data-index="5">
+  <div class="slide-content">
+    <div class="slide-eyebrow">The Processing Pipeline</div>
+    <div class="slide-title">Article → Entry<br>in 15 Minutes</div>
+    <div class="slide-subtitle">Every article you process follows this pipeline. <strong style="color:#fff;">Do not save articles for later — process now or let it go.</strong></div>
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="step-icon">📖</div>
+        <div class="step-title">1. Read (5 min)</div>
+        <div class="step-desc">Read the article. Identify the author's main argument. Underline 2–3 pieces of specific evidence.</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="step-icon">✍️</div>
+        <div class="step-title">2. Extract (3 min)</div>
+        <div class="step-desc">Write the "What" in your own words. Include names, dates, numbers. Never copy-paste — paraphrasing forces understanding.</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="step-icon">🔍</div>
+        <div class="step-title">3. Analyse (4 min)</div>
+        <div class="step-desc">Write the "Why" (causes/context) and the "So What" (implications). This is where AO3 is built. The most important step.</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="step-icon">🗂️</div>
+        <div class="step-title">4. File (2 min)</div>
+        <div class="step-desc">Assign Theme + Subtopic + Scale. Tag cross-topic connections. File into your bank.</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <div class="step-icon">🔁</div>
+        <div class="step-title">5. Review (1 min)</div>
+        <div class="step-desc">Read your "So What." Could you use this entry to answer a past-year question right now? If not, rewrite the "So What."</div>
+      </div>
+    </div>
+    <div style="margin-top:24px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:16px;text-align:left;">
+      <p style="font-size:13px;color:var(--slide-dim);"><strong style="color:var(--accent);">Processing trigger question:</strong> "If I had to use this example to support a thesis right now, what would my thesis be, and what would this example prove?" If you can answer that, the entry is complete.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: Organisation System -->
+<div class="slide" data-index="6">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Organisation System</div>
+    <div class="slide-title">Theme → Subtopic<br>→ Scale</div>
+    <div class="slide-subtitle" style="text-align:left;margin-top:16px;">A 3-level hierarchy that makes retrieval instantaneous:</div>
+    <div class="org-tree" style="margin-top:16px;">
+      <div class="org-level">
+        <span class="org-badge theme">THEME</span>
+        <span class="org-label"><strong style="color:#fff;">Broad category.</strong> Environment · Technology · Politics · Society · Economics · Arts</span>
+      </div>
+      <div class="org-level l2">
+        <span class="org-badge subtopic">SUBTOPIC</span>
+        <span class="org-label"><strong style="color:#fff;">Specific issue within the theme.</strong> Environment → Climate Policy / Biodiversity / Energy Transition / Waste Management</span>
+      </div>
+      <div class="org-level l3">
+        <span class="org-badge scale">SCALE</span>
+        <span class="org-label"><strong style="color:#fff;">Geographic scope.</strong> 🇸🇬 Singapore · 🌏 SEA/Regional · 🌐 Global</span>
+      </div>
+    </div>
+
+    <div style="margin-top:28px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px;">
+      <p style="font-size:13px;color:var(--slide-dim);margin-bottom:10px;"><strong style="color:#fff;">Example: Your "Politics" section</strong></p>
+      <div style="font-size:12px;color:var(--slide-dim);line-height:2;">
+        <div>📁 <strong style="color:#fff;">Politics & Governance</strong></div>
+        <div style="padding-left:24px;">├─ 📁 <strong style="color:var(--blue);">Democracy</strong> <span style="color:var(--green);">[SG]</span> Reserved Presidency · GRC system · WP in Parliament</div>
+        <div style="padding-left:24px;">│  └─ <span style="color:var(--green);">[Global]</span> Taiwan 2024 election · US Capitol attack (2021) · Hungary's democratic backsliding</div>
+        <div style="padding-left:24px;">├─ 📁 <strong style="color:var(--blue);">Free Speech & Media</strong> <span style="color:var(--green);">[SG]</span> POFMA · Online Safety Act · SPH Media Trust restructuring</div>
+        <div style="padding-left:24px;">│  └─ <span style="color:var(--green);">[Global]</span> EU Digital Services Act · Elon Musk's Twitter/X content moderation changes</div>
+        <div style="padding-left:24px;">└─ 📁 <strong style="color:var(--blue);">International Relations</strong> <span style="color:var(--green);">[SG]</span> Singapore's UNCLOS stance · ASEAN centrality</div>
+        <div style="padding-left:48px;">└─ <span style="color:var(--green);">[Global]</span> US-China trade war · Ukraine war · BRI · BRICS expansion</div>
+      </div>
+    </div>
+    <p style="margin-top:12px;font-size:12px;color:var(--accent);">Digital tools: Notion (databases), Google Sheets (tabs), or a single Google Doc with headings and Ctrl+F.</p>
+  </div>
+</div>
+
+<!-- SLIDE 7: Triple-Layer Technique -->
+<div class="slide" data-index="7">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">The Triple-Layer Technique</div>
+    <div class="slide-title">Global → Regional<br>→ Local</div>
+    <div class="slide-subtitle" style="text-align:left;margin-top:16px;">For every subtopic, aim to have entries at all three scales. This gives you <strong style="color:#fff;">argument depth</strong> — the ability to show how an issue operates at every level.</div>
+    <div class="scale-row">
+      <div class="scale-badge global">
+        <div class="s-label">🌐 GLOBAL</div>
+        <div class="s-desc" style="font-size:12px;"><strong style="color:#fff;">Broad context.</strong><br>UN policies, major treaties, geopolitical events, global economic trends.<br><br><em>Example: COP28 loss and damage fund, US-China trade war, WHO pandemic treaty.</em></div>
+      </div>
+      <div class="scale-badge regional">
+        <div class="s-label">🌏 REGIONAL (SEA)</div>
+        <div class="s-desc" style="font-size:12px;"><strong style="color:#fff;">Singapore's neighbourhood.</strong><br>ASEAN initiatives, regional climate issues, South China Sea, cross-border challenges.<br><br><em>Example: ASEAN haze agreement, Mekong dam disputes, regional digital economy framework.</em></div>
+      </div>
+      <div class="scale-badge local">
+        <div class="s-label">🇸🇬 LOCAL (SG)</div>
+        <div class="s-desc" style="font-size:12px;"><strong style="color:#fff;">Essential for AQ.</strong><br>Government policies, local statistics, social trends, Singapore-specific case studies.<br><br><em>Example: HDB EIP, Green Plan 2030, CPF system, SkillsFuture, TraceTogether.</em></div>
+      </div>
+    </div>
+    <div style="margin-top:24px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:20px;text-align:left;">
+      <p style="font-size:13px;color:#fff;margin-bottom:6px;"><strong>Triple-Layer in Action — Essay on "Technology & Society":</strong></p>
+      <p style="font-size:12px;color:var(--slide-dim);line-height:1.8;">
+        <strong style="color:var(--blue);">Global:</strong> EU AI Act (2024) — first comprehensive AI regulation framework. Sets risk-based categories; bans social scoring and real-time biometric surveillance.<br>
+        <strong style="color:var(--accent);">Regional:</strong> ASEAN Guide to AI Governance and Ethics (2024) — voluntary framework, contrasts with EU's regulatory approach. Reflects ASEAN's preference for non-binding cooperation.<br>
+        <strong style="color:var(--green);">Local:</strong> Singapore's AI Verify toolkit + National AI Strategy 2.0 — positions SG as a trusted AI hub. Demonstrates small-state strategy: use regulatory reputation to attract investment.
+      </p>
+      <p style="margin-top:10px;font-size:12px;color:var(--accent);">This triple-layer entry alone can support arguments for: technology governance, small states in global affairs, regulatory competition, AI ethics, and the democracy-autocracy tech regulation divide.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: Source Selection -->
+<div class="slide" data-index="8">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Source Strategy</div>
+    <div class="slide-title">What to Read.<br>What to Skip.</div>
+    <div class="slide-subtitle" style="text-align:left;margin-top:16px;">Your time is finite. Allocate reading time to <strong style="color:#fff;">high-signal sources</strong> that produce GP-usable content.</div>
+    <table class="src-table">
+      <thead><tr><th>Source</th><th>Best For</th><th>Tier</th><th>Frequency</th></tr></thead>
+      <tbody>
+        <tr><td><strong style="color:#fff;">CNA Commentary</strong></td><td>Singapore perspectives, AQ examples</td><td><span class="tier-badge tier-core">CORE</span></td><td>Daily, 15 min</td></tr>
+        <tr><td><strong style="color:#fff;">Straits Times Opinion</strong></td><td>Local arguments, SG policy analysis</td><td><span class="tier-badge tier-core">CORE</span></td><td>Daily, 15 min</td></tr>
+        <tr><td><strong style="color:#fff;">The Economist</strong></td><td>Argumentation models, global breadth</td><td><span class="tier-badge tier-core">CORE</span></td><td>Weekly, 1–2 articles</td></tr>
+        <tr><td><strong style="color:#fff;">BBC Future / The Guardian</strong></td><td>Science, environment, social issues deep dives</td><td><span class="tier-badge tier-supp">SUPP</span></td><td>2–3× per week</td></tr>
+        <tr><td><strong style="color:#fff;">UN / WHO / World Bank Reports</strong></td><td>Authoritative statistics, global trends</td><td><span class="tier-badge tier-supp">SUPP</span></td><td>As needed</td></tr>
+        <tr><td><strong style="color:#fff;">TED / YouTube explainers</strong></td><td>Quick context, foundational understanding</td><td><span class="tier-badge tier-supp">SUPP</span></td><td>Supplementary only</td></tr>
+        <tr><td style="color:rgba(248,113,113,0.7);"><strong>Instagram infographics</strong></td><td style="color:rgba(248,113,113,0.7);">—</td><td><span class="tier-badge tier-skip">SKIP</span></td><td>0</td></tr>
+        <tr><td style="color:rgba(248,113,113,0.7);"><strong>TikTok summaries</strong></td><td style="color:rgba(248,113,113,0.7);">—</td><td><span class="tier-badge tier-skip">SKIP</span></td><td>0</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:16px;background:rgba(74,158,255,0.08);border:1px solid rgba(74,158,255,0.15);border-radius:10px;padding:16px;text-align:left;">
+      <p style="font-size:13px;color:var(--slide-dim);"><strong style="color:var(--blue);">Credibility check for every source:</strong> (1) Who wrote this? Are they an expert or a commentator? (2) What evidence do they cite? (3) Is there a clear bias or agenda? (4) How recent is the data? <strong style="color:#fff;">Add the source + date to every bank entry.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: Active Reading -->
+<div class="slide" data-index="9">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Active Reading Method</div>
+    <div class="slide-title">Read with questions,<br>not just eyes.</div>
+    <div class="slide-subtitle" style="text-align:left;margin-top:20px;">
+      <p style="margin-bottom:12px;">Passive reading — scrolling through an article without mental engagement — produces zero bank entries. <strong style="color:#fff;">Active reading means interrogating the text.</strong></p>
+      <div class="col-card" style="margin-top:16px;">
+        <h4>🔍 The 4 Active Reading Questions</h4>
+        <p style="margin-bottom:6px;"><strong style="color:var(--accent);">Q1: What is the author arguing?</strong> Not "what is the article about" — what is the <em>specific debatable claim</em>? Write it in one sentence.</p>
+        <p style="margin-bottom:6px;"><strong style="color:var(--accent);">Q2: What evidence do they use?</strong> Mark 2–3 specific pieces. Names, dates, numbers, case studies. These become your "What" field.</p>
+        <p style="margin-bottom:6px;"><strong style="color:var(--accent);">Q3: Do I agree? Why or why not?</strong> This is where you build AO3. Write 2–3 sentences of your own evaluation. This becomes your "So What."</p>
+        <p><strong style="color:var(--accent);">Q4: Which GP questions could this support?</strong> List 3+ potential essay questions or AQ scenarios. This builds the retrieval pathway in your brain.</p>
+      </div>
+      <div style="margin-top:16px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:16px;text-align:left;">
+        <p style="font-size:13px;color:var(--slide-dim);"><strong style="color:var(--accent);">Training regimen:</strong> For the first 2 weeks, do this with pen and paper. Physically write Q1–Q4 for each article. It will feel slow. After 2 weeks, it becomes automatic. After a month, you will do it unconsciously as you read. <strong style="color:#fff;">This is the single most transformative habit in GP.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: Weekly Maintenance -->
+<div class="slide" data-index="10">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Maintenance System</div>
+    <div class="slide-title">The Weekly<br>Bank Routine</div>
+    <div class="slide-subtitle" style="text-align:left;margin-top:16px;">A knowledge bank is a living system. Without maintenance, it decays. <strong style="color:#fff;">20 minutes every Sunday.</strong></div>
+    <div class="two-col" style="margin-top:20px;">
+      <div class="col-card">
+        <h4>📥 Add (10 min)</h4>
+        <p>Process 2–3 articles from the week's reading into full entries. If you read 5 articles but only have time to process 3 — process the best 3. <strong style="color:#fff;">Better 3 deep entries than 10 shallow ones.</strong></p>
+      </div>
+      <div class="col-card">
+        <h4>🔁 Review (5 min)</h4>
+        <p>Randomly open 10 entries. Read only the "Name" field. Can you recall the "Why" and "So What"? If not, re-read and re-process that entry. <strong style="color:#fff;">Retrieval practice strengthens memory.</strong></p>
+      </div>
+      <div class="col-card">
+        <h4>🔍 Gap Check (3 min)</h4>
+        <p>Scan your bank. Which topic area has fewer than 5 entries? Which has only Singapore examples but no global ones? Which subtopic has only "What" entries but weak "So What"? <strong style="color:#fff;">Next week's reading should target the gaps.</strong></p>
+      </div>
+      <div class="col-card">
+        <h4>🧹 Prune (2 min)</h4>
+        <p>Delete or archive entries that are: outdated (pre-2020 without enduring relevance), redundant (3 entries making the same point), or weak (generic "What" with no "Why" or "So What"). <strong style="color:#fff;">Quality over quantity. 80 strong entries > 200 weak ones.</strong></p>
+      </div>
+    </div>
+    <p style="margin-top:20px;font-size:14px;color:var(--accent);">Weekly investment: 20 min maintenance + ~60 min reading/processing across the week = <strong style="color:#fff;">80 minutes to become the most well-evidenced writer in your class.</strong></p>
+  </div>
+</div>
+
+<!-- SLIDE 11: Retrieval & Application -->
+<div class="slide" data-index="11">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Retrieval & Application</div>
+    <div class="slide-title">The bank is useless<br>if you cannot retrieve.</div>
+    <div class="slide-subtitle" style="text-align:left;margin-top:20px;">
+      <p style="margin-bottom:16px;">The exam tests your ability to <strong style="color:#fff;">recall the right evidence, fast.</strong> Here is how to train retrieval:</p>
+      <div class="col-card" style="margin-bottom:12px;">
+        <h4>🧠 Retrieval Drill #1: The 5-Minute Question Challenge</h4>
+        <p>Pick a past-year essay question. Set a 5-minute timer. Without opening your bank, write down: (1) your thesis, (2) 3 pieces of evidence you would use, (3) for each, the specific name/date/number. <em>Then</em> open your bank to verify. This trains the retrieval pathway — the exact mental action the exam demands.</p>
+      </div>
+      <div class="col-card" style="margin-bottom:12px;">
+        <h4>🔗 Retrieval Drill #2: Cross-Topic Mapping</h4>
+        <p>Take one strong entry from your bank. Write down <strong>5 different essay questions</strong> (across different topic areas) that this entry could support. This builds the mental flexibility to deploy evidence in unexpected contexts — a hallmark of A-grade essays.</p>
+      </div>
+      <div class="col-card">
+        <h4>📝 Retrieval Drill #3: The AQ Speed Round</h4>
+        <p>Read a GP passage (from any past-year Paper 2). Pick 2 author arguments. For each, list: (1) 1 Singapore example that supports the argument, (2) 1 Singapore example that challenges it. <strong>8 minutes total.</strong> This directly simulates AQ conditions.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12: Common Mistakes -->
+<div class="slide" data-index="12">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Avoid These</div>
+    <div class="slide-title">7 Bank-Building<br>Mistakes</div>
+    <div style="margin-top:20px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div style="flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(248,113,113,0.15);color:var(--red);border-radius:6px;font-size:13px;font-weight:700;">1</div>
+        <div><p style="font-size:14px;color:#fff;margin-bottom:2px;">Collecting without processing</p><p style="font-size:12px;color:var(--slide-dim);">Saving 200 articles to a bookmark folder. This is a digital hoard, not a knowledge bank. An unprocessed article has zero deployable value.</p></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div style="flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(248,113,113,0.15);color:var(--red);border-radius:6px;font-size:13px;font-weight:700;">2</div>
+        <div><p style="font-size:14px;color:#fff;margin-bottom:2px;">Copy-pasting instead of paraphrasing</p><p style="font-size:12px;color:var(--slide-dim);">When you copy-paste, you bypass the cognitive work of understanding. Always write entries in your own words. The friction is the point.</p></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div style="flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(248,113,113,0.15);color:var(--red);border-radius:6px;font-size:13px;font-weight:700;">3</div>
+        <div><p style="font-size:14px;color:#fff;margin-bottom:2px;">No "So What" — just facts</p><p style="font-size:12px;color:var(--slide-dim);">An entry that only has "What" is half-finished. The "So What" is where AO3 lives. Without it, you have a fact, not an argument component.</p></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div style="flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(248,113,113,0.15);color:var(--red);border-radius:6px;font-size:13px;font-weight:700;">4</div>
+        <div><p style="font-size:14px;color:#fff;margin-bottom:2px;">Only Singapore or only Global</p><p style="font-size:12px;color:var(--slide-dim);">A bank with only Singapore examples fails "global significance" questions. A bank with only global examples fails AQ. You need both.</p></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div style="flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(248,113,113,0.15);color:var(--red);border-radius:6px;font-size:13px;font-weight:700;">5</div>
+        <div><p style="font-size:14px;color:#fff;margin-bottom:2px;">No organisation system</p><p style="font-size:12px;color:var(--slide-dim);">Dumping all entries into one long document with no structure. You cannot retrieve what you cannot find. Theme → Subtopic → Scale.</p></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div style="flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(248,113,113,0.15);color:var(--red);border-radius:6px;font-size:13px;font-weight:700;">6</div>
+        <div><p style="font-size:14px;color:#fff;margin-bottom:2px;">Never reviewing</p><p style="font-size:12px;color:var(--slide-dim);">Entries you never review are entries you won't recall in the exam. Without weekly retrieval practice, your bank is functionally empty when it matters most.</p></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;">
+        <div style="flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(248,113,113,0.15);color:var(--red);border-radius:6px;font-size:13px;font-weight:700;">7</div>
+        <div><p style="font-size:14px;color:#fff;margin-bottom:2px;">Too many entries, too fast</p><p style="font-size:12px;color:var(--slide-dim);">Adding 20 entries in one weekend then nothing for a month. The bank compounds. The student who adds 3 entries per week for 60 weeks has 180 entries. The weekend warrior burns out at 30.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13: Setup Checklist -->
+<div class="slide" data-index="13">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Get Started</div>
+    <div class="slide-title">Your Bank Setup<br>Checklist</div>
+    <div class="slide-subtitle" style="text-align:left;margin-top:16px;">Complete these steps this week. <strong style="color:#fff;">~60 minutes total.</strong></div>
+    <ul class="ck-list" style="margin-top:16px;">
+      <li><strong style="color:#fff;">Choose your tool.</strong> Notion (best: databases + tags) or Google Sheets (simplest: columns + tabs) or Google Docs (easiest: headings + Ctrl+F). Pick one. Don't overthink it.</li>
+      <li><strong style="color:#fff;">Create the 6 Theme pages/tabs/sheets.</strong> Society & Culture · Politics & Governance · Economics & Development · Science & Technology · Environment & Sustainability · Arts & Humanities.</li>
+      <li><strong style="color:#fff;">Set up the entry template.</strong> Name · Theme/Subtopic · Scale · What · Why · So What · Source. Make this a template you can duplicate for each new entry.</li>
+      <li><strong style="color:#fff;">Add 3 seed entries today.</strong> Pick 3 articles you've read recently. Process them using the pipeline (Slide 5). File them into the correct Theme → Subtopic → Scale. These are your first 3 bank entries.</li>
+      <li><strong style="color:#fff;">Schedule your recurring slots.</strong> Block time in your calendar: Mon/Wed (reading, 20 min), Tue (processing + outline, 45 min), Thu (Paper 2 practice, 45 min), Fri (AQ, 30 min), Weekend (full paper + bank maintenance, 60 min).</li>
+      <li><strong style="color:#fff;">Bookmark your core sources.</strong> CNA Commentary, Straits Times Opinion, The Economist Espresso app, BBC Future.</li>
+      <li><strong style="color:#fff;">Set a 3-week reminder.</strong> "Review bank structure — is my organisation working? Am I retrieving entries during practice? Do I need more SG or more global examples?"</li>
+    </ul>
+    <div style="margin-top:20px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:12px;padding:18px;text-align:left;">
+      <p style="font-size:14px;color:var(--slide-dim);"><strong style="color:var(--green);">✓ Rule of thumb:</strong> After 1 month: 15+ entries. After 3 months: 50+ entries. After 6 months: 100+ entries. By A-Levels: 150+ entries across 5+ topic areas. <strong style="color:#fff;">150 deployable argument components waiting for any question the examiner can ask.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14: Close -->
+<div class="slide" data-index="14">
+  <div class="slide-content">
+    <div class="big-emoji">📚</div>
+    <div class="slide-title" style="margin-bottom:12px;">Read. Process.<br>File. Retrieve.</div>
+    <div class="slide-subtitle">
+      <p style="margin-bottom:12px;">The knowledge bank is the single highest-leverage investment you can make in GP.</p>
+      <p style="margin-bottom:12px;"><strong style="color:#fff;">It transforms reading from passive consumption into active preparation.</strong> Every article becomes a weapon. Every entry is a pre-built argument component.</p>
+      <p style="color:var(--accent);">Build the bank. Trust the process. Start today.</p>
+    </div>
+    <div style="margin-top:28px;font-size:13px;color:var(--slide-dim);">
+      <a href="gp-framework.html" style="color:var(--accent);text-decoration:none;">📖 GP Framework →</a>
+      &nbsp;&nbsp;·&nbsp;&nbsp;
+      <a href="gp-study-guide.html" style="color:var(--accent);text-decoration:none;">📖 Full Study Guide →</a>
+      &nbsp;&nbsp;·&nbsp;&nbsp;
+      <a href="../index.html" style="color:var(--accent);text-decoration:none;">← CastPages</a>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Navigation -->
+<div class="slide-num" id="slideNum">1 / 15</div>
+<div class="nav-arrows">
+  <button class="nav-arrow" onclick="prevSlide()" aria-label="Previous">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-arrow" onclick="nextSlide()" aria-label="Next">→</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+let current = 0;
+
+const dotsContainer = document.getElementById('dots');
+for (let i = 0; i < totalSlides; i++) {
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => goTo(i);
+  dotsContainer.appendChild(dot);
+}
+
+function updateSlide() {
+  slides.forEach((s, i) => {
+    s.className = 'slide';
+    if (i === current) s.classList.add('active');
+    else if (i < current) s.classList.add('prev');
+  });
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.className = 'dot' + (i === current ? ' active' : '');
+  });
+  document.getElementById('slideNum').textContent = (current + 1) + ' / ' + totalSlides;
+}
+
+function nextSlide() { if (current < totalSlides - 1) { current++; updateSlide(); } }
+function prevSlide() { if (current > 0) { current--; updateSlide(); } }
+function goTo(index) { current = index; updateSlide(); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); nextSlide(); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prevSlide(); }
+});
+
+let touchStartX = 0;
+document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+document.addEventListener('touchend', (e) => {
+  const diff = touchStartX - e.changedTouches[0].screenX;
+  if (Math.abs(diff) > 50) { if (diff > 0) nextSlide(); else prevSlide(); }
+});
+</script>
+
+</body>
+</html>
