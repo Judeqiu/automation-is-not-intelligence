@@ -1,6 +1,6 @@
 ---
 name: gp-trainer
-description: GP 思维训练器 — 训练 GP (General Paper) 的核心思维技能：框架记忆、论点构建、多角度分析、反方论证、AQ 应用。渐进式三阶段训练系统（Foundation → Application → Mastery），含策略性引导和反馈。触发词："gp-trainer"、"GP训练"、"GP思维"、"练习GP"、"训练论证"、"GP drill"。
+description: GP 思维训练器 — 训练 GP (General Paper) 的核心思维技能：框架记忆、论点构建、多角度分析、反方论证、AQ 应用、从推荐来源自动抓取训练文章。渐进式三阶段训练系统（Foundation → Application → Mastery），含策略性引导和反馈。触发词："gp-trainer"、"GP训练"、"GP思维"、"练习GP"、"训练论证"、"GP drill"、"GP文章"、"抓取文章"。
 ---
 
 # GP Trainer · 思维训练器
@@ -20,15 +20,30 @@ description: GP 思维训练器 — 训练 GP (General Paper) 的核心思维技
 ```
 Level 1 (Foundation)        Level 2 (Application)       Level 3 (Mastery)
 ─────────────────────────────────────────────────────────────────────────
-框架记忆与召回              论点构建与多角度分析          限时压力训练
-文章解构（提取+评估）       Thesis 构建 Workshop         反方论证对练
-基础 SAQ 题型识别           AQ 模拟训练                   综合模拟考场
-Knowledge Bank 条目编写     观点生成与策略引导            评估深度专项
+📡 文章抓取（从推荐来源）   论点构建与多角度分析          限时压力训练
+框架记忆与召回              Thesis 构建 Workshop         反方论证对练
+文章解构（提取+评估）       AQ 模拟训练                   综合模拟考场
+基础 SAQ 题型识别           观点生成与策略引导            评估深度专项
+Knowledge Bank 条目编写
 ```
 
 ## 启动流程
 
 当用户调用此 Skill 时，按以下流程启动：
+
+### Step 0: 检查是否需要抓取文章
+
+在开始任何训练之前，先问用户：
+
+```
+你有想训练的文章吗？
+
+A. 有，我自己提供（粘贴文本或链接）
+B. 没有，帮我从推荐来源抓取一篇
+C. 我今天想练其他模式（框架、论题、反方、AQ 等）
+```
+
+如果用户选 B，进入 **Mode 0: 文章抓取**。询问用户偏好的话题或来源，然后用多渠道策略抓取文章。抓取成功后无缝进入训练。
 
 ### Step 1: 评估当前水平
 
@@ -86,6 +101,110 @@ Knowledge Bank 条目编写     观点生成与策略引导            评估深
 **反馈标准：**
 - 准确率 ≥ 80% → 可以进入 Level 2 训练
 - 准确率 < 80% → 指出具体哪个框架不熟，建议在接下来一周每天花 5 分钟默写该框架
+
+---
+
+### Mode 0: 文章抓取 — 从推荐来源获取训练素材 (Level 0 — 任何训练的前置步骤)
+
+**目标：** 从 GP 推荐来源中抓取高质量、主题相关的文章，作为后续训练（解构、多角度分析、AQ 等）的素材。
+
+**触发条件：** 用户请求抓取文章时，或用户要进行文章解构训练但未提供文章时。
+
+**可用渠道（按优先级排列）：**
+
+教练在抓取文章时，应按以下优先级尝试多种渠道，确保获取到可用的文章内容：
+
+**Channel 1: WebSearch / WebFetch**
+- 使用 WebSearch 搜索指定话题 + 来源过滤（如 `site:channelnewsasia.com`）
+- 使用 WebFetch 直接从搜索结果中的 URL 提取文章全文
+- 适用来源：CNA、BBC、The Guardian、Straits Times
+- 注意：部分网站可能限制访问，失败时自动降级到下一个渠道
+
+**Channel 2: Chrome CDP Browser（chromecdp skill）**
+- 启动 Chrome CDP → 直接导航到来源网站首页 → 浏览最新文章列表 → 点击进入文章 → 提取全文
+- 适用来源：所有来源，特别是在 WebFetch 受限时（如某些新加坡网站）
+- 优势：真实的浏览器环境，可以绕过大多数反爬限制
+- 工作流：`chromecdp-start.sh` → `cdp.py new <URL>` → `cdp.py content <target_id>` → 提取文章文本
+- 对搜索结果页：使用 `cdp.py evaluate` 提取搜索结果链接，然后逐个访问文章页面
+
+**Channel 3: Google News / Google Search via CDP**
+- 通过 CDP 导航到 Google News 或 Google Search → 搜索 `[topic] site:[source domain]` → 提取搜索结果列表 → 逐个访问文章页面
+- 可用搜索模式：
+  - `[话题] site:channelnewsasia.com/commentary`
+  - `[话题] site:straitstimes.com/opinion`
+  - `[话题] site:economist.com`
+  - `[话题] site:bbc.com/future`
+  - `[话题] site:theguardian.com/commentisfree`
+
+**Channel 4: 直接 RSS / 首页抓取**
+- 对于有稳定首页结构的来源（如 CNA、BBC），直接抓取首页并提取头条文章链接
+- 使用 CDP 的 `evaluate` 功能提取链接列表
+
+**回退策略：** 如果所有渠道都无法获取指定话题的文章：
+1. 从来源首页提取任意一篇高质量的评论/分析文章（不限话题）
+2. 告知用户"未能获取到 [话题] 的指定文章，但我从 [来源] 找到了一篇关于 [替代话题] 的分析文章，同样可以用于训练"
+3. 让用户确认是否使用这篇文章进行训练
+
+**文章质量标准：**
+抓取的文章必须满足以下条件才可用于训练：
+- ✅ 是一篇**评论/分析/观点**文章（不是纯新闻报道）
+- ✅ 包含一个**可识别的论点**（作者有明显的立场）
+- ✅ 长度适中（800–2000 词，足够提供论证和证据）
+- ✅ 来自推荐来源列表中的 Core 或 Supplementary 级别来源
+- ❌ 跳过纯新闻、新闻简报、产品发布、体育赛事报道
+- ❌ 跳过少于 500 词的摘要性文章
+
+**抓取参数：**
+
+用户可以通过以下方式指定抓取需求：
+
+| 参数 | 说明 | 示例 |
+|---|---|---|
+| **话题** | 按 GP 话题领域指定 | "Environment"、"Politics"、"Technology" |
+| **来源** | 指定来源或使用默认 Core 来源 | "CNA"、"The Economist"、"BBC" |
+| **数量** | 需要几篇文章（默认 1 篇） | "给我 2 篇关于 AI 的文章" |
+| **地区** | 文章的地区范围 | "新加坡"、"全球"、"东南亚" |
+| **用途** | 后续训练模式 | "用于解构训练"、"用于 AQ 训练" |
+
+**抓取工作流：**
+
+```
+用户请求 → 解析参数 → Channel 1 (WebFetch) → 成功? → 验证文章质量 → 交付
+                                ↓ 失败
+                           Channel 2 (CDP 直接访问) → 成功? → 验证 → 交付
+                                ↓ 失败  
+                           Channel 3 (CDP + Google) → 成功? → 验证 → 交付
+                                ↓ 失败
+                           Channel 4 (首页抓取) → 成功? → 验证 → 交付
+                                ↓ 失败
+                           回退：告知用户并建议替代方案
+```
+
+**抓取成功后的交付格式：**
+
+```
+## 📡 文章抓取结果
+
+**来源：** [Source Name]  
+**标题：** [Article Title]  
+**日期：** [Date]  
+**作者：** [Author if available]  
+**URL：** [Link]
+
+### 文章摘要（教练快速预览）
+[2-3 句话概括文章内容和主要论点]
+
+### 适用训练
+- 🎯 推荐训练模式：[Mode 2: 文章解构] / [Mode 3: 多角度分析]
+- 🏷️ 话题标签：[Theme 1], [Theme 2]
+- 📐 难度：[Easy / Medium / Hard]
+
+---
+
+准备好开始训练了吗？输入"开始解构"或"开始分析"启动训练。
+```
+
+**后续流程：** 文章抓取完成后，教练应**立即**建议进入文章解构训练 (Mode 2) 或多角度观点生成 (Mode 3)，不要让训练流程中断。
 
 ---
 
@@ -312,6 +431,12 @@ T - Takeaway: 总体判断
 | 命令 | 含义 |
 |---|---|
 | `gp-trainer` 或 `/gp-trainer` | 启动训练（首次使用时评估水平） |
+| `抓取 [话题/来源]` / `fetch [topic]` | 从推荐来源抓取文章作为训练素材 (Mode 0) |
+| `抓取 CNA [话题]` | 从 CNA 抓取指定话题的文章 |
+| `抓取 Economist [话题]` | 从 The Economist 抓取指定话题的文章 |
+| `抓取 BBC [话题]` | 从 BBC 抓取指定话题的文章 |
+| `抓取 ST [话题]` | 从 Straits Times 抓取指定话题的文章 |
+| `抓取 [话题] 然后解构` | 抓取文章后直接进入解构训练 |
 | `解构 [URL/文本]` | 对指定文章进行文章解构训练 (Mode 2) |
 | `论题` | 随机出一道 GP essay 题进行 Thesis 构建训练 (Mode 4) |
 | `反方 [话题]` | 对指定话题进行反方论证对练 (Mode 5) |
@@ -320,6 +445,7 @@ T - Takeaway: 总体判断
 | `框架` | 进行框架记忆与召回训练 (Mode 1) |
 | `多角度 [话题]` | 进行多角度观点生成训练 (Mode 3) |
 | `诊断` | 基于最近的训练表现，给出诊断和改进建议 |
+| `随机训练` | 教练随机选择话题 + 来源 + 训练模式，给用户一个完整的训练挑战 |
 
 ---
 
@@ -332,6 +458,69 @@ T - Takeaway: 总体判断
 - `docs/gp-guide/04-sample-knowledge-bank.md` — 10 篇精加工示例
 
 当用户询问框架细节、方法论或需要参考示例时，教练应从这些文档中引用具体内容。当进行文章解构训练时，应引导用户参照 Sample Bank 中条目的质量标准。
+
+## 推荐来源列表（用于文章抓取）
+
+这些是 GP 的高质量来源，按等级排列。教练在 Mode 0 抓取文章时，应优先从 Core 来源抓取，Supplementary 来源为辅，绝不抓取 Skip 来源：
+
+### Core 来源（优先抓取）
+
+| 来源 | 最佳用途 | URL 模式 | 抓取备注 |
+|---|---|---|---|
+| **CNA Commentary** | 新加坡视角、AQ 例子 | `channelnewsasia.com/commentary` | 通过 CDP 访问，新加坡 IP 可直达 |
+| **Straits Times Opinion** | 本地论证、SG 政策分析 | `straitstimes.com/opinion` | 可能有 paywall，CDP 或 WebFetch 均可尝试 |
+| **The Economist** | 论证模型、全球广度 | `economist.com` | 有 paywall，部分文章免费。优先抓取免费文章 |
+| **BBC Future** | 科学、环境、社会深度报道 | `bbc.com/future` | 免费访问，WebFetch 通常可用 |
+
+### Supplementary 来源（补充抓取）
+
+| 来源 | 最佳用途 | URL 模式 |
+|---|---|---|
+| **The Guardian Opinion** | 进步视角、环境、不平等、人权 | `theguardian.com/commentisfree` |
+| **UN / WHO / World Bank Reports** | 权威统计、全球趋势 | 按需搜索 |
+| **TED / YouTube explainers** | 快速背景、基础理解 | 仅作补充，不用于正式训练 |
+
+### Skip 来源（绝不抓取）
+
+- ❌ Instagram infographics
+- ❌ TikTok summaries
+- ❌ 纯新闻报道（无观点/无论证）
+- ❌ 少于 500 词的摘要性文章
+- ❌ 未署名的 AI 生成内容
+
+### 抓取搜索模板
+
+教练在 Google/CDP 中搜索文章时，可使用以下搜索模板：
+
+```
+# 新加坡话题
+[topic] site:channelnewsasia.com/commentary
+[topic] site:straitstimes.com/opinion
+
+# 全球话题
+[topic] site:economist.com
+[topic] site:bbc.com/future
+[topic] site:theguardian.com/commentisfree
+
+# 按 GP 话题领域预置搜索词
+## Environment
+"climate policy" OR "COP" OR "biodiversity" OR "sustainability" OR "carbon"
+
+## Politics & Governance
+"democracy" OR "governance" OR "regulation" OR "international relations" OR "geopolitics"
+
+## Economics
+"inequality" OR "economic growth" OR "trade" OR "development" OR "budget"
+
+## Science & Technology
+"AI regulation" OR "artificial intelligence" OR "digital divide" OR "technology ethics"
+
+## Society & Culture
+"immigration" OR "aging population" OR "multiculturalism" OR "identity" OR "youth"
+
+## Arts & Humanities
+"arts and technology" OR "cultural identity" OR "creative AI" OR "heritage"
+```
 
 ---
 
