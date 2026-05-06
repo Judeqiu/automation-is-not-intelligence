@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Study GP (Syllabus 8881) — A Practical Guide for Singapore JC Students</title>
+<meta name="description" content="A comprehensive, research-backed guide to mastering Singapore A-Level General Paper (Syllabus 8881). Covers Paper 1 essay writing, Paper 2 comprehension with the NEW comparison questions, AQ strategy, and a sustainable weekly study plan.">
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card-bg: #ffffff;
+    --border: #e7e5e4;
+    --text: #292524;
+    --text-secondary: #57534e;
+    --text-tertiary: #78716c;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --green: #059669;
+    --green-light: #ecfdf5;
+    --amber: #d97706;
+    --amber-light: #fffbeb;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    color: #f1f5f9;
+    padding: 80px 24px 64px;
+    text-align: center;
+  }
+  .hero .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #94a3b8;
+    margin-bottom: 16px;
+  }
+  .hero .badge {
+    display: inline-block;
+    background: rgba(37,99,235,0.25);
+    border: 1px solid rgba(37,99,235,0.4);
+    color: #93c5fd;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    max-width: 720px;
+    margin: 0 auto 16px;
+  }
+  .hero .subtitle {
+    font-size: 18px;
+    color: #94a3b8;
+    max-width: 560px;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+  .hero .meta {
+    margin-top: 28px;
+    font-size: 13px;
+    color: #64748b;
+  }
+
+  /* Layout */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* Sections */
+  .section { margin-top: 56px; }
+  .section:first-of-type { margin-top: 48px; }
+
+  .section-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+    letter-spacing: -0.3px;
+  }
+  .section-title .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .subsection { margin-top: 32px; }
+  .subsection-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
+  }
+
+  p { margin-bottom: 16px; color: var(--text-secondary); }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--text); }
+
+  /* Cards */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .card-highlight {
+    border-left: 4px solid var(--accent);
+  }
+  .card-warning {
+    border-left: 4px solid var(--amber);
+    background: var(--amber-light);
+  }
+  .card-success {
+    border-left: 4px solid var(--green);
+    background: var(--green-light);
+  }
+  .card-danger {
+    border-left: 4px solid var(--red);
+    background: var(--red-light);
+  }
+
+  /* Framework boxes */
+  .framework {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .framework .name {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .framework .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .framework .step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .framework .step-num {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .framework .step-text { font-size: 14px; color: var(--text-secondary); padding-top: 2px; }
+  .framework .step-text strong { color: var(--text); }
+
+  /* Lists */
+  ul, ol { margin-bottom: 16px; padding-left: 22px; color: var(--text-secondary); }
+  li { margin-bottom: 6px; }
+  li:last-child { margin-bottom: 0; }
+
+  /* Tables */
+  .table-wrap {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th {
+    background: #f8fafc;
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 700;
+    color: #0f172a;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  /* Blockquote */
+  blockquote {
+    background: #f8fafc;
+    border-left: 3px solid #94a3b8;
+    margin: 20px 0;
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    color: var(--text-tertiary);
+    font-style: italic;
+  }
+
+  /* Inline code */
+  code {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: #0f172a;
+  }
+
+  /* New! badge */
+  .new-badge {
+    display: inline-block;
+    background: #dc2626;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+    margin-left: 4px;
+  }
+
+  /* Study plan grid */
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .plan-day {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .plan-day .day {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .plan-day ul { padding-left: 18px; margin-bottom: 0; font-size: 14px; }
+
+  /* Topic tags */
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .tag {
+    font-size: 12px;
+    padding: 4px 12px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  .tag.active {
+    background: var(--accent-light);
+    border-color: #bfdbfe;
+    color: var(--accent);
+  }
+
+  /* CTA */
+  .cta {
+    margin-top: 64px;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #f1f5f9;
+    border-radius: 16px;
+    padding: 40px 32px;
+    text-align: center;
+  }
+  .cta h2 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .cta p { color: #94a3b8; font-size: 15px; margin-bottom: 0; }
+
+  /* Specimen question */
+  .specimen-q {
+    background: #fff;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .specimen-q .q-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 24px 48px;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .hero { padding: 56px 20px 48px; }
+    .container { padding: 0 16px 48px; }
+    .section { margin-top: 40px; }
+    .section-title { font-size: 21px; }
+    .card { padding: 18px 16px; }
+    .plan-grid { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    body { font-size: 12px; }
+    .hero { padding: 24px 0; background: none; color: #000; }
+    .hero h1, .hero .subtitle, .hero .badge, .hero .label { color: #000; }
+    .cta { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== HERO ====== -->
+<header class="hero">
+  <div class="label">Singapore A-Level · H1 General Paper</div>
+  <div class="badge">Syllabus 8881 · 2024–2026</div>
+  <h1>How to Study GP:<br>A Practical Guide</h1>
+  <p class="subtitle">From &ldquo;I don&rsquo;t know what to write&rdquo; to a systematic method that works — built from the official SEAB syllabus, examiner expectations, and strategies from top-scoring students.</p>
+  <p class="meta">Updated May 2026 · Researched from SEAB Syllabus 8881, EduEdge, illum.e, and multiple Singapore JC resources</p>
+</header>
+
+<!-- ====== CONTENT ====== -->
+<div class="container">
+
+<!-- SECTION 1: EXAM OVERVIEW -->
+<div class="section">
+  <h2 class="section-title"><span class="num">1</span>The GP Exam at a Glance (Syllabus 8881)</h2>
+
+  <p>GP is an <strong>H1 compulsory subject</strong> for all Singapore JC students. It tests your ability to <strong>think critically, construct arguments, and communicate clearly</strong> — not your ability to memorise facts. The syllabus was revised from 8807 to <strong>8881 starting from the 2024 examination</strong>, with several important structural changes.</p>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Exam Structure</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th></th><th>Paper 1 (Essay)</th><th>Paper 2 (Comprehension)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Weight</strong></td><td>50 marks (50%)</td><td>50 marks (50%)</td></tr>
+          <tr><td><strong>Duration</strong></td><td>1h 30min</td><td>1h 30min</td></tr>
+          <tr><td><strong>Format</strong></td><td><strong>8 questions</strong> (reduced from 12 in old syllabus). Choose 1. Write <strong>500–800 words</strong>.</td><td><strong>3 passages</strong> (~1200 words total). Passages present 2 opposing viewpoints (Passage A = View 1, B = View 2, C = personal anecdote or related perspective).</td></tr>
+          <tr><td><strong>Components</strong></td><td>1 essay covering issues of local, regional, and/or global significance across disciplines.</td><td>SAQs + <strong>Comparison Questions <span class="new-badge">NEW</span></strong> + Summary (based on ALL of Passage 2, no opening phrase given) + Application Question (AQ, 12 marks).</td></tr>
+          <tr><td><strong>Assessment Objectives</strong></td><td>AO1: Understand &amp; explain issues<br>AO2: Apply knowledge to construct arguments<br>AO3: Critically analyse, evaluate, and present own assessment</td><td>AO1 + AO2 (literal, inference, vocabulary, summary)<br>AO3 (comparison, evaluation, application to Singapore context in AQ)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">What Changed in Syllabus 8881</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Old Syllabus (8807)</th><th>New Syllabus 8881</th></tr></thead>
+        <tbody>
+          <tr><td>12 essay questions, choose 1</td><td><strong>8 essay questions</strong>, choose 1 — fewer choices, more students per question, higher competition to stand out</td></tr>
+          <tr><td>1 or 2 passages (alternated by year)</td><td><strong>3 passages every year</strong> — standardised format with 2 opposing viewpoints</td></tr>
+          <tr><td>No comparison between passages</td><td><strong>Comparison Questions <span class="new-badge">NEW</span></strong> (4–6 marks): cross-reference Passage C with A or B. Identify and justify support/contradiction.</td></tr>
+          <tr><td>Summary based on selected paragraphs of specified passage</td><td>Summary based on <strong>ALL paragraphs of Passage 2</strong> — you must scan the entire passage to find relevant points</td></tr>
+          <tr><td>Opening phrase provided for summary</td><td><strong>No opening phrase given</strong> — you must write the first sentence yourself</td></tr>
+          <tr><td>AQ: 10 marks</td><td><strong>AQ: 12 marks</strong> — higher stakes, requires at least 1 passage referenced</td></tr>
+          <tr><td>Niche topics (mathematics, family, poverty, crime)</td><td>Streamlined to <strong>6 broad thematic areas</strong> + local/regional/global issues</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">The Three Assessment Objectives (AOs)</h3>
+    <p>Every mark in GP maps to one of three AOs. Understanding them tells you <strong>what the examiner is actually looking for</strong>:</p>
+
+    <div class="framework">
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>AO1 — Understand and explain</strong> issues of local, regional, and global significance across disciplines (e.g., politics, economics, arts &amp; culture, science &amp; technology, the environment). <em>This is your content knowledge.</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>AO2 — Apply knowledge</strong> and understanding of issues to construct arguments. <em>This is your ability to use what you know to build a case.</em></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>AO3 — Critically analyse, evaluate,</strong> and present your own assessment of issues. <em>This is the discriminator — your independent judgment. Top essays demonstrate AO3 in every paragraph.</em></div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-tertiary);">AO1+AO2 = ~70% of marks. AO3 = ~30%. Students who stop at AO1 ("here is what I know about this topic") cap at a C. <strong>AO3 — your own evaluation — is what separates the A from the C.</strong></p>
+
+    <div class="card card-danger">
+      <strong>Common mistake:</strong> Treating Paper 1 as a content-dump (&ldquo;let me tell you everything I know about climate change&rdquo;). The examiner does not want an encyclopedia. They want <strong>your position, defended with evidence and evaluated critically</strong>. Every paragraph must argue, not just describe.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: TOPIC AREAS -->
+<div class="section">
+  <h2 class="section-title"><span class="num">2</span>The 6 Topic Areas + How to Build Content</h2>
+
+  <p>The SEAB syllabus defines <strong>6 interconnected thematic areas</strong>. You don&rsquo;t need to master all 6 — <strong>master 4 deeply</strong> and you&rsquo;ll always find a question you can answer well.</p>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Official Topic Clusters (from SEAB Syllabus 8881)</h3>
+    <div class="tag-list">
+      <span class="tag active">1. Society &amp; Culture</span>
+      <span class="tag active">2. Politics &amp; Governance</span>
+      <span class="tag active">3. Economics &amp; Development</span>
+      <span class="tag">4. Science &amp; Technology</span>
+      <span class="tag">5. Environment &amp; Sustainability</span>
+      <span class="tag">6. Arts &amp; Humanities</span>
+    </div>
+    <p style="font-size:13px;color:var(--text-tertiary);">Blue tags = highest overlap and most frequently tested. Start here. All topics also include questions of local (Singapore), regional, and global significance.</p>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">See the Actual 2025 A-Level Questions</h3>
+    <p>These are the <strong>real questions from the 2025 exam</strong> (Syllabus 8881). Study them carefully — they reveal the exact question patterns you will face:</p>
+
+    <div class="specimen-q">
+      <div class="q-label">2025 A-Level GP Paper 1 — Question 1</div>
+      'No country should sacrifice its economic development in favour of preserving the environment.' Discuss.
+    </div>
+    <div class="specimen-q">
+      <div class="q-label">Question 2</div>
+      Assess the view that only well-known works of art can be considered great.
+    </div>
+    <div class="specimen-q">
+      <div class="q-label">Question 3</div>
+      'The most important aim of a scientist is to satisfy human curiosity about the world.' Evaluate this view.
+    </div>
+    <div class="specimen-q">
+      <div class="q-label">Question 4</div>
+      How far do you agree that media coverage of celebrities has a positive influence on young people in your society?
+    </div>
+    <div class="specimen-q">
+      <div class="q-label">Question 5</div>
+      'Democracy is the perfect form of government.' Discuss.
+    </div>
+    <div class="specimen-q">
+      <div class="q-label">Question 6</div>
+      Examine the claim that it is the responsibility of wealthier countries to assist in dealing with natural disasters.
+    </div>
+    <div class="specimen-q">
+      <div class="q-label">Question 7</div>
+      'Learning facts is no longer necessary because information can be instantly accessed online.' Evaluate this statement.
+    </div>
+    <div class="specimen-q">
+      <div class="q-label">Question 8</div>
+      To what extent do you agree that enough is done in your society to encourage a healthy lifestyle?
+    </div>
+
+    <p style="font-size:13px;color:var(--text-tertiary);">Source: illum.e — GP 2025 A-Level Essay Questions for Paper 1. Note the command words: <strong>Discuss, Assess, Evaluate, How far do you agree, Examine, To what extent</strong>. Each requires a different argument structure.</p>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">How to Read for GP (Not for Pleasure)</h3>
+    <p>Active reading is the difference between "I read the news every day" and "I can deploy specific evidence in an essay." The key is <strong>processing what you read into usable argument material</strong>.</p>
+
+    <div class="framework">
+      <div class="name">The 3-Pass Reading Method (10–15 min per article)</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Extract the argument.</strong> What is the author&rsquo;s main claim? Write it in 1 sentence. This trains you to identify thesis statements — the same skill you need for Paper 2 comprehension.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Capture evidence.</strong> Note 2–3 specific examples: a statistic, a named policy, a case study with a country and date. Vague evidence (&ldquo;many countries have tried...&rdquo;) signals weak content knowledge to the examiner.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Evaluate.</strong> Do you agree? What&rsquo;s the strongest counterargument? Write 2–3 sentences of your own evaluation. <em>This habit builds the AO3 critical voice that examiners reward with top bands.</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-highlight">
+      <strong>Keep a digital knowledge bank.</strong> Use Notion, OneNote, or Google Docs. Create one page per topic area. Every entry: argument summary + specific evidence (with source and date) + your evaluation. By JC2 mid-year, aim for 100+ processed entries. This becomes your essay ammunition — far more powerful than memorising model essays because <strong>you can recombine evidence for any question</strong>.
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">What to Read (and What to Skip)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Source</th><th>Why</th><th>Frequency</th></tr></thead>
+        <tbody>
+          <tr><td><strong>CNA / Straits Times (Opinion)</strong></td><td>Singapore-context arguments. Essential for AQ and Singapore-related essay questions. The opinion section models GP-style argumentation.</td><td>Daily, 15 min</td></tr>
+          <tr><td><strong>BBC News / The Guardian</strong></td><td>Global perspective. Strong on international relations, environment, human rights, inequality topics.</td><td>3–4× per week</td></tr>
+          <tr><td><strong>The Economist (Espresso app)</strong></td><td>Excellent argumentation models. Dense but high-quality — read 1–2 articles per week deeply rather than skimming many.</td><td>Weekly</td></tr>
+          <tr><td><strong>TED Talks / YouTube explainers</strong></td><td>Quick context on unfamiliar topics. Good for building foundational understanding, but <em>not a substitute for reading</em> — you need written argument models.</td><td>Supplementary</td></tr>
+          <tr><td style="color:#dc2626;"><strong>Instagram infographics / TikTok summaries</strong></td><td style="color:#dc2626;">Superficial. No argument depth. No specific evidence. Cannot be used as essay material. Skip for GP purposes.</td><td style="color:#dc2626;">Skip</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: PAPER 1 - ESSAY -->
+<div class="section">
+  <h2 class="section-title"><span class="num">3</span>Paper 1: The Essay — from blank page to structured argument</h2>
+
+  <p>The biggest problem: staring at a blank page for 20 minutes, then writing whatever comes to mind. This guarantees mediocrity. <strong>Use a framework.</strong></p>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Step 1: Question Analysis (the skill most students skip)</h3>
+    <p>Every GP essay question contains <strong>command words</strong> that tell you exactly what kind of argument to build. Misreading them is the single most common reason for a low score.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Command Word</th><th>What It Demands</th><th>Strategy</th></tr></thead>
+        <tbody>
+          <tr><td><strong>"Discuss"</strong></td><td>Present multiple perspectives, then take a position</td><td>2–3 paragraphs for, 1–2 against, conclude with your balanced judgment</td></tr>
+          <tr><td><strong>"To what extent...?"</strong></td><td>Agree partially; show limits of the claim</td><td>Define the extent. "To a large extent, but not entirely, because..." Show where the claim holds and where it breaks.</td></tr>
+          <tr><td><strong>"Evaluate" / "Assess"</strong></td><td>Judge the value, validity, or importance of a claim</td><td>Set criteria for evaluation. Apply criteria to the claim. Conclude with your overall assessment.</td></tr>
+          <tr><td><strong>"How far do you agree?"</strong></td><td>Degrees of agreement, not binary yes/no</td><td>Agree up to a point, then identify the boundary. "I agree insofar as X, but the agreement stops when Y."</td></tr>
+          <tr><td><strong>"Examine"</strong></td><td>Investigate the claim closely; probe its assumptions</td><td>Unpack the claim. What does it assume? Are those assumptions valid? What evidence supports or challenges them?</td></tr>
+          <tr><td><strong>"Is X the most important...?"</strong></td><td>Comparison — argue that something else matters more or equally</td><td>Acknowledge X's importance, then argue for competing priorities. Absolute claims ("most," "always," "never") are usually attackable.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Step 2: Thesis-First Pre-Writing (0:00–0:10)</h3>
+    <p>Do not write a single word of prose until you can state your thesis in one clear sentence. <strong>This discipline alone separates the A from the C.</strong></p>
+
+    <div class="framework">
+      <div class="name">Pre-Writing Checklist</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Deconstruct the question.</strong> Underline keywords. What is the <em>actual</em> debate? Example: &ldquo;Is social media a threat to democracy?&rdquo; → Operative words: &ldquo;threat&rdquo; (not just &ldquo;effect&rdquo;) and &ldquo;democracy&rdquo; (not just &ldquo;society&rdquo;).</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Form your thesis.</strong> One sentence stating your position. Not &ldquo;I will discuss pros and cons&rdquo; — take a stand. <em>&ldquo;Social media undermines democracy primarily by fragmenting the public sphere into algorithmically-separated information bubbles, though its role in mobilising grassroots movements complicates a purely negative assessment.&rdquo;</em> A nuanced thesis ("Yes, but..." or "Yes in context A, but no in context B") demonstrates mature thinking.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Map 3–4 topic sentences.</strong> Each becomes one body paragraph. Together they form your argument chain. Jot them as bullet points. Check: do they logically build on each other, or are they just a list?</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Identify your counterargument + rebuttal.</strong> What is the strongest objection to your thesis? Where will you address it? (Usually paragraph 3 or 4.) A strong counterargument-rebuttal pair is a direct demonstration of AO3.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Step 3: PEEL — The Building Block of Every Paragraph</h3>
+
+    <div class="framework">
+      <div class="name">PEEL = Point → Evidence → Explanation → Link</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">P</div>
+          <div class="step-text"><strong>Point:</strong> Topic sentence. States the paragraph&rsquo;s argument. Must be <strong>debatable</strong>, not factual. &ldquo;Algorithmic curation on social media platforms structurally amplifies polarising content&rdquo; — debatable. &ldquo;Social media was invented in the 2000s&rdquo; — factual, not an argument, do not use as a topic sentence.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">E</div>
+          <div class="step-text"><strong>Evidence:</strong> Specific. Include at least one of: a <strong>named entity</strong> (country, company, policy), a <strong>number/statistic</strong>, a <strong>date/time period</strong>. &ldquo;Facebook&rsquo;s own internal research (The Wall Street Journal, September 2021) found that its ranking algorithm amplified divisive content by approximately 30% because outrage-driven posts generated higher engagement metrics.&rdquo;</div>
+        </div>
+        <div class="step">
+          <div class="step-num">E</div>
+          <div class="step-text"><strong>Explanation:</strong> <em>This is where most essays fail.</em> Don&rsquo;t just drop evidence and move on. Explain <strong>why</strong> this evidence supports your point — and <strong>why it matters</strong>. &ldquo;This means the platform&rsquo;s business model — maximising engagement for ad revenue — structurally incentivises content that divides rather than unites. Even if the company publicly claims neutrality, the algorithm&rsquo;s design ensures the opposite outcome. This is not a bug; it is a feature of the attention economy.&rdquo;</div>
+        </div>
+        <div class="step">
+          <div class="step-num">L</div>
+          <div class="step-text"><strong>Link:</strong> Tie back to your thesis. One sentence. &ldquo;Algorithmic polarisation thus directly threatens the shared factual basis that democratic deliberation requires.&rdquo;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-danger">
+      <strong>The #1 PEEL mistake:</strong> Students write P + E and skip the second E (Explanation). The result is a paragraph that lists facts but makes no argument. <strong>The Explanation is where AO3 lives.</strong> Without it, you cannot score above a C for content — no matter how good your evidence is.
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Step 4: Structure &amp; Time Budget (90 minutes)</h3>
+
+    <p>Use the <strong>1-3-1 or 1-4-1 structure</strong>: Introduction (1 para) → Body (3–4 PEEL paras, including counterargument) → Conclusion (1 para).</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Phase</th><th>Time</th><th>What to Do</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Choose + Plan</strong></td><td>0–15 min</td><td>Read all 8 questions. Eliminate until you have the best one. Do the Thesis-First pre-writing. <strong>Do not skip this step.</strong> A well-planned essay writes itself; an unplanned one wanders.</td></tr>
+          <tr><td><strong>Write body paragraphs</strong></td><td>15–60 min</td><td>Write 3–4 PEEL paragraphs (~12 min each). Focus on getting the argument down — you will not have time to restructure later.</td></tr>
+          <tr><td><strong>Introduction</strong></td><td>60–70 min</td><td>Write the intro <strong>after</strong> the body. Now you know exactly what your essay argues. Hook + context + thesis statement. The introduction should signal to the examiner: "This candidate knows where they are going."</td></tr>
+          <tr><td><strong>Conclusion</strong></td><td>70–80 min</td><td>Restate thesis (in different words). Synthesise — don&rsquo;t just repeat topic sentences. End with a forward-looking statement or implication. <strong>No new evidence in the conclusion.</strong></td></tr>
+          <tr><td><strong>Review</strong></td><td>80–90 min</td><td>Check grammar, spelling, paragraph transitions. Fix weak word choices. Confirm every paragraph links to the thesis. Check word count (500–800).</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">The Most Effective Practice Method: Essay Outlines</h3>
+
+    <p>Writing full essays is exhausting and you cannot sustain it daily. Instead, train the bottleneck skill: <strong>rapid argument construction</strong>.</p>
+
+    <div class="card card-success">
+      <strong>The 30-Minute Outline Drill (2–3 per week):</strong>
+      <ol style="margin-top:8px;">
+        <li>Pick a past-year question or one of the 2025 questions listed above.</li>
+        <li>Set a timer for 30 minutes. <strong>No notes allowed.</strong> This forces active recall from your knowledge bank.</li>
+        <li>Write only: thesis statement + 3–4 topic sentences + 3–4 pieces of specific evidence (one per paragraph) + counterargument + rebuttal. <strong>No full paragraphs.</strong></li>
+        <li>After 30 min, check your outline: Does each topic sentence advance the thesis? Is each piece of evidence specific (named, dated, quantified)? Did you include a counterargument?</li>
+      </ol>
+      <p style="margin-top:8px;font-size:14px;">After 20+ outlines across different topic areas, you will never stare at a blank page again. You will have trained the neural pathway: see question → form thesis → map argument → deploy evidence. That is the exact sequence the exam demands.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: PAPER 2 -->
+<div class="section">
+  <h2 class="section-title"><span class="num">4</span>Paper 2: Comprehension — precision reading under time pressure</h2>
+
+  <p>Paper 2 looks easier than Paper 1, but the mark scheme is <strong>ruthlessly precise</strong>. You lose marks for slightly wrong paraphrasing, for missing the author&rsquo;s tone, for lifting phrases without quotation marks. And with the new 8881 format, there is a brand-new question type to master.</p>
+
+  <div class="subsection">
+    <h3 class="subsection-title">The 3-Passage Structure (8881 Format)</h3>
+    <div class="framework">
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">A</div>
+          <div class="step-text"><strong>Passage A: Viewpoint 1.</strong> Presents one side of the debate. Examples: argues FOR technology in education; argues AGAINST government surveillance.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">B</div>
+          <div class="step-text"><strong>Passage B: Viewpoint 2.</strong> Presents the opposing side. Passage A and B are in dialogue — they may directly contradict or qualify each other.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">C</div>
+          <div class="step-text"><strong>Passage C: Personal or contextual perspective.</strong> Often a personal anecdote, case study, or narrative that relates to the debate. This is the passage used for the NEW Comparison Questions.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">SAQ (Short Answer Questions): The 3 Types</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>What It Asks</th><th>Technique</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Literal / Factual</strong></td><td>"According to the author, what is X?"</td><td>Locate and <strong>paraphrase in your own words</strong>. Do not lift. If you must quote, use quotation marks and cite the line number.</td></tr>
+          <tr><td><strong>Inferential</strong></td><td>"What does the author imply about Y?"</td><td>Read between the lines. What is suggested but not stated? Base your answer on textual clues. Begin: "The author implies that..."</td></tr>
+          <tr><td><strong>Language Use / Authorial Technique</strong></td><td>"How does the author's use of language convey Z?"</td><td>3-step formula: <strong>Identify technique</strong> (metaphor, irony, rhetorical question, juxtaposition, diction, tone) → <strong>Quote</strong> the specific word/phrase → <strong>Explain effect</strong> on the reader. All three steps needed for full marks.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="framework">
+      <div class="name">Universal SAQ Formula: Answer → Evidence → Explain</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Answer directly.</strong> First sentence answers the question head-on. Do not "warm up." "The author argues that social media exacerbates political polarisation."</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Support with textual evidence.</strong> Quote the relevant phrase. Use quotation marks. Cite the line. "This is evident when the author describes social media as 'a centrifugal force in modern democracy' (line 23)."</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Explain the connection.</strong> 1–2 sentences linking evidence to answer. "The metaphor 'centrifugal force' connotes something that pushes objects away from the centre, reinforcing the claim that social media fragments rather than unifies political discourse."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Comparison Questions <span class="new-badge">NEW in 8881</span> (4–6 marks)</h3>
+
+    <p>This is the <strong>brand-new question type</strong> introduced in Syllabus 8881. It asks you to cross-reference Passage C with Passage A or B and explain how C <strong>supports or contradicts</strong> a specific idea from A or B. Expect 4–6 marks (up to 10% of Paper 2) allocated to these questions.</p>
+
+    <div class="card card-warning">
+      <strong>How Comparison Questions work:</strong>
+      <ul style="margin-top:8px;">
+        <li>The question quotes a specific sentence or idea from Passage A (or B).</li>
+        <li>You must <strong>identify one idea from Passage C</strong> that either <strong>supports</strong> (reinforces, provides evidence for) or <strong>contradicts</strong> (challenges, provides counter-evidence to) that quoted sentence.</li>
+        <li>You must <strong>justify</strong> how C supports or contradicts — simply stating "C supports A" without explanation earns zero.</li>
+      </ul>
+    </div>
+
+    <div class="framework">
+      <div class="name">Comparison Question Formula: Idea in C → Relationship → Justification</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Identify the quoted idea from A/B.</strong> Read the quoted sentence carefully. What is the <em>specific claim</em> being made? Underline its key terms. You must understand this before looking at C.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Locate a matching idea in Passage C.</strong> Scan C for content that relates to the same concept. Does C provide an example that <em>confirms</em> the claim (support) or an example that <em>challenges</em> it (contradiction)?</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>State the relationship explicitly.</strong> "Passage C supports Passage A's claim that X by providing the example of Y, which demonstrates..." OR "Passage C contradicts Passage B's assertion that X, as it shows Y, which directly challenges the premise that..."</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Justify with textual evidence from both passages.</strong> Quote from C AND reference the quoted sentence from A/B. Explain <em>why</em> C's example supports or contradicts. The justification is where the marks are.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Summary Writing (8881 Format)</h3>
+
+    <p>The summary question has changed significantly in 8881. <strong>Two key differences:</strong></p>
+
+    <div class="card card-highlight">
+      <strong>New Summary Rules (8881):</strong>
+      <ol style="margin-top:8px;">
+        <li><strong>Summary is based on ALL of Passage 2</strong> — not just selected paragraphs. You must scan the entire passage to find every relevant point. Missing a point because it was in a paragraph you didn't check = lost marks.</li>
+        <li><strong>No opening phrase is provided.</strong> In the old syllabus, the question gave you the first few words (e.g., "The author argues that technology..."). Now you must write the entire summary from scratch, including the opening sentence.</li>
+        <li>Word limit: 80–120 words. <strong>Count your words.</strong></li>
+      </ol>
+    </div>
+
+    <div class="framework">
+      <div class="name">Summary Method (15–18 minutes)</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Read the question carefully.</strong> What exactly are you summarising? Underline the key instruction. (e.g., "Summarise the author's arguments AGAINST nuclear energy" — only the <em>against</em> points.)</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Scan ALL of Passage 2.</strong> Mark every sentence or phrase containing a relevant point. Be exhaustive — a missed point is a lost mark.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>List all points</strong> as short phrases (8–12 points typically). Check: did you capture everything across ALL paragraphs?</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Paraphrase and condense.</strong> Rewrite each point in your own words. Combine related points into single sentences. Write your own opening sentence. Aim for 80–120 words. <strong>Count.</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-text"><strong>Verify.</strong> Did you change any meaning? If yes, fix. Did you accidentally lift entire phrases? If yes, rephrase. <strong>Lifting = zero for that point.</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-danger">
+      <strong>The 3 summary killers:</strong> (1) <strong>Lifting</strong> — copying phrases word-for-word from the passage. Always paraphrase. (2) <strong>Exceeding 120 words</strong> — examiners count, and excess words will cost you. (3) <strong>Summarising the wrong thing</strong> — read the question instruction twice. Summarising both sides of an argument when only one was asked is a common and costly error.
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">AQ (Application Question) — 12 Marks</h3>
+
+    <p>The AQ is now worth <strong>12 marks</strong> (up from 10 in the old syllabus) — the single highest-value question in Paper 2. It asks you to <strong>evaluate the author's arguments and apply them to your own society (Singapore)</strong>. This is where top students separate themselves. Budget <strong>20–25 minutes</strong> for AQ.</p>
+
+    <div class="framework">
+      <div class="name">The AQ Framework: REACT</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">R</div>
+          <div class="step-text"><strong>Restate</strong> the author's argument(s) you will evaluate. Be specific — which claim from which passage? "The author of Passage A argues that multicultural societies inevitably face social friction (paragraph 4)."</div>
+        </div>
+        <div class="step">
+          <div class="step-num">E</div>
+          <div class="step-text"><strong>Evaluate</strong> — is the argument valid? Strong? Weak? Overgeneralised? Context-dependent? "This argument is partially valid in that cultural differences can generate tension, but it overstates the case by assuming such differences are inherently divisive rather than potentially enriching."</div>
+        </div>
+        <div class="step">
+          <div class="step-num">A</div>
+          <div class="step-text"><strong>Apply</strong> to Singapore context. This is where Singapore-specific knowledge becomes essential. "Singapore's Ethnic Integration Policy (EIP) in public housing and its bilingual education policy are deliberate interventions designed to counteract the friction the author describes. The EIP ensures no HDB block becomes an ethnic enclave, directly addressing the segregation the author claims is inevitable."</div>
+        </div>
+        <div class="step">
+          <div class="step-num">C</div>
+          <div class="step-text"><strong>Contrast or complicate.</strong> Does Singapore support or challenge the author's argument? Be nuanced. "However, the rise of xenophobic sentiment during COVID-19 and online discourse about CECA (Comprehensive Economic Cooperation Agreement with India) suggests Singapore is not immune to the dynamics the author identifies, even if policy mitigates their most visible effects."</div>
+        </div>
+        <div class="step">
+          <div class="step-num">T</div>
+          <div class="step-text"><strong>Takeaway.</strong> Conclude with your overall judgment. "Ultimately, while the author's argument captures a real tendency, Singapore demonstrates that deliberate policy design can substantially alter outcomes — though it cannot eliminate the underlying tension entirely."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-success">
+      <strong>Singapore Examples You Must Have Ready for AQ:</strong>
+      <ul style="margin-top:8px;">
+        <li><strong>Policies:</strong> HDB Ethnic Integration Policy (EIP), CPF system, SkillsFuture, Green Plan 2030, PSLE/streaming system, CECA (India), WP/opposition in Parliament, POFMA (fake news law)</li>
+        <li><strong>Statistics:</strong> Gini coefficient (0.37 after taxes/transfers), home ownership rate (~90%), internet penetration (~92%), aging population (~18% aged 65+ by 2030)</li>
+        <li><strong>Social trends:</strong> Mental health awareness (Beyond the Label campaign), K-pop/Western cultural influence vs. local identity, rise of gig economy (Grab, food delivery), cancel culture / online activism among youth</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: WEEKLY STUDY PLAN -->
+<div class="section">
+  <h2 class="section-title"><span class="num">5</span>A Sustainable Weekly Study Plan (~3.5 hours)</h2>
+
+  <p>GP improvement is not about cramming. It is about <strong>consistent, small investments</strong> that compound over the two JC years. Here is a realistic weekly plan that fits alongside 3 H2 subjects + PW + CCA.</p>
+
+  <div class="plan-grid">
+    <div class="plan-day">
+      <div class="day">Monday · 20 min</div>
+      <ul>
+        <li>Read 1 opinion article (CNA / ST)</li>
+        <li>Process it: 1 argument + 2 evidence items → knowledge bank</li>
+        <li>Focus on a topic area you're weak in</li>
+      </ul>
+    </div>
+    <div class="plan-day">
+      <div class="day">Tuesday · 45 min</div>
+      <ul>
+        <li>1 essay outline (30-min drill)</li>
+        <li>Thesis + 3–4 topic sentences + specific evidence</li>
+        <li>Include counterargument + rebuttal</li>
+        <li>Review against a sample essay or mark scheme</li>
+      </ul>
+    </div>
+    <div class="plan-day">
+      <div class="day">Wednesday · 20 min</div>
+      <ul>
+        <li>Read 1 Economist / Guardian article</li>
+        <li>Focus on global perspective (helps for both essay and AQ)</li>
+        <li>Add to knowledge bank with evaluation</li>
+      </ul>
+    </div>
+    <div class="plan-day">
+      <div class="day">Thursday · 45 min</div>
+      <ul>
+        <li>Paper 2 practice: SAQs + Comparison Questions</li>
+        <li>Time yourself strictly (30 min for this section)</li>
+        <li>Self-mark using answer key</li>
+        <li>Note: what paraphrase did you get wrong?</li>
+      </ul>
+    </div>
+    <div class="plan-day">
+      <div class="day">Friday · 30 min</div>
+      <ul>
+        <li>1 AQ practice (find a passage, write AQ only)</li>
+        <li>Use REACT framework</li>
+        <li>Reference at least 2 Singapore-specific examples</li>
+        <li>Self-evaluate: did you evaluate or just describe?</li>
+      </ul>
+    </div>
+    <div class="plan-day">
+      <div class="day">Weekend · 60 min</div>
+      <ul>
+        <li>1 full essay OR 1 full Paper 2 (alternate weekly)</li>
+        <li>Timed conditions. No phone, no notes.</li>
+        <li>Self-mark honestly. Identify 1 specific weakness to target next week.</li>
+        <li>Update knowledge bank with anything you learned</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="font-size:13px;color:var(--text-tertiary);">Total: ~3.5 hours/week. The key is <strong>consistency, not intensity</strong>. A student who does this every week for 18 months will dramatically outperform one who crams for 2 weeks before A-Levels.</p>
+</div>
+
+<!-- SECTION 6: QUESTION TYPES -->
+<div class="section">
+  <h2 class="section-title"><span class="num">6</span>Recognise the Question Type — Deploy the Right Structure</h2>
+
+  <p>GP essay questions fall into recurring patterns. Recognising the pattern immediately lets you deploy the right argument structure without wasting time.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Question Type</th><th>Example (from actual papers)</th><th>Strategy</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Absolute / Superlative Claim</strong></td>
+          <td>"Democracy is the perfect form of government." Discuss. (2025 Q5)</td>
+          <td>Words like "perfect," "always," "never," "most important" are almost always attackable. Acknowledge strengths, then show limits. Argue that another factor matters more or that the claim only holds in specific conditions.</td>
+        </tr>
+        <tr>
+          <td><strong>Trade-off / Dilemma</strong></td>
+          <td>"No country should sacrifice its economic development in favour of preserving the environment." Discuss. (2025 Q1)</td>
+          <td>Avoid a pure "pick one side." Argue that the trade-off is often false or that a middle path exists. Show complexity: sometimes development and environment are complementary (green technology creates growth), sometimes they genuinely conflict.</td>
+        </tr>
+        <tr>
+          <td><strong>Role / Value Judgment</strong></td>
+          <td>"The most important aim of a scientist is to satisfy human curiosity." Evaluate. (2025 Q3)</td>
+          <td>Define the role. Explain why it matters. Propose alternative aims (solving practical problems? serving power?). Conclude with a ranked or balanced assessment.</td>
+        </tr>
+        <tr>
+          <td><strong>Societal Application</strong></td>
+          <td>"How far do you agree that media coverage of celebrities has a positive influence on young people in your society?" (2025 Q4)</td>
+          <td>Key phrase: <strong>"in your society."</strong> You MUST anchor arguments in Singapore. Use Singapore-specific evidence. The examiner is explicitly asking for local application.</td>
+        </tr>
+        <tr>
+          <td><strong>Responsibility / Obligation</strong></td>
+          <td>"Examine the claim that it is the responsibility of wealthier countries to assist in dealing with natural disasters." (2025 Q6)</td>
+          <td>Identify who has responsibility and why. Consider: moral obligation? Historical responsibility (colonialism, carbon emissions)? Practical capacity? Counterargument: sovereignty, domestic priorities. Conclude with a qualified position.</td>
+        </tr>
+        <tr>
+          <td><strong>Technological / Epistemic Challenge</strong></td>
+          <td>"Learning facts is no longer necessary because information can be instantly accessed online." Evaluate. (2025 Q7)</td>
+          <td>Agree that information access has changed, but argue that <em>understanding</em>, <em>synthesis</em>, and <em>critical evaluation</em> are more important than ever. Facts are inputs; thinking is the output. Access ≠ comprehension.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 7: COMMON MISTAKES -->
+<div class="section">
+  <h2 class="section-title"><span class="num">7</span>The 7 Mistakes That Keep Students at a C/D</h2>
+
+  <div class="card card-danger">
+    <strong>1. Writing before thinking.</strong> Starting to write without a thesis and paragraph plan. Result: a wandering essay that discovers its argument in paragraph 3. <strong>Fix:</strong> Force yourself to spend 10–15 minutes on pre-writing every time. If you cannot state your thesis in one sentence, you are not ready to write.
+  </div>
+
+  <div class="card card-danger">
+    <strong>2. The laundry list essay.</strong> "There are many reasons why... firstly... secondly... thirdly... in conclusion there are many reasons." This is a list, not an argument. No thesis, no evaluation, no counterargument. <strong>Fix:</strong> Every paragraph must argue FOR or AGAINST a specific claim related to your thesis. If a paragraph is just "another point," cut it.
+  </div>
+
+  <div class="card card-danger">
+    <strong>3. Generic, unanchored evidence.</strong> "Many countries have tried to reduce pollution..." Which countries? When? What happened? Vague evidence signals weak content knowledge. <strong>Fix:</strong> Every piece of evidence must include at least one of: a specific name, a date, a number, a policy name, a country. "Germany's Energiewende policy (2010) reduced coal's share of electricity from 43% to 23% by 2022" — that is evidence. "Some countries use renewable energy" — that is not.
+  </div>
+
+  <div class="card card-danger">
+    <strong>4. Ignoring Paper 2 until the last month.</strong> Students obsess over essays and neglect comprehension, then panic. Paper 2 is 50% of your grade. The new Comparison Questions (4–6 marks) require specific practice — you cannot wing them. <strong>Fix:</strong> Do at least 1 Paper 2 component every week from JC1.
+  </div>
+
+  <div class="card card-danger">
+    <strong>5. Memorising model essays.</strong> This is the most common last-minute strategy and it fails because GP questions are never identical. You are tested on your ability to <em>construct</em> an argument, not reproduce one. <strong>Fix:</strong> Instead of memorising essays, build your knowledge bank of <strong>evidence and arguments</strong> — raw materials you can recombine for any question.
+  </div>
+
+  <div class="card card-danger">
+    <strong>6. Treating AQ as an afterthought.</strong> The AQ is now worth 12 marks — the highest single question. Students often rush it in the last 10 minutes and produce vague generalisations. <strong>Fix:</strong> Build a dedicated "Singapore Examples" section in your knowledge bank. Practice AQ responses regularly. Aim for 2–3 well-developed REACT cycles with specific Singapore references. Budget 20–25 minutes for AQ.
+  </div>
+
+  <div class="card card-danger">
+    <strong>7. No counterargument.</strong> An essay without a counterargument demonstrates zero evaluation (AO3). You are essentially telling the examiner: "I have not considered any perspective other than my own." <strong>Fix:</strong> Every essay outline must include: "The strongest counterargument to my thesis is... I would respond that..." Make this a non-negotiable part of your pre-writing checklist.
+  </div>
+</div>
+
+<!-- SECTION 8: EXAM STRATEGY -->
+<div class="section">
+  <h2 class="section-title"><span class="num">8</span>Exam Day: The Final 48 Hours</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>When</th><th>Do</th><th>Don&rsquo;t</th></tr></thead>
+      <tbody>
+        <tr><td><strong>2 days before</strong></td><td>Review your knowledge bank. Read through your best essay outlines. Do 1 light Paper 2 practice (SAQs only, 30 min). Sleep 7–8 hours.</td><td>Read new material. Start a new topic. Write a full essay if you are exhausted.</td></tr>
+        <tr><td><strong>1 day before</strong></td><td>Review frameworks: PEEL, REACT, Comparison Question formula. Read 2–3 of your best full essays to anchor what good writing feels like. Pack: entry proof, NRIC, stationery (2+ pens), water, analogue watch.</td><td>Cram model essays. Pull an all-nighter. Read dense new material that will confuse rather than clarify.</td></tr>
+        <tr><td><strong>Morning of</strong></td><td>Good breakfast (protein + complex carbs). Light flip through your knowledge bank if it calms you. Arrive early. Breathe.</td><td>Discuss the exam with anxious friends. Panic-read. Skip breakfast. Scroll social media.</td></tr>
+        <tr><td><strong>In the exam hall</strong></td><td><strong>Paper 1:</strong> First 15 min — read ALL 8 questions twice. Eliminate. Choose the one where you have the strongest thesis and best evidence. Then pre-write.<br><strong>Paper 2:</strong> Read questions first, THEN passages. Annotate as you read. Mark comparison-relevant content. Budget 25 min for AQ.</td><td>Choose a question just because it "looks easy." Start writing without a plan. Spend 35+ min on AQ and rush the rest of Paper 2.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 9: RESOURCES -->
+<div class="section">
+  <h2 class="section-title"><span class="num">9</span>Recommended Resources</h2>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Reading (Daily/Weekly)</h3>
+    <ul>
+      <li><strong>CNA Commentary:</strong> <code>channelnewsasia.com/commentary</code> — Best source for Singapore-context arguments. Essential for AQ.</li>
+      <li><strong>Straits Times Opinion:</strong> <code>straitstimes.com/opinion</code> — Local perspectives on global issues. Models GP-style argumentation.</li>
+      <li><strong>The Economist (Espresso app):</strong> Free daily briefing + 1 article. Dense but excellent argument models. Read 1–2 articles deeply per week.</li>
+      <li><strong>BBC Future:</strong> <code>bbc.com/future</code> — Science, tech, society deep-dives. Accessible and well-argued.</li>
+      <li><strong>The Guardian Opinion:</strong> <code>theguardian.com/commentisfree</code> — Progressive perspective. Strong on environment, inequality, human rights.</li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Practice Material</h3>
+    <ul>
+      <li><strong>SEAB Official Syllabus &amp; Specimen Papers:</strong> Available through your school or at <code>seab.gov.sg</code>. The specimen paper is essential — it contains examples of the NEW Comparison Questions.</li>
+      <li><strong>Other JC Prelim Papers:</strong> Exchange with friends from other JCs. Prelim papers are often harder than A-Levels — excellent training under pressure.</li>
+      <li><strong>Your school's GP department resources:</strong> Essay banks, model answers, comprehension practice sets. These are curated for your level.</li>
+      <li><strong>Past-year A-Level papers (2024, 2025):</strong> The first two years of Syllabus 8881. Study these especially for Comparison Question formats and the new summary style.</li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-title">Tools</h3>
+    <ul>
+      <li><strong>Notion / Google Docs / OneNote:</strong> Your knowledge bank. Pick one and stick to it. Organise by topic area.</li>
+      <li><strong>Anki (flashcard app):</strong> For memorising key statistics, case studies, policy names. 5 minutes of review daily compounds dramatically.</li>
+      <li><strong>Grammarly (free tier):</strong> Catches basic grammar and clarity issues in practice essays. Does not replace self-editing but catches what you miss.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 10: CLOSING -->
+<div class="section">
+  <h2 class="section-title"><span class="num">10</span>The Bottom Line</h2>
+
+  <p>Every A-grade GP student I have observed shares three habits:</p>
+
+  <div class="framework">
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>They read consistently, not frantically.</strong> 15–20 minutes of focused reading daily, processed into a knowledge bank, beats 3 hours of panic-reading the week before the exam. GP rewards the long game. Start in JC1 — do not wait until JC2 mid-year.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>They practice the bottleneck skill.</strong> Instead of writing endless full essays, they identify their weakest link — thesis formation? evidence specificity? paraphrasing? AQ evaluation? Comparison Questions? — and drill that specific skill until it becomes automatic.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>They think before they write — every single time.</strong> Every practice session starts with: "What is my argument?" They do not write a single word of prose until they can state their thesis in one clear, nuanced sentence. This discipline is simple, but it is not easy. It is also the single highest-leverage habit in GP.</div>
+      </div>
+    </div>
+  </div>
+
+  <blockquote>
+    GP is not a test of how much you know. It is a test of how well you think — and how clearly you can communicate that thinking under pressure. If you treat GP as a content subject, you will always struggle. If you treat it as a thinking subject — where content serves argument, not the other way around — everything changes.
+  </blockquote>
+</div>
+
+<div class="cta">
+  <h2>Start Today</h2>
+  <p>Pick one thing from this guide — one habit, one framework, one drill — and do it today. Not tomorrow. The students who improve are the ones who start before they feel ready.</p>
+  <p style="margin-top:12px;font-size:14px;color:#64748b;">Good luck. You&rsquo;ve got this.</p>
+</div>
+
+<div class="section" style="margin-top:32px;">
+  <p style="font-size:12px;color:var(--text-tertiary);text-align:center;">
+    Sources: SEAB General Paper Syllabus 8881 (2026) · EduEdge "Preparing for the New A-Level General Paper (GP) Exam Syllabus 8881" · illum.e "GP 2025 A-Level Essay Questions for Paper 1" · Ancourage Academy "A-Level General Paper GP Guide JC Singapore" · Eclat Institute "General Paper (GP) Syllabus Guide" · ExaminerIQ · Geniebook · Multiple Singapore JC GP department resources
+  </p>
+</div>
+
+</div>
+
+<footer class="footer">
+  <p><a href="index.html" style="color:var(--accent);text-decoration:none;">← Back to CastPages</a></p>
+</footer>
+
+</body>
+</html>
