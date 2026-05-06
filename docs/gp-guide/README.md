@@ -20,6 +20,22 @@
 - [Sample Knowledge Bank (Web)](../CastPages/gp-sample-bank.html) — 10 篇文章标签页互动版
 - [Full Study Guide (Web)](../CastPages/gp-study-guide.html) — 完整学习指南（双标签页）
 
+## 🎯 GP Trainer Skill
+
+本项目包含一个 **Claude Code Skill** — `gp-trainer`，用于训练 GP 思维技巧：
+
+| 训练模式 | 说明 |
+|---|---|
+| 框架记忆与召回 | 测试 PEEL、REACT、Thesis Formula 等核心框架的记忆 |
+| 文章解构训练 | 给定一篇文章，提取论点 + 证据 + 评估 + 多角度分析 |
+| 多角度观点生成 | 从同一现象生成多种对立且有理有据的观点 |
+| Thesis 构建 Workshop | 限时构建高质量 Thesis + 论证大纲 |
+| 反方论证对练 | 交互式反驳训练 — 教练扮演反方，用户反驳 |
+| AQ 模拟训练 | 将论点应用于新加坡语境的 REACT 框架训练 |
+| 限时 Outline 训练 | 30 分钟真实考试压力下的论证构建 |
+
+**使用方法：** 在 Claude Code 中输入 `gp-trainer` 或 `/gp-trainer` 启动训练。详见 `.claude/skills/gp-trainer.md`。
+
 ## 📝 使用建议
 
 1. **新生：** 从 `01-gp-fundamentals.md` 开始 → 阅读 `03-knowledge-bank-building.md` → 开始搭建自己的 Bank
