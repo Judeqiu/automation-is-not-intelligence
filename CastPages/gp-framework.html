@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GP: The Right Framework — A Slide Guide for New JC Students</title>
+<meta name="description" content="A comprehensive slide-format guide to the correct mental framework for Singapore JC General Paper (Syllabus 8881). For new students starting their GP journey.">
+<style>
+  :root {
+    --slide-bg: #0f172a;
+    --slide-text: #e2e8f0;
+    --slide-dim: #94a3b8;
+    --accent: #4a9eff;
+    --accent2: #22d3ee;
+    --green: #34d399;
+    --amber: #fbbf24;
+    --red: #f87171;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #000;
+    font-family: var(--font-sans);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- Slides Container ---- */
+  .slides-wrapper {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 48px;
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+    background: var(--slide-bg);
+  }
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    z-index: 1;
+  }
+  .slide.prev {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  /* ---- Slide Layout ---- */
+  .slide-content {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+  }
+  .slide-content.left { text-align: left; }
+
+  /* ---- Typography ---- */
+  .slide-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .slide-title {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 24px;
+  }
+  .slide-subtitle {
+    font-size: clamp(16px, 2.5vw, 22px);
+    color: var(--slide-dim);
+    line-height: 1.5;
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .slide-body {
+    font-size: clamp(15px, 2vw, 18px);
+    color: var(--slide-dim);
+    line-height: 1.7;
+  }
+  .slide-body strong { color: #fff; }
+
+  /* ---- Grid layouts ---- */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 32px;
+  }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; gap: 20px; } }
+  .col-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: left;
+  }
+  .col-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .col-card h3 .icon {
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .icon-blue { background: rgba(74,158,255,0.15); color: var(--accent); }
+  .icon-green { background: rgba(52,211,153,0.15); color: var(--green); }
+  .icon-amber { background: rgba(251,191,36,0.15); color: var(--amber); }
+  .icon-cyan { background: rgba(34,211,238,0.15); color: var(--accent2); }
+  .icon-red { background: rgba(248,113,113,0.15); color: var(--red); }
+  .col-card p, .col-card ul { font-size: 14px; color: var(--slide-dim); line-height: 1.6; }
+  .col-card ul { padding-left: 18px; }
+  .col-card li { margin-bottom: 6px; }
+
+  /* ---- Framework cards ---- */
+  .framework-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 24px;
+  }
+  .fw-step {
+    background: rgba(74,158,255,0.08);
+    border: 1px solid rgba(74,158,255,0.15);
+    border-radius: 12px;
+    padding: 16px 18px;
+    text-align: center;
+    min-width: 100px;
+    flex: 1;
+    max-width: 160px;
+  }
+  .fw-step .step-letter {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .fw-step .step-label {
+    font-size: 12px;
+    color: var(--slide-dim);
+    line-height: 1.3;
+  }
+
+  /* ---- Process flow ---- */
+  .process-flow {
+    display: flex;
+    gap: 0;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .process-step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 16px 20px;
+    text-align: center;
+  }
+  .process-arrow {
+    color: var(--accent);
+    font-size: 20px;
+    margin: 0 8px;
+    font-weight: 700;
+  }
+
+  /* ---- Big number ---- */
+  .big-num {
+    font-size: clamp(60px, 10vw, 100px);
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  /* ---- AO cards ---- */
+  .ao-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  @media (max-width: 640px) { .ao-row { grid-template-columns: 1fr; } }
+  .ao-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: left;
+  }
+  .ao-card .ao-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .ao-card .ao-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .ao-card .ao-desc { font-size: 13px; color: var(--slide-dim); line-height: 1.5; }
+
+  /* ---- Trap list ---- */
+  .trap-list { text-align: left; margin-top: 24px; }
+  .trap-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .trap-item:last-child { border-bottom: none; }
+  .trap-num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(248,113,113,0.15);
+    color: var(--red);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .trap-item h4 { font-size: 15px; color: #fff; margin-bottom: 2px; }
+  .trap-item p { font-size: 13px; color: var(--slide-dim); }
+
+  /* ---- Week plan mini ---- */
+  .week-strip {
+    display: flex;
+    gap: 8px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .week-day {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 14px 12px;
+    text-align: center;
+    min-width: 90px;
+    flex: 1;
+    max-width: 130px;
+  }
+  .week-day .dow {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .week-day .activity {
+    font-size: 12px;
+    color: var(--slide-dim);
+    line-height: 1.4;
+  }
+
+  /* ---- Progress timeline ---- */
+  .timeline {
+    display: flex;
+    gap: 0;
+    margin-top: 24px;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tl-phase {
+    text-align: center;
+    padding: 20px 16px;
+    flex: 1;
+    min-width: 160px;
+    max-width: 220px;
+    border-top: 3px solid rgba(255,255,255,0.1);
+    position: relative;
+  }
+  .tl-phase::before {
+    content: "";
+    position: absolute;
+    top: -9px; left: 50%;
+    transform: translateX(-50%);
+    width: 15px; height: 15px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+  }
+  .tl-phase.p1 { border-top-color: var(--accent); }
+  .tl-phase.p1::before { background: var(--accent); }
+  .tl-phase.p2 { border-top-color: var(--accent2); }
+  .tl-phase.p2::before { background: var(--accent2); }
+  .tl-phase.p3 { border-top-color: var(--green); }
+  .tl-phase.p3::before { background: var(--green); }
+  .tl-phase h4 { font-size: 14px; color: #fff; margin-bottom: 6px; }
+  .tl-phase p { font-size: 12px; color: var(--slide-dim); line-height: 1.4; }
+
+  /* ---- Navigation ---- */
+  .nav-arrows {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    z-index: 100;
+  }
+  .nav-arrow {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .nav-arrow:hover { background: rgba(255,255,255,0.16); }
+  .nav-arrow:active { background: rgba(255,255,255,0.24); }
+
+  /* ---- Dots ---- */
+  .dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .dot.active { background: var(--accent); transform: scale(1.4); }
+  .dot:hover { background: rgba(255,255,255,0.4); }
+
+  /* ---- Slide number ---- */
+  .slide-num {
+    position: fixed;
+    top: 24px;
+    right: 32px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--slide-dim);
+    z-index: 100;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .slide { padding: 40px 20px; }
+    .slide-num { top: 16px; right: 16px; font-size: 11px; }
+    .nav-arrows { bottom: 20px; gap: 12px; }
+    .nav-arrow { width: 40px; height: 40px; font-size: 16px; }
+    .fw-step { min-width: 70px; max-width: 120px; padding: 12px 10px; }
+    .week-day { min-width: 70px; max-width: 100px; padding: 10px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="slides-wrapper" id="slides">
+
+<!-- SLIDE 0: Title -->
+<div class="slide active" data-index="0">
+  <div class="slide-content">
+    <div class="slide-eyebrow">Syllabus 8881 · Singapore A-Level</div>
+    <div class="slide-title">GP: The Right<br>Framework</div>
+    <div class="slide-subtitle">What this subject actually is, how it works, and how to approach it correctly — from Day 1.</div>
+    <div style="margin-top:32px;font-size:14px;color:var(--slide-dim);">Use ← → arrow keys or tap arrows to navigate</div>
+  </div>
+</div>
+
+<!-- SLIDE 1: What GP Actually Tests -->
+<div class="slide" data-index="1">
+  <div class="slide-content">
+    <div class="slide-eyebrow">The Big Picture</div>
+    <div class="slide-title">GP is not a<br>content subject.</div>
+    <div class="slide-subtitle" style="text-align:left;">
+      <p style="margin-bottom:16px;">GP tests your ability to <strong style="color:#fff;">think critically, construct arguments, and communicate clearly</strong> — not your ability to memorise facts.</p>
+      <p style="margin-bottom:16px;">The student who memorises 100 examples but cannot form a thesis will score a C. The student with 30 well-processed examples who argues with clarity and evaluation will score an A.</p>
+      <p><strong style="color:var(--accent);">GP is a thinking subject disguised as a general knowledge subject.</strong> Treat it as the former and you will thrive. Treat it as the latter and you will always struggle.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: Exam at a Glance -->
+<div class="slide" data-index="2">
+  <div class="slide-content">
+    <div class="slide-eyebrow">The Exam Structure</div>
+    <div class="slide-title">Two Papers.<br>One Goal.</div>
+    <div class="two-col">
+      <div class="col-card">
+        <h3><span class="icon icon-blue">1</span> Paper 1: Essay</h3>
+        <p><strong style="color:#fff;">50% · 90 min</strong></p>
+        <ul>
+          <li>8 questions → choose 1</li>
+          <li>Write 500–800 words</li>
+          <li>Present a structured, evidence-backed argument on an issue of global or local significance</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h3><span class="icon icon-green">2</span> Paper 2: Comprehension</h3>
+        <p><strong style="color:#fff;">50% · 90 min</strong></p>
+        <ul>
+          <li>3 passages (~1200 words total)</li>
+          <li>SAQs + Comparison Questions <span style="color:var(--red);font-size:11px;">NEW</span> + Summary + AQ (12 marks)</li>
+          <li>Read precisely, paraphrase accurately, evaluate arguments, apply to Singapore</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: Paper 1 Deep Dive -->
+<div class="slide" data-index="3">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Paper 1 Deep Dive</div>
+    <div class="slide-title">The Essay:<br>90 minutes to argue.</div>
+    <div class="slide-body" style="margin-top:24px;">
+      <p style="margin-bottom:16px;"><strong>8 questions</strong> spanning 6 topic areas. You pick <strong>one</strong>. You have 90 minutes to plan, write, and review an essay of 500–800 words.</p>
+      <p style="margin-bottom:16px;">The questions are not factual ("What is climate change?"). They are <strong>debatable propositions</strong>:</p>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px 20px;margin-bottom:16px;">
+        <p style="font-size:14px;color:var(--slide-dim);margin-bottom:6px;">"No country should sacrifice its economic development in favour of preserving the environment." Discuss.</p>
+        <p style="font-size:14px;color:var(--slide-dim);margin-bottom:6px;">"Democracy is the perfect form of government." Discuss.</p>
+        <p style="font-size:14px;color:var(--slide-dim);">"Learning facts is no longer necessary because information can be instantly accessed online." Evaluate.</p>
+      </div>
+      <p>The examiner does <strong style="color:#fff;">not</strong> want you to list facts about the topic. They want <strong style="color:var(--accent);">your position, defended with evidence, evaluated critically.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: Paper 2 Deep Dive -->
+<div class="slide" data-index="4">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Paper 2 Deep Dive</div>
+    <div class="slide-title">Comprehension:<br>Precision is everything.</div>
+    <div class="slide-body" style="margin-top:24px;">
+      <p style="margin-bottom:16px;"><strong>3 passages</strong> (~1200 words total) presenting different viewpoints on the same topic. You have 90 minutes to answer all components.</p>
+      <div class="two-col" style="margin-top:16px;">
+        <div class="col-card">
+          <h3 style="font-size:15px;">SAQs (17 marks)</h3>
+          <p style="font-size:13px;">Literal, inference, language use, attitude, tone, punctuation questions. Answer formula: <strong style="color:#fff;">Answer → Evidence → Explain.</strong> Always paraphrase — never lift.</p>
+        </div>
+        <div class="col-card">
+          <h3 style="font-size:15px;">Comparison Qs <span style="color:var(--red);font-size:10px;">NEW 8881</span></h3>
+          <p style="font-size:13px;">Cross-reference Passage C with A or B. Does C support or contradict? Identify → Quote → Justify. <strong style="color:#fff;">4–6 marks.</strong></p>
+        </div>
+        <div class="col-card">
+          <h3 style="font-size:15px;">Summary (8 marks)</h3>
+          <p style="font-size:13px;">Based on ALL of Passage 2. No opening phrase given. 80–120 words. <strong style="color:#fff;">Scan everything. Paraphrase everything. Count words.</strong></p>
+        </div>
+        <div class="col-card">
+          <h3 style="font-size:15px;">AQ (12 marks)</h3>
+          <p style="font-size:13px;">Evaluate the author's arguments and apply them to Singapore. Use specific local examples. <strong style="color:#fff;">12 marks = highest single question. Budget 25 min.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: The 3 Assessment Objectives -->
+<div class="slide" data-index="5">
+  <div class="slide-content">
+    <div class="slide-eyebrow">What the Examiner Marks</div>
+    <div class="slide-title">The 3 Assessment Objectives</div>
+    <div class="slide-subtitle">Every mark in GP maps to one of these. <strong style="color:#fff;">AO3 is the discriminator.</strong></div>
+    <div class="ao-row">
+      <div class="ao-card">
+        <div class="ao-num">AO1 · ~35%</div>
+        <div class="ao-title">Understand &amp; Explain</div>
+        <div class="ao-desc">Demonstrate knowledge of issues across disciplines. <em>This is your content — necessary but not sufficient.</em></div>
+      </div>
+      <div class="ao-card">
+        <div class="ao-num">AO2 · ~35%</div>
+        <div class="ao-title">Apply &amp; Construct</div>
+        <div class="ao-desc">Use knowledge to build arguments. Select and deploy evidence to support a position. <em>This is your structure.</em></div>
+      </div>
+      <div class="ao-card">
+        <div class="ao-num">AO3 · ~30%</div>
+        <div class="ao-title">Evaluate &amp; Judge</div>
+        <div class="ao-desc">Critically analyse claims. Present your own assessment. Engage with counterarguments. <em>This is the A/C boundary — your independent thinking.</em></div>
+      </div>
+    </div>
+    <p style="margin-top:24px;font-size:14px;color:var(--accent);">Students who stop at AO1 ("here is what I know") cap at C. AO3 is the difference.</p>
+  </div>
+</div>
+
+<!-- SLIDE 6: The Content Trap -->
+<div class="slide" data-index="6">
+  <div class="slide-content">
+    <div class="slide-eyebrow">⚠️ New Student Warning</div>
+    <div class="slide-title">The Content Trap</div>
+    <div class="slide-subtitle" style="text-align:left;margin-top:24px;">
+      <p style="margin-bottom:20px;">Most JC1 students believe: <em>"If I just read more, I'll get better at GP."</em></p>
+      <p style="margin-bottom:20px;"><strong style="color:var(--red);">This is wrong.</strong> Reading more without a processing system is like pouring water into a leaky bucket. Within 48 hours, you forget most of what you read. Within a week, it's gone.</p>
+      <div style="background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:12px;padding:20px;text-align:left;margin-top:24px;">
+        <p style="font-size:15px;color:#fff;margin-bottom:8px;"><strong style="color:var(--green);">✓ The Right Approach:</strong></p>
+        <p style="font-size:14px;color:var(--slide-dim);">Read → <strong style="color:#fff;">Process</strong> (extract argument + evidence + your evaluation) → <strong style="color:#fff;">File</strong> into a knowledge bank organised by topic → <strong style="color:#fff;">Retrieve</strong> during practice. Every article you read must leave a trace in your bank. No trace = wasted time.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: The Right System -->
+<div class="slide" data-index="7">
+  <div class="slide-content">
+    <div class="slide-eyebrow">The Right Approach</div>
+    <div class="slide-title">Knowledge Bank<br>+ Frameworks<br>+ Deliberate Practice</div>
+    <div class="slide-subtitle">Three pillars. All three must be in place. Missing any one guarantees a plateau.</div>
+    <div class="two-col" style="margin-top:24px;">
+      <div class="col-card">
+        <h3><span class="icon icon-blue">📚</span> Knowledge Bank</h3>
+        <p>A structured digital notebook organised by topic area. Every entry = argument + specific evidence + your evaluation. Build 80–100 entries over JC1. <strong style="color:#fff;">Your essay ammunition.</strong></p>
+      </div>
+      <div class="col-card">
+        <h3><span class="icon icon-green">🔧</span> Frameworks</h3>
+        <p>PEEL for paragraphs. REACT for AQ. Thesis formula for introductions. 9 SAQ answering formulas. <strong style="color:#fff;">Memorise these until they are automatic.</strong></p>
+      </div>
+      <div class="col-card" style="grid-column: 1 / -1;">
+        <h3><span class="icon icon-amber">🎯</span> Deliberate Practice</h3>
+        <p>Not mindless repetition. Every practice session targets a specific weakness identified from your error log. 2–3 essay outlines + 1 full paper per week. <strong style="color:#fff;">Practice what you're bad at, not what you're comfortable with.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: Topic Landscape -->
+<div class="slide" data-index="8">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Content Architecture</div>
+    <div class="slide-title">The 6 Topic Areas</div>
+    <div class="slide-subtitle" style="text-align:left;">You don't need to master all 6. <strong style="color:#fff;">Master 4–5 deeply.</strong> That gives you at least one strong question choice in every exam.</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;">
+      <div style="background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.2);border-radius:10px;padding:16px;"><p style="font-size:13px;color:#fff;font-weight:700;">1. Society &amp; Culture</p><p style="font-size:11px;color:var(--slide-dim);">Identity, inequality, multiculturalism, youth, aging</p></div>
+      <div style="background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.2);border-radius:10px;padding:16px;"><p style="font-size:13px;color:#fff;font-weight:700;">2. Politics &amp; Governance</p><p style="font-size:11px;color:var(--slide-dim);">Democracy, power, international relations, law</p></div>
+      <div style="background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.2);border-radius:10px;padding:16px;"><p style="font-size:13px;color:#fff;font-weight:700;">3. Economics</p><p style="font-size:11px;color:var(--slide-dim);">Development, inequality, globalisation, trade</p></div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;"><p style="font-size:13px;color:#fff;font-weight:700;">4. Science &amp; Tech</p><p style="font-size:11px;color:var(--slide-dim);">AI, ethics, innovation, digital divide</p></div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;"><p style="font-size:13px;color:#fff;font-weight:700;">5. Environment</p><p style="font-size:11px;color:var(--slide-dim);">Climate, sustainability, energy, conservation</p></div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;"><p style="font-size:13px;color:#fff;font-weight:700;">6. Arts &amp; Humanities</p><p style="font-size:11px;color:var(--slide-dim);">Role of arts, creativity, heritage, beauty</p></div>
+    </div>
+    <p style="margin-top:16px;font-size:12px;color:var(--accent);">Blue tiles = highest overlap with other topics. Start here.</p>
+  </div>
+</div>
+
+<!-- SLIDE 9: The Essay Framework -->
+<div class="slide" data-index="9">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">The Essay Framework</div>
+    <div class="slide-title">Thesis-First<br>→ PEEL<br>→ Counterargument</div>
+    <div class="slide-body" style="margin-top:24px;">
+      <p style="margin-bottom:16px;"><strong style="color:var(--accent);">Step 1: Thesis-First (10 min).</strong> Before you write a single word, state your position in one clear, debatable sentence. "While [counterpoint], I argue [position] because [reason 1, 2, 3]." <strong style="color:#fff;">No thesis = no essay.</strong></p>
+      <p style="margin-bottom:16px;"><strong style="color:var(--accent);">Step 2: PEEL Paragraphs (3–4 × 12 min).</strong> Point (debatable topic sentence) → Evidence (specific: named, dated, quantified) → Explanation (WHY this supports your thesis — this is where AO3 lives) → Link (tie back to thesis).</p>
+      <p style="margin-bottom:16px;"><strong style="color:var(--accent);">Step 3: Counterargument + Rebuttal (1 para).</strong> "Admittedly, some argue that [strongest opposing view]..." Then rebut: "However, this argument overlooks [your rebuttal]..." <strong style="color:#fff;">An essay without a counterargument cannot score A.</strong></p>
+      <p><strong style="color:var(--accent);">Step 4: Conclusion.</strong> Synthesise (don't summarise). Connect your arguments into a larger insight. End with a forward-looking statement. <strong style="color:#fff;">No new evidence in the conclusion.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: The Comprehension Framework -->
+<div class="slide" data-index="10">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">The Comprehension Framework</div>
+    <div class="slide-title">SAQs → Summary<br>→ Comparison<br>→ AQ</div>
+    <div class="slide-body" style="margin-top:20px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="col-card">
+          <h3 style="font-size:14px;">SAQs (17 marks) · 35 min</h3>
+          <p style="font-size:12px;">9 question types, each with a fixed answer formula. <strong style="color:#fff;">Answer → Evidence → Explain.</strong> Always paraphrase. Never lift. If stuck >3 min, circle and return.</p>
+        </div>
+        <div class="col-card">
+          <h3 style="font-size:14px;">Comparison Qs <span style="color:var(--red);font-size:10px;">NEW</span> · 4–6 marks</h3>
+          <p style="font-size:12px;">Does Passage C support or contradict A/B? Identify idea in C → Quote both passages → Justify the relationship. <strong style="color:#fff;">Say "supports" or "contradicts" explicitly.</strong></p>
+        </div>
+        <div class="col-card">
+          <h3 style="font-size:14px;">Summary (8 marks) · 25 min</h3>
+          <p style="font-size:12px;">Based on ALL of Passage 2 (Syllabus 8881). Scan every paragraph. 80–120 words. <strong style="color:#fff;">5-point check: requirements, location, degree, connotation, overarching point.</strong> No opening phrase provided — write your own.</p>
+        </div>
+        <div class="col-card">
+          <h3 style="font-size:14px;">AQ (12 marks) · 25–30 min</h3>
+          <p style="font-size:12px;">REACT framework: Restate author's argument → Evaluate → Apply to Singapore with specific examples → Contrast/complicate → Takeaway. <strong style="color:#fff;">12 marks. Don't rush this.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11: Weekly Rhythm -->
+<div class="slide" data-index="11">
+  <div class="slide-content">
+    <div class="slide-eyebrow">The Weekly Rhythm</div>
+    <div class="slide-title">~3.5 hours / week.<br>Sustainable. Compound.</div>
+    <div class="week-strip">
+      <div class="week-day"><div class="dow">Mon</div><div class="activity">Read &amp; process 1 article<br>→ knowledge bank<br><strong>20 min</strong></div></div>
+      <div class="week-day"><div class="dow">Tue</div><div class="activity">1 essay outline<br>Thesis + topic sentences + evidence<br><strong>45 min</strong></div></div>
+      <div class="week-day"><div class="dow">Wed</div><div class="activity">Read 1 global article<br>Process + evaluate<br><strong>20 min</strong></div></div>
+      <div class="week-day"><div class="dow">Thu</div><div class="activity">Paper 2 practice<br>SAQs + Comparison Qs<br><strong>45 min</strong></div></div>
+      <div class="week-day"><div class="dow">Fri</div><div class="activity">1 AQ response<br>REACT framework<br>Singapore examples<br><strong>30 min</strong></div></div>
+      <div class="week-day"><div class="dow">Weekend</div><div class="activity">1 full paper<br>(alternate P1/P2)<br>+ bank maintenance<br><strong>60 min</strong></div></div>
+    </div>
+    <p style="margin-top:24px;font-size:14px;color:var(--accent);">Consistency beats intensity. 3.5 hours every week for 18 months > 40 hours of cramming in the last 2 weeks.</p>
+  </div>
+</div>
+
+<!-- SLIDE 12: JC1→JC2 Progression -->
+<div class="slide" data-index="12">
+  <div class="slide-content">
+    <div class="slide-eyebrow">The Long Game</div>
+    <div class="slide-title">JC1 → JC2<br>Progression</div>
+    <div class="timeline">
+      <div class="tl-phase p1">
+        <h4>JC1 Term 1–2</h4>
+        <p>Build the knowledge bank. Read daily, process into bank. Memorise all frameworks (PEEL, REACT, SAQ formulas). Practice essay outlines — no full essays yet. <strong>Goal: 40+ bank entries.</strong></p>
+      </div>
+      <div class="tl-phase p2">
+        <h4>JC1 Term 3–4</h4>
+        <p>Introduce timed full essays and Paper 2. Start error log. Identify your weakest topic areas and question types. <strong>Goal: 70+ bank entries. 15+ outlines.</strong></p>
+      </div>
+      <div class="tl-phase p3">
+        <h4>JC2 → A-Levels</h4>
+        <p>Timed full papers weekly. Targeted drills on weak areas. Consolidate bank (100+ entries). Review all outlines. <strong>Goal: Error-free execution under time pressure.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13: Common Traps -->
+<div class="slide" data-index="13">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">⚠️ Avoid These</div>
+    <div class="slide-title">Common Traps New<br>Students Fall Into</div>
+    <div class="trap-list">
+      <div class="trap-item">
+        <div class="trap-num">1</div>
+        <div><h4>Reading without processing</h4><p>Scrolling CNA every day but never extracting arguments or evidence. This is entertainment, not study.</p></div>
+      </div>
+      <div class="trap-item">
+        <div class="trap-num">2</div>
+        <div><h4>Writing before thinking</h4><p>Starting to write an essay without a thesis. The essay discovers its argument in paragraph 3. The examiner has already decided your grade by then.</p></div>
+      </div>
+      <div class="trap-item">
+        <div class="trap-num">3</div>
+        <div><h4>Memorising model essays</h4><p>GP questions are never identical. You are tested on your ability to construct an argument, not to reproduce one. Memorise evidence, not essays.</p></div>
+      </div>
+      <div class="trap-item">
+        <div class="trap-num">4</div>
+        <div><h4>Neglecting Paper 2 until JC2</h4><p>Paper 2 is 50% of your grade. The new Comparison Questions require specific practice. Start Paper 2 in JC1 Term 1. Do not wait.</p></div>
+      </div>
+      <div class="trap-item">
+        <div class="trap-num">5</div>
+        <div><h4>Vague evidence</h4><p>"Many countries have tried to reduce pollution..." No. Name the country. Name the policy. Give the year. Specificity = credibility = marks.</p></div>
+      </div>
+      <div class="trap-item">
+        <div class="trap-num">6</div>
+        <div><h4>No counterargument</h4><p>An essay without a counterargument cannot demonstrate AO3. You are telling the examiner: "I have not considered any perspective other than my own." This alone caps you at B.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14: Your First Week -->
+<div class="slide" data-index="14">
+  <div class="slide-content left">
+    <div class="slide-eyebrow">Start Here</div>
+    <div class="slide-title">Your First Week<br>Action Plan</div>
+    <div class="slide-body">
+      <div class="col-card" style="margin-top:24px;">
+        <h3 style="font-size:16px;"><span class="icon icon-green">1</span> Day 1: Set up your knowledge bank</h3>
+        <p style="font-size:14px;">Create a Notion/Google Doc. Make one page per topic area (6 pages). This is your GP infrastructure. Everything you read from now on goes into this bank.</p>
+      </div>
+      <div class="col-card">
+        <h3 style="font-size:16px;"><span class="icon icon-green">2</span> Day 2–3: Read &amp; process 3 articles</h3>
+        <p style="font-size:14px;">Use the 3-Pass Method: Extract argument → Capture evidence → Write your evaluation. File each into the correct topic area. Congratulations — you now have your first 3 bank entries.</p>
+      </div>
+      <div class="col-card">
+        <h3 style="font-size:16px;"><span class="icon icon-green">3</span> Day 4: Memorise the core frameworks</h3>
+        <p style="font-size:14px;">PEEL paragraph structure. Thesis formula ("While X, I argue Y because A, B, C."). REACT for AQ. 9 SAQ question types. Write them on a card. Keep it on your desk.</p>
+      </div>
+      <div class="col-card">
+        <h3 style="font-size:16px;"><span class="icon icon-green">4</span> Day 5–6: Try your first essay outline</h3>
+        <p style="font-size:14px;">Pick a past-year question from a topic area where you now have bank entries. 30 minutes. Thesis + 3 topic sentences + evidence + counterargument. No full paragraphs yet. Just the skeleton.</p>
+      </div>
+      <div class="col-card">
+        <h3 style="font-size:16px;"><span class="icon icon-green">5</span> Day 7: Review and set the rhythm</h3>
+        <p style="font-size:14px;">Review your bank. Read 1 more article. Schedule your recurring weekly slots (Mon/Wed read, Tue outline, Thu Paper 2, Fri AQ, Weekend full paper). The habit is built.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 15: Final -->
+<div class="slide" data-index="15">
+  <div class="slide-content">
+    <div class="big-num">GP</div>
+    <div class="slide-title" style="margin-bottom:16px;">Think. Argue.<br>Communicate.</div>
+    <div class="slide-subtitle">
+      <p style="margin-bottom:12px;">GP is not a test of how much you know.<br>It is a test of <strong style="color:#fff;">how well you think</strong> — and how clearly you can communicate that thinking under pressure.</p>
+      <p style="color:var(--accent);">Start today. Build the system. Trust the process.</p>
+    </div>
+    <div style="margin-top:32px;font-size:13px;color:var(--slide-dim);">
+      <a href="gp-study-guide.html" style="color:var(--accent);text-decoration:none;">📖 Full Study Guide →</a>
+      &nbsp;&nbsp;·&nbsp;&nbsp;
+      <a href="../index.html" style="color:var(--accent);text-decoration:none;">← Back to CastPages</a>
+    </div>
+  </div>
+</div>
+
+</div><!-- end slides-wrapper -->
+
+<!-- Navigation -->
+<div class="slide-num" id="slideNum">1 / 16</div>
+<div class="nav-arrows">
+  <button class="nav-arrow" onclick="prevSlide()" aria-label="Previous">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-arrow" onclick="nextSlide()" aria-label="Next">→</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+let current = 0;
+
+// Build dots
+const dotsContainer = document.getElementById('dots');
+for (let i = 0; i < totalSlides; i++) {
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => goTo(i);
+  dotsContainer.appendChild(dot);
+}
+
+function updateSlide() {
+  slides.forEach((s, i) => {
+    s.className = 'slide';
+    if (i === current) s.classList.add('active');
+    else if (i < current) s.classList.add('prev');
+  });
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.className = 'dot' + (i === current ? ' active' : '');
+  });
+  document.getElementById('slideNum').textContent = (current + 1) + ' / ' + totalSlides;
+}
+
+function nextSlide() {
+  if (current < totalSlides - 1) { current++; updateSlide(); }
+}
+
+function prevSlide() {
+  if (current > 0) { current--; updateSlide(); }
+}
+
+function goTo(index) {
+  current = index;
+  updateSlide();
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); nextSlide(); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prevSlide(); }
+});
+
+// Touch swipe
+let touchStartX = 0;
+let touchEndX = 0;
+document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+document.addEventListener('touchend', (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  const diff = touchStartX - touchEndX;
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) nextSlide();
+    else prevSlide();
+  }
+});
+</script>
+
+</body>
+</html>
